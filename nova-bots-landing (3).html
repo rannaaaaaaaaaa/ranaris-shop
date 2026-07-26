@@ -1,0 +1,817 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ranaris Shop — Bots de Discord a medida</title>
+<meta name="description" content="Desarrollo bots personalizados para Discord: moderación, economía, tickets y sistemas a medida. Código limpio, soporte real.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+
+<style>
+:root{
+  --bg:#050508;
+  --bg-soft:#08080d;
+  --surface:#0f0f16;
+  --surface-2:#14141d;
+  --border:rgba(255,255,255,0.08);
+  --border-strong:rgba(255,255,255,0.14);
+  --text:#f2f2f7;
+  --muted:#9ca0ae;
+  --muted-2:#6b7080;
+  --blue:#1E6B49;
+  --violet:#4CAF7D;
+  --grad: linear-gradient(135deg,#1E6B49 0%, #4CAF7D 100%);
+  --grad-soft: linear-gradient(135deg, rgba(30,107,73,0.18), rgba(76,175,125,0.15));
+}
+
+*{box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  background:var(--bg);
+  color:var(--text);
+  font-family:'Inter',system-ui,sans-serif;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+h1,h2,h3,h4,.font-display{
+  font-family:'Sora',system-ui,sans-serif;
+  letter-spacing:-0.02em;
+}
+.font-mono{font-family:'JetBrains Mono',monospace;}
+
+::selection{ background:rgba(76,175,125,0.35); color:#fff; }
+
+/* focus visibility */
+a:focus-visible, button:focus-visible, summary:focus-visible{
+  outline:2px solid var(--violet);
+  outline-offset:3px;
+  border-radius:6px;
+}
+
+/* scrollbar */
+::-webkit-scrollbar{ width:10px; }
+::-webkit-scrollbar-track{ background:var(--bg); }
+::-webkit-scrollbar-thumb{ background:#22222e; border-radius:10px; }
+::-webkit-scrollbar-thumb:hover{ background:#33334a; }
+
+/* ---------- backgrounds ---------- */
+.grain{
+  position:fixed; inset:0; pointer-events:none; z-index:1; opacity:0.035; mix-blend-mode:overlay;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+.grid-overlay{
+  position:absolute; inset:0;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.035) 1px, transparent 1px);
+  background-size:64px 64px;
+  mask-image:radial-gradient(ellipse 80% 55% at 50% 0%, black 40%, transparent 90%);
+}
+.nova-glow{
+  position:absolute; border-radius:50%; filter:blur(90px); pointer-events:none;
+}
+.blob{ animation:float 16s ease-in-out infinite; }
+.blob-2{ animation:float 20s ease-in-out infinite reverse; }
+@keyframes float{
+  0%,100%{ transform:translate(0,0) scale(1); }
+  33%{ transform:translate(30px,-40px) scale(1.08); }
+  66%{ transform:translate(-25px,25px) scale(0.95); }
+}
+
+.particles{ position:absolute; inset:0; overflow:hidden; pointer-events:none; }
+.particle{
+  position:absolute; width:3px; height:3px; border-radius:50%;
+  background:#fff; opacity:0; animation:twinkle 6s ease-in-out infinite;
+}
+@keyframes twinkle{
+  0%,100%{ opacity:0; transform:translateY(0) scale(0.6); }
+  50%{ opacity:0.8; transform:translateY(-18px) scale(1); }
+}
+
+/* ---------- reveal on scroll ---------- */
+.reveal{ opacity:0; transform:translateY(24px); transition:opacity .7s cubic-bezier(.16,.8,.28,1), transform .7s cubic-bezier(.16,.8,.28,1); }
+.reveal.in{ opacity:1; transform:translateY(0); }
+.reveal-delay-1{ transition-delay:.08s; }
+.reveal-delay-2{ transition-delay:.16s; }
+.reveal-delay-3{ transition-delay:.24s; }
+.reveal-delay-4{ transition-delay:.32s; }
+
+@media (prefers-reduced-motion: reduce){
+  *{ animation-duration:0.001ms !important; animation-iteration-count:1 !important; transition-duration:0.001ms !important; scroll-behavior:auto !important; }
+  .reveal{ opacity:1; transform:none; }
+}
+
+/* ---------- surfaces ---------- */
+.card{
+  background:linear-gradient(180deg, var(--surface), var(--surface-2));
+  border:1px solid var(--border);
+  border-radius:20px;
+  transition:transform .35s cubic-bezier(.16,.8,.28,1), border-color .35s ease, box-shadow .35s ease, background .35s ease;
+}
+.card:hover{
+  transform:translateY(-6px);
+  border-color:var(--border-strong);
+  box-shadow:0 20px 60px -20px rgba(30,107,73,0.3), 0 8px 30px -10px rgba(76,175,125,0.22);
+}
+.card-glow{ position:relative; isolation:isolate; }
+.card-glow::before{
+  content:""; position:absolute; inset:-1px; z-index:-1; border-radius:21px; opacity:0;
+  background:var(--grad); transition:opacity .35s ease;
+}
+.card-glow:hover::before{ opacity:0.5; filter:blur(10px); }
+
+.text-grad{
+  background:var(--grad);
+  -webkit-background-clip:text; background-clip:text; color:transparent;
+}
+.border-grad{
+  position:relative; border-radius:9999px;
+}
+.border-grad::before{
+  content:""; position:absolute; inset:0; border-radius:inherit; padding:1px;
+  background:var(--grad);
+  -webkit-mask:linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite:xor; mask-composite:exclude;
+  pointer-events:none;
+}
+
+/* buttons */
+.btn{
+  position:relative; display:inline-flex; align-items:center; justify-content:center; gap:.5rem;
+  font-weight:600; border-radius:12px; transition:transform .25s ease, box-shadow .25s ease, background .25s ease, border-color .25s ease;
+  white-space:nowrap;
+}
+.btn:active{ transform:scale(0.97); }
+.btn-primary{
+  background:var(--grad); color:#fff;
+  box-shadow:0 8px 30px -8px rgba(76,175,125,0.55);
+}
+.btn-primary:hover{ box-shadow:0 12px 40px -6px rgba(76,175,125,0.75); transform:translateY(-2px); }
+.btn-primary::after{
+  content:""; position:absolute; inset:0; border-radius:inherit; opacity:0;
+  background:linear-gradient(120deg, transparent 30%, rgba(255,255,255,0.4) 50%, transparent 70%);
+  background-size:200% 100%; background-position:120% 0;
+  transition:opacity .2s ease;
+}
+.btn-primary:hover::after{ opacity:1; animation:shine 1.1s ease forwards; }
+@keyframes shine{ to{ background-position:-20% 0; } }
+
+.btn-ghost{
+  background:rgba(255,255,255,0.03); color:var(--text); border:1px solid var(--border-strong);
+}
+.btn-ghost:hover{ background:rgba(255,255,255,0.07); border-color:rgba(255,255,255,0.25); transform:translateY(-2px); }
+
+.chip{
+  border:1px solid var(--border-strong); background:rgba(255,255,255,0.03);
+  border-radius:9999px; font-size:.8rem; color:var(--muted);
+}
+
+/* nav */
+#nav{ transition:background .35s ease, border-color .35s ease, backdrop-filter .35s ease; }
+#nav.scrolled{ background:rgba(5,5,8,0.72); backdrop-filter:blur(14px); border-bottom:1px solid var(--border); }
+
+.navlink{ position:relative; color:var(--muted); transition:color .25s ease; }
+.navlink::after{
+  content:""; position:absolute; left:0; bottom:-4px; width:0%; height:1.5px; background:var(--grad);
+  transition:width .25s ease;
+}
+.navlink:hover{ color:var(--text); }
+.navlink:hover::after{ width:100%; }
+
+/* timeline */
+.timeline-line{ background:linear-gradient(180deg, var(--blue), var(--violet)); }
+.step-dot{
+  background:var(--grad); box-shadow:0 0 0 6px rgba(76,175,125,0.14), 0 0 24px rgba(76,175,125,0.5);
+}
+
+/* pricing */
+.price-card{ position:relative; }
+.price-card.featured{
+  border:1px solid transparent;
+  background:linear-gradient(var(--surface), var(--surface)) padding-box, var(--grad) border-box;
+}
+.price-card.featured::before{
+  content:"Más elegido"; position:absolute; top:-13px; left:50%; transform:translateX(-50%);
+  background:var(--grad); color:#fff; font-size:.7rem; font-weight:700; letter-spacing:.04em;
+  padding:5px 14px; border-radius:9999px; text-transform:uppercase;
+}
+
+/* faq */
+.faq-item summary{ cursor:pointer; list-style:none; }
+.faq-item summary::-webkit-details-marker{ display:none; }
+.faq-item .chevron{ transition:transform .3s ease; }
+.faq-item[open] .chevron{ transform:rotate(180deg); }
+.faq-item[open] .faq-a{ animation:faqOpen .3s ease; }
+@keyframes faqOpen{ from{ opacity:0; transform:translateY(-6px);} to{ opacity:1; transform:translateY(0);} }
+
+/* discord mock */
+.discord-mock{
+  background:#0a100c; border:1px solid var(--border-strong); border-radius:18px;
+  box-shadow:0 30px 90px -25px rgba(30,107,73,0.4), 0 10px 40px -15px rgba(76,175,125,0.3);
+}
+.dot{ width:10px; height:10px; border-radius:50%; }
+.blink{ animation:blink 1.4s step-end infinite; }
+@keyframes blink{ 50%{ opacity:0; } }
+
+.section-eyebrow{
+  font-family:'JetBrains Mono',monospace; letter-spacing:.12em; font-size:.72rem; color:var(--violet);
+  text-transform:uppercase;
+}
+
+.mobile-menu{ transition:max-height .4s cubic-bezier(.16,.8,.28,1), opacity .3s ease; overflow:hidden; }
+</style>
+</head>
+
+<body class="antialiased">
+<div class="grain"></div>
+
+<!-- ============ NAV ============ -->
+<header id="nav" class="fixed top-0 inset-x-0 z-50">
+  <div class="max-w-7xl mx-auto px-6 lg:px-10 flex items-center justify-between h-20">
+    <a href="#top" class="flex items-center gap-2.5 group">
+      <span class="relative flex h-9 w-9 items-center justify-center rounded-xl overflow-hidden" style="background:var(--grad)">
+        <img src="data:image/png;base64,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" alt="Ranaris Shop" style="width:22px;height:22px;object-fit:contain">
+      </span>
+      <span class="font-display font-bold text-lg tracking-tight text-grad">Ranaris Shop</span>
+    </a>
+
+    <nav class="hidden md:flex items-center gap-9 font-mono text-sm">
+      <a href="#bots" class="navlink">Bots</a>
+      <a href="#proceso" class="navlink">Cómo trabajo</a>
+      <a href="#precios" class="navlink">Precios</a>
+      <a href="#incluye" class="navlink">Qué incluye</a>
+      <a href="#faq" class="navlink">FAQ</a>
+    </nav>
+
+    <div class="hidden md:block">
+      <a href="#contacto" class="btn btn-primary px-5 py-2.5 text-sm">
+        Solicitar presupuesto
+        <i data-lucide="arrow-right" style="width:15px;height:15px"></i>
+      </a>
+    </div>
+
+    <button id="menuBtn" aria-label="Abrir menú" aria-expanded="false" class="md:hidden flex items-center justify-center w-10 h-10 rounded-lg border" style="border-color:var(--border-strong)">
+      <i data-lucide="menu" id="menuIcon" style="width:20px;height:20px"></i>
+    </button>
+  </div>
+
+  <div id="mobileMenu" class="mobile-menu max-h-0 opacity-0 md:hidden border-t" style="border-color:var(--border)">
+    <div class="px-6 py-6 flex flex-col gap-5 font-mono text-sm" style="background:rgba(5,5,8,0.96)">
+      <a href="#bots" class="navlink">Bots</a>
+      <a href="#proceso" class="navlink">Cómo trabajo</a>
+      <a href="#precios" class="navlink">Precios</a>
+      <a href="#incluye" class="navlink">Qué incluye</a>
+      <a href="#faq" class="navlink">FAQ</a>
+      <a href="#contacto" class="btn btn-primary px-5 py-3 text-sm mt-1">Solicitar presupuesto</a>
+    </div>
+  </div>
+</header>
+
+<!-- ============ HERO ============ -->
+<section id="top" class="relative pt-40 pb-28 md:pt-52 md:pb-36 px-6 overflow-hidden">
+  <div class="absolute inset-0 grid-overlay"></div>
+  <div class="nova-glow blob" style="width:520px;height:520px; background:radial-gradient(circle, rgba(30,107,73,0.4), transparent 70%); top:-160px; left:-120px;"></div>
+  <div class="nova-glow blob-2" style="width:560px;height:560px; background:radial-gradient(circle, rgba(76,175,125,0.3), transparent 70%); top:-100px; right:-160px;"></div>
+  <div class="particles" id="heroParticles"></div>
+
+  <div class="relative max-w-7xl mx-auto grid lg:grid-cols-2 gap-16 items-center">
+    <div>
+      <div class="reveal in inline-flex items-center gap-2 chip px-4 py-1.5 mb-7">
+        <span class="relative flex h-2 w-2">
+          <span class="animate-ping absolute inline-flex h-full w-full rounded-full opacity-60" style="background:var(--violet)"></span>
+          <span class="relative inline-flex rounded-full h-2 w-2" style="background:var(--violet)"></span>
+        </span>
+        Bots a medida, listos para producción
+      </div>
+
+      <h1 class="reveal in font-display font-bold text-4xl sm:text-5xl lg:text-[3.4rem] leading-[1.08] mb-6">
+        Bots de Discord diseñados para <span class="text-grad"> hacer crecer tu comunidad.</span>
+      </h1>
+
+      <p class="reveal in reveal-delay-1 text-lg leading-relaxed mb-9 max-w-xl" style="color:var(--muted)">
+        Desarrollo bots personalizados para Discord: moderación, economía, tickets y sistemas propios de RPG con IA con código prolijo, base de datos dedicada y soporte real después de la entrega.
+      </p>
+
+      <div class="reveal in reveal-delay-2 flex flex-wrap gap-4 mb-12">
+        <a href="#bots" class="btn btn-ghost px-6 py-3.5">
+          <i data-lucide="bot" style="width:17px;height:17px"></i>
+          Ver bots
+        </a>
+        <a href="#contacto" class="btn btn-primary px-6 py-3.5">
+          Solicitar presupuesto
+          <i data-lucide="arrow-right" style="width:17px;height:17px"></i>
+        </a>
+      </div>
+
+      <div class="reveal in reveal-delay-3 flex flex-wrap items-center gap-x-8 gap-y-3 font-mono text-xs" style="color:var(--muted-2)">
+        <span class="flex items-center gap-2"><i data-lucide="code-2" style="width:14px;height:14px"></i> discord.py &amp; discord.js</span>
+        <span class="flex items-center gap-2"><i data-lucide="database" style="width:14px;height:14px"></i> SQLite dedicada</span>
+        <span class="flex items-center gap-2"><i data-lucide="brain-circuit" style="width:14px;height:14px"></i> IA narrativa (Groq)</span>
+      </div>
+    </div>
+
+    <!-- Signature visual: mock discord embed showing a real bot response -->
+    <div class="reveal in reveal-delay-2 relative">
+      <div class="discord-mock p-5 sm:p-6 max-w-md mx-auto lg:ml-auto lg:mr-0 font-mono text-[13px]">
+        <div class="flex items-center gap-2 pb-4 mb-4 border-b" style="border-color:var(--border)">
+          <span class="dot" style="background:#ff5f56"></span>
+          <span class="dot" style="background:#ffbd2e"></span>
+          <span class="dot" style="background:#27c93f"></span>
+          <span class="ml-2" style="color:var(--muted-2)">#comandos-bot</span>
+        </div>
+
+        <div class="mb-4">
+          <span style="color:var(--muted-2)">Kaito</span>
+          <span style="color:var(--muted)"> usó </span>
+          <span style="color:var(--blue)">/perfil</span>
+        </div>
+
+        <div class="rounded-xl p-4 mb-4" style="background:var(--surface-2); border-left:3px solid var(--violet)">
+          <div class="flex items-center justify-between mb-3">
+            <span class="font-semibold" style="color:var(--text)">Kaito — Nivel 34</span>
+            <i data-lucide="shield-check" style="width:16px;height:16px; color:var(--blue)"></i>
+          </div>
+          <div class="flex justify-between mb-1.5" style="color:var(--muted)">
+            <span>❖ Monedas</span><span style="color:var(--text)">12,450</span>
+          </div>
+          <div class="flex justify-between mb-1.5" style="color:var(--muted)">
+            <span>⚔ Clase</span><span style="color:var(--text)">Vanguardia</span>
+          </div>
+          <div class="flex justify-between mb-3" style="color:var(--muted)">
+            <span>♥ HP</span><span style="color:var(--text)">210 / 210</span>
+          </div>
+          <div class="h-1.5 rounded-full overflow-hidden" style="background:rgba(255,255,255,0.08)">
+            <div class="h-full rounded-full" style="width:72%; background:var(--grad)"></div>
+          </div>
+        </div>
+
+        <div class="flex items-center gap-2" style="color:var(--muted-2)">
+          <i data-lucide="terminal" style="width:14px;height:14px"></i>
+          <span>bot en línea · 99.9% uptime</span>
+          <span class="blink">▍</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ MIS BOTS ============ -->
+<section id="bots" class="relative py-28 md:py-36 px-6">
+  <div class="max-w-7xl mx-auto">
+    <div class="reveal text-center max-w-2xl mx-auto mb-16">
+      <p class="section-eyebrow mb-4">Catálogo</p>
+      <h2 class="font-display font-bold text-3xl sm:text-4xl mb-5">Mis bots</h2>
+      <p style="color:var(--muted)" class="text-lg">Cuatro puntos de partida sólidos. Cada uno se adapta al estilo, tema y reglas de tu servidor.</p>
+    </div>
+
+    <div class="grid sm:grid-cols-2 gap-6" id="botsGrid">
+      <!-- cards injected structure below, static for reliability -->
+
+      <article class="reveal card card-glow p-8" data-card>
+        <div class="flex items-start justify-between mb-6">
+          <span class="flex h-12 w-12 items-center justify-center rounded-2xl" style="background:var(--grad-soft); border:1px solid var(--border-strong)">
+            <i data-lucide="shield" style="width:22px;height:22px; color:var(--blue)"></i>
+          </span>
+          <span class="chip px-3 py-1">Moderación</span>
+        </div>
+        <h3 class="font-display font-semibold text-xl mb-2.5">Bot de Moderación</h3>
+        <p style="color:var(--muted)" class="text-sm leading-relaxed mb-5">Mantiene el orden en tu servidor con automoderación inteligente, sanciones y registros configurables.</p>
+        <ul class="space-y-2.5 mb-5 text-sm" style="color:var(--muted)">
+          <li class="flex gap-2"><i data-lucide="check" style="width:16px;height:16px;color:var(--violet)" class="shrink-0 mt-0.5"></i>Automoderación de spam, links e insultos</li>
+          <li class="flex gap-2"><i data-lucide="check" style="width:16px;height:16px;color:var(--violet)" class="shrink-0 mt-0.5"></i>Advertencias, mutes, kicks y baneos</li>
+          <li class="flex gap-2 more-feat hidden"><i data-lucide="check" style="width:16px;height:16px;color:var(--violet)" class="shrink-0 mt-0.5"></i>Logs de auditoría configurables por canal</li>
+          <li class="flex gap-2 more-feat hidden"><i data-lucide="check" style="width:16px;height:16px;color:var(--violet)" class="shrink-0 mt-0.5"></i>Filtros y palabras prohibidas personalizables</li>
+        </ul>
+        <button class="ver-mas flex items-center gap-1.5 text-sm font-semibold" style="color:var(--blue)">
+          Ver más <i data-lucide="chevron-down" class="chev" style="width:15px;height:15px"></i>
+        </button>
+      </article>
+
+      <article class="reveal reveal-delay-1 card card-glow p-8" data-card>
+        <div class="flex items-start justify-between mb-6">
+          <span class="flex h-12 w-12 items-center justify-center rounded-2xl" style="background:var(--grad-soft); border:1px solid var(--border-strong)">
+            <i data-lucide="coins" style="width:22px;height:22px; color:var(--violet)"></i>
+          </span>
+          <span class="chip px-3 py-1">Economía</span>
+        </div>
+        <h3 class="font-display font-semibold text-xl mb-2.5">Bot de Economía</h3>
+        <p style="color:var(--muted)" class="text-sm leading-relaxed mb-5">Un sistema económico completo con trabajos, tienda y rankings para mantener a la comunidad activa.</p>
+        <ul class="space-y-2.5 mb-5 text-sm" style="color:var(--muted)">
+          <li class="flex gap-2"><i data-lucide="check" style="width:16px;height:16px;color:var(--violet)" class="shrink-0 mt-0.5"></i>Monedas, trabajos y recompensa diaria</li>
+          <li class="flex gap-2"><i data-lucide="check" style="width:16px;height:16px;color:var(--violet)" class="shrink-0 mt-0.5"></i>Tienda, inventario y objetos</li>
+          <li class="flex gap-2 more-feat hidden"><i data-lucide="check" style="width:16px;height:16px;color:var(--violet)" class="shrink-0 mt-0.5"></i>Transferencias entre usuarios</li>
+          <li class="flex gap-2 more-feat hidden"><i data-lucide="check" style="width:16px;height:16px;color:var(--violet)" class="shrink-0 mt-0.5"></i>Rankings, apuestas y minijuegos</li>
+        </ul>
+        <button class="ver-mas flex items-center gap-1.5 text-sm font-semibold" style="color:var(--blue)">
+          Ver más <i data-lucide="chevron-down" class="chev" style="width:15px;height:15px"></i>
+        </button>
+      </article>
+
+      <article class="reveal reveal-delay-2 card card-glow p-8" data-card>
+        <div class="flex items-start justify-between mb-6">
+          <span class="flex h-12 w-12 items-center justify-center rounded-2xl" style="background:var(--grad-soft); border:1px solid var(--border-strong)">
+            <i data-lucide="ticket" style="width:22px;height:22px; color:var(--blue)"></i>
+          </span>
+          <span class="chip px-3 py-1">Soporte</span>
+        </div>
+        <h3 class="font-display font-semibold text-xl mb-2.5">Bot de Tickets</h3>
+        <p style="color:var(--muted)" class="text-sm leading-relaxed mb-5">Soporte organizado para tu servidor con paneles, categorías y transcripciones automáticas.</p>
+        <ul class="space-y-2.5 mb-5 text-sm" style="color:var(--muted)">
+          <li class="flex gap-2"><i data-lucide="check" style="width:16px;height:16px;color:var(--violet)" class="shrink-0 mt-0.5"></i>Panel de tickets con botones</li>
+          <li class="flex gap-2"><i data-lucide="check" style="width:16px;height:16px;color:var(--violet)" class="shrink-0 mt-0.5"></i>Categorías y roles de staff configurables</li>
+          <li class="flex gap-2 more-feat hidden"><i data-lucide="check" style="width:16px;height:16px;color:var(--violet)" class="shrink-0 mt-0.5"></i>Transcripciones automáticas al cerrar</li>
+          <li class="flex gap-2 more-feat hidden"><i data-lucide="check" style="width:16px;height:16px;color:var(--violet)" class="shrink-0 mt-0.5"></i>Notificaciones y logs de actividad</li>
+        </ul>
+        <button class="ver-mas flex items-center gap-1.5 text-sm font-semibold" style="color:var(--blue)">
+          Ver más <i data-lucide="chevron-down" class="chev" style="width:15px;height:15px"></i>
+        </button>
+      </article>
+
+      <article class="reveal reveal-delay-3 card card-glow p-8" data-card>
+        <div class="flex items-start justify-between mb-6">
+          <span class="flex h-12 w-12 items-center justify-center rounded-2xl" style="background:var(--grad-soft); border:1px solid var(--border-strong)">
+            <i data-lucide="wand-sparkles" style="width:22px;height:22px; color:var(--violet)"></i>
+          </span>
+          <span class="chip px-3 py-1">A medida</span>
+        </div>
+        <h3 class="font-display font-semibold text-xl mb-2.5">Bot Personalizado</h3>
+        <p style="color:var(--muted)" class="text-sm leading-relaxed mb-5">¿Tenés una idea distinta? Desarrollo sistemas propios de RPG, narrativa con IA y rol para comunidades de anime.</p>
+        <ul class="space-y-2.5 mb-5 text-sm" style="color:var(--muted)">
+          <li class="flex gap-2"><i data-lucide="check" style="width:16px;height:16px;color:var(--violet)" class="shrink-0 mt-0.5"></i>Sistemas de combate y estadísticas</li>
+          <li class="flex gap-2"><i data-lucide="check" style="width:16px;height:16px;color:var(--violet)" class="shrink-0 mt-0.5"></i>Narrativa asistida por IA</li>
+          <li class="flex gap-2 more-feat hidden"><i data-lucide="check" style="width:16px;height:16px;color:var(--violet)" class="shrink-0 mt-0.5"></i>Base de datos y paneles de administración propios</li>
+          <li class="flex gap-2 more-feat hidden"><i data-lucide="check" style="width:16px;height:16px;color:var(--violet)" class="shrink-0 mt-0.5"></i>Integraciones y funciones a medida</li>
+        </ul>
+        <button class="ver-mas flex items-center gap-1.5 text-sm font-semibold" style="color:var(--blue)">
+          Ver más <i data-lucide="chevron-down" class="chev" style="width:15px;height:15px"></i>
+        </button>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CÓMO TRABAJO ============ -->
+<section id="proceso" class="relative py-28 md:py-36 px-6" style="background:var(--bg-soft)">
+  <div class="absolute inset-0 grid-overlay" style="opacity:0.5"></div>
+  <div class="relative max-w-5xl mx-auto">
+    <div class="reveal text-center max-w-2xl mx-auto mb-20">
+      <p class="section-eyebrow mb-4">Proceso</p>
+      <h2 class="font-display font-bold text-3xl sm:text-4xl mb-5">¿Cómo trabajo?</h2>
+      <p style="color:var(--muted)" class="text-lg">Cuatro pasos, sin vueltas, con comunicación clara de principio a fin.</p>
+    </div>
+
+    <div class="relative pl-14 sm:pl-20">
+      <div class="timeline-line absolute left-[19px] sm:left-[27px] top-2 bottom-2 w-[2px] rounded-full opacity-40"></div>
+
+      <div class="relative space-y-14">
+        <div class="reveal relative">
+          <span class="step-dot absolute -left-14 sm:-left-20 top-0 w-10 h-10 rounded-full flex items-center justify-center font-display font-bold text-sm text-white">01</span>
+          <h3 class="font-display font-semibold text-lg mb-2">Contame tu idea</h3>
+          <p style="color:var(--muted)" class="max-w-xl">Me explicás qué necesitás para tu servidor: tema, funciones, referencias. Cuanto más contexto, mejor propuesta.</p>
+        </div>
+        <div class="reveal reveal-delay-1 relative">
+          <span class="step-dot absolute -left-14 sm:-left-20 top-0 w-10 h-10 rounded-full flex items-center justify-center font-display font-bold text-sm text-white">02</span>
+          <h3 class="font-display font-semibold text-lg mb-2">Acordamos el presupuesto</h3>
+          <p style="color:var(--muted)" class="max-w-xl">Con la idea clara, definimos alcance, tiempos y precio final antes de escribir una sola línea de código.</p>
+        </div>
+        <div class="reveal reveal-delay-2 relative">
+          <span class="step-dot absolute -left-14 sm:-left-20 top-0 w-10 h-10 rounded-full flex items-center justify-center font-display font-bold text-sm text-white">03</span>
+          <h3 class="font-display font-semibold text-lg mb-2">Desarrollo el bot</h3>
+          <p style="color:var(--muted)" class="max-w-xl">Construyo tu bot con código limpio y base de datos propia, con avances y consultas durante el proceso.</p>
+        </div>
+        <div class="reveal reveal-delay-3 relative">
+          <span class="step-dot absolute -left-14 sm:-left-20 top-0 w-10 h-10 rounded-full flex items-center justify-center font-display font-bold text-sm text-white">04</span>
+          <h3 class="font-display font-semibold text-lg mb-2">Entrega y soporte</h3>
+          <p style="color:var(--muted)" class="max-w-xl">Recibís el bot instalado y configurado, con 3 meses de soporte incluido para corregir cualquier error.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PRECIOS ============ -->
+<section id="precios" class="relative py-28 md:py-36 px-6">
+  <div class="max-w-6xl mx-auto">
+    <div class="reveal text-center max-w-2xl mx-auto mb-16">
+      <p class="section-eyebrow mb-4">Inversión</p>
+      <h2 class="font-display font-bold text-3xl sm:text-4xl mb-5">Precios</h2>
+      <p style="color:var(--muted)" class="text-lg">Rangos orientativos según la complejidad. El valor final siempre se acuerda antes de empezar.</p>
+    </div>
+
+    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 items-stretch">
+      <div class="reveal price-card card p-7 flex flex-col">
+        <p class="chip inline-block px-3 py-1 mb-5 self-start">Sencillo</p>
+        <p class="font-display font-bold text-3xl mb-1">Desde $4<span class="text-base font-normal" style="color:var(--muted)"> USD</span></p>
+        <p class="text-sm mb-6" style="color:var(--muted)">Comandos puntuales o ajustes simples sobre un bot ya existente.</p>
+        <ul class="space-y-2.5 text-sm mb-7" style="color:var(--muted)">
+          <li class="flex gap-2"><i data-lucide="check" style="width:15px;height:15px;color:var(--blue)" class="mt-0.5 shrink-0"></i>Funciones puntuales</li>
+          <li class="flex gap-2"><i data-lucide="check" style="width:15px;height:15px;color:var(--blue)" class="mt-0.5 shrink-0"></i>Entrega rápida</li>
+        </ul>
+        <a href="#contacto" class="btn btn-ghost mt-auto py-3 text-sm">Consultar</a>
+      </div>
+
+      <div class="reveal reveal-delay-1 price-card featured card p-7 flex flex-col">
+        <p class="chip inline-block px-3 py-1 mb-5 self-start">Intermedio</p>
+        <p class="font-display font-bold text-3xl mb-1">$8 – $15<span class="text-base font-normal" style="color:var(--muted)"> USD</span></p>
+        <p class="text-sm mb-6" style="color:var(--muted)">Bot con varios sistemas conectados: moderación, economía o tickets.</p>
+        <ul class="space-y-2.5 text-sm mb-7" style="color:var(--muted)">
+          <li class="flex gap-2"><i data-lucide="check" style="width:15px;height:15px;color:var(--violet)" class="mt-0.5 shrink-0"></i>Base de datos propia</li>
+          <li class="flex gap-2"><i data-lucide="check" style="width:15px;height:15px;color:var(--violet)" class="mt-0.5 shrink-0"></i>Configuración incluida</li>
+          <li class="flex gap-2"><i data-lucide="check" style="width:15px;height:15px;color:var(--violet)" class="mt-0.5 shrink-0"></i>Soporte de 3 meses</li>
+        </ul>
+        <a href="#contacto" class="btn btn-primary mt-auto py-3 text-sm">Consultar</a>
+      </div>
+
+      <div class="reveal reveal-delay-2 price-card card p-7 flex flex-col">
+        <p class="chip inline-block px-3 py-1 mb-5 self-start">Avanzado</p>
+        <p class="font-display font-bold text-3xl mb-1">$20+<span class="text-base font-normal" style="color:var(--muted)"> USD</span></p>
+        <p class="text-sm mb-6" style="color:var(--muted)">Sistemas complejos: RPG, combate, narrativa con IA, paneles propios.</p>
+        <ul class="space-y-2.5 text-sm mb-7" style="color:var(--muted)">
+          <li class="flex gap-2"><i data-lucide="check" style="width:15px;height:15px;color:var(--blue)" class="mt-0.5 shrink-0"></i>Arquitectura a medida</li>
+          <li class="flex gap-2"><i data-lucide="check" style="width:15px;height:15px;color:var(--blue)" class="mt-0.5 shrink-0"></i>Integración con IA</li>
+        </ul>
+        <a href="#contacto" class="btn btn-ghost mt-auto py-3 text-sm">Consultar</a>
+      </div>
+
+      <div class="reveal reveal-delay-3 price-card card p-7 flex flex-col">
+        <p class="chip inline-block px-3 py-1 mb-5 self-start">A medida</p>
+        <p class="font-display font-bold text-3xl mb-1">Presupuesto<span class="block text-base font-normal" style="color:var(--muted)">según el proyecto</span></p>
+        <p class="text-sm mb-6" style="color:var(--muted)">Sistema totalmente personalizado, pensado desde cero para tu servidor.</p>
+        <ul class="space-y-2.5 text-sm mb-7" style="color:var(--muted)">
+          <li class="flex gap-2"><i data-lucide="check" style="width:15px;height:15px;color:var(--violet)" class="mt-0.5 shrink-0"></i>Alcance definido juntos</li>
+          <li class="flex gap-2"><i data-lucide="check" style="width:15px;height:15px;color:var(--violet)" class="mt-0.5 shrink-0"></i>Sin límites de creatividad</li>
+        </ul>
+        <a href="#contacto" class="btn btn-ghost mt-auto py-3 text-sm">Consultar</a>
+      </div>
+    </div>
+
+    <p class="reveal reveal-delay-4 flex items-center gap-2 justify-center text-sm mt-10" style="color:var(--muted-2)">
+      <i data-lucide="info" style="width:15px;height:15px"></i>
+      El precio final depende de la complejidad, cantidad de funciones y tiempo de desarrollo del bot.
+    </p>
+  </div>
+</section>
+
+<!-- ============ QUÉ INCLUYE ============ -->
+<section id="incluye" class="relative py-28 md:py-36 px-6" style="background:var(--bg-soft)">
+  <div class="max-w-6xl mx-auto">
+    <div class="reveal text-center max-w-2xl mx-auto mb-16">
+      <p class="section-eyebrow mb-4">Todo resuelto</p>
+      <h2 class="font-display font-bold text-3xl sm:text-4xl mb-5">¿Qué incluye?</h2>
+      <p style="color:var(--muted)" class="text-lg">Cada proyecto se entrega listo para usar, no solo el código.</p>
+    </div>
+
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div class="reveal card p-7 flex items-start gap-4">
+        <span class="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl" style="background:var(--grad-soft)"><i data-lucide="file-code-2" style="width:20px;height:20px;color:var(--blue)"></i></span>
+        <div><h3 class="font-display font-semibold mb-1.5">Código limpio</h3><p class="text-sm" style="color:var(--muted)">Organizado, comentado y fácil de mantener o ampliar más adelante.</p></div>
+      </div>
+      <div class="reveal reveal-delay-1 card p-7 flex items-start gap-4">
+        <span class="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl" style="background:var(--grad-soft)"><i data-lucide="database" style="width:20px;height:20px;color:var(--violet)"></i></span>
+        <div><h3 class="font-display font-semibold mb-1.5">Base de datos</h3><p class="text-sm" style="color:var(--muted)">Persistencia propia para que ningún dato se pierda al reiniciar el bot.</p></div>
+      </div>
+      <div class="reveal reveal-delay-2 card p-7 flex items-start gap-4">
+        <span class="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl" style="background:var(--grad-soft)"><i data-lucide="sliders-horizontal" style="width:20px;height:20px;color:var(--blue)"></i></span>
+        <div><h3 class="font-display font-semibold mb-1.5">Configuración</h3><p class="text-sm" style="color:var(--muted)">Ajustado a los roles, canales y reglas específicas de tu servidor.</p></div>
+      </div>
+      <div class="reveal card p-7 flex items-start gap-4">
+        <span class="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl" style="background:var(--grad-soft)"><i data-lucide="rocket" style="width:20px;height:20px;color:var(--violet)"></i></span>
+        <div><h3 class="font-display font-semibold mb-1.5">Instalación</h3><p class="text-sm" style="color:var(--muted)">Me encargo de que el bot quede online y funcionando en tu servidor.</p></div>
+      </div>
+      <div class="reveal reveal-delay-1 card p-7 flex items-start gap-4">
+        <span class="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl" style="background:var(--grad-soft)"><i data-lucide="life-buoy" style="width:20px;height:20px;color:var(--blue)"></i></span>
+        <div><h3 class="font-display font-semibold mb-1.5">Soporte 3 meses</h3><p class="text-sm" style="color:var(--muted)">Acompañamiento después de la entrega para dudas o ajustes.</p></div>
+      </div>
+      <div class="reveal reveal-delay-2 card p-7 flex items-start gap-4">
+        <span class="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl" style="background:var(--grad-soft)"><i data-lucide="bug" style="width:20px;height:20px;color:var(--violet)"></i></span>
+        <div><h3 class="font-display font-semibold mb-1.5">Corrección de errores</h3><p class="text-sm" style="color:var(--muted)">Si algo falla, lo reviso y lo soluciono sin costo dentro del soporte.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ TÉRMINOS ============ -->
+<section id="terminos" class="relative py-28 md:py-36 px-6">
+  <div class="max-w-4xl mx-auto">
+    <div class="reveal text-center max-w-2xl mx-auto mb-14">
+      <p class="section-eyebrow mb-4">Reglas claras</p>
+      <h2 class="font-display font-bold text-3xl sm:text-4xl mb-5">Términos y condiciones</h2>
+      <p style="color:var(--muted)" class="text-lg">Para que ambas partes sepamos exactamente qué esperar.</p>
+    </div>
+
+    <div class="reveal card p-8 sm:p-12">
+      <ul class="space-y-6">
+        <li class="flex gap-4">
+          <i data-lucide="handshake" class="shrink-0 mt-0.5" style="width:20px;height:20px;color:var(--blue)"></i>
+          <p style="color:var(--muted)">El presupuesto se acuerda <span style="color:var(--text)">antes de comenzar</span> el desarrollo.</p>
+        </li>
+        <li class="flex gap-4">
+          <i data-lucide="clock" class="shrink-0 mt-0.5" style="width:20px;height:20px;color:var(--violet)"></i>
+          <p style="color:var(--muted)">El desarrollo puede tardar <span style="color:var(--text)">entre algunos días y varias semanas</span>, según la complejidad del proyecto.</p>
+        </li>
+        <li class="flex gap-4">
+          <i data-lucide="bell-ring" class="shrink-0 mt-0.5" style="width:20px;height:20px;color:var(--blue)"></i>
+          <p style="color:var(--muted)">Si existe algún retraso, <span style="color:var(--text)">el cliente es informado</span> con anticipación.</p>
+        </li>
+        <li class="flex gap-4">
+          <i data-lucide="life-buoy" class="shrink-0 mt-0.5" style="width:20px;height:20px;color:var(--violet)"></i>
+          <p style="color:var(--muted)">Incluye <span style="color:var(--text)">soporte durante 3 meses</span> para corregir errores del bot.</p>
+        </li>
+        <li class="flex gap-4">
+          <i data-lucide="plus-circle" class="shrink-0 mt-0.5" style="width:20px;height:20px;color:var(--blue)"></i>
+          <p style="color:var(--muted)">Las <span style="color:var(--text)">funciones nuevas</span> pedidas después de la entrega pueden tener un costo adicional.</p>
+        </li>
+        <li class="flex gap-4">
+          <i data-lucide="ban" class="shrink-0 mt-0.5" style="width:20px;height:20px;color:var(--violet)"></i>
+          <p style="color:var(--muted)">No hay reembolsos una vez <span style="color:var(--text)">iniciado el desarrollo</span>, salvo acuerdo entre ambas partes.</p>
+        </li>
+        <li class="flex gap-4">
+          <i data-lucide="server" class="shrink-0 mt-0.5" style="width:20px;height:20px;color:var(--blue)"></i>
+          <p style="color:var(--muted)">El <span style="color:var(--text)">hosting del bot es responsabilidad del cliente</span>: lo contrata por su cuenta, no está incluido ni administrado por Ranaris.</p>
+        </li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FAQ ============ -->
+<section id="faq" class="relative py-28 md:py-36 px-6" style="background:var(--bg-soft)">
+  <div class="max-w-3xl mx-auto">
+    <div class="reveal text-center mb-14">
+      <p class="section-eyebrow mb-4">Dudas frecuentes</p>
+      <h2 class="font-display font-bold text-3xl sm:text-4xl mb-5">Preguntas frecuentes</h2>
+    </div>
+
+    <div class="space-y-4">
+      <details class="faq-item reveal card px-7 py-5" open>
+        <summary class="flex items-center justify-between gap-4 font-display font-semibold">
+          ¿El bot funciona 24/7?
+          <i data-lucide="chevron-down" class="chevron shrink-0" style="width:18px;height:18px;color:var(--muted)"></i>
+        </summary>
+        <p class="faq-a mt-3 text-sm leading-relaxed" style="color:var(--muted)">Sí, siempre que esté alojado en un hosting activo. Te oriento sobre las opciones disponibles según tu presupuesto.</p>
+      </details>
+
+      <details class="faq-item reveal reveal-delay-1 card px-7 py-5">
+        <summary class="flex items-center justify-between gap-4 font-display font-semibold">
+          ¿Necesito contratar hosting?
+          <i data-lucide="chevron-down" class="chevron shrink-0" style="width:18px;height:18px;color:var(--muted)"></i>
+        </summary>
+        <p class="faq-a mt-3 text-sm leading-relaxed" style="color:var(--muted)">Sí, el bot necesita un servidor donde ejecutarse 24/7. El hosting lo contratás vos por tu cuenta; yo te oriento sobre opciones económicas y te ayudo con la instalación.</p>
+      </details>
+
+      <details class="faq-item reveal reveal-delay-2 card px-7 py-5">
+        <summary class="flex items-center justify-between gap-4 font-display font-semibold">
+          ¿Hacés bots totalmente personalizados?
+          <i data-lucide="chevron-down" class="chevron shrink-0" style="width:18px;height:18px;color:var(--muted)"></i>
+        </summary>
+        <p class="faq-a mt-3 text-sm leading-relaxed" style="color:var(--muted)">Sí, es una de mis especialidades: sistemas de RPG, combate, economía o narrativa con IA construidos desde cero para tu servidor.</p>
+      </details>
+
+      <details class="faq-item reveal reveal-delay-3 card px-7 py-5">
+        <summary class="flex items-center justify-between gap-4 font-display font-semibold">
+          ¿Qué tecnologías usás?
+          <i data-lucide="chevron-down" class="chevron shrink-0" style="width:18px;height:18px;color:var(--muted)"></i>
+        </summary>
+        <p class="faq-a mt-3 text-sm leading-relaxed" style="color:var(--muted)">Trabajo principalmente con Python (discord.py) y JavaScript (discord.js), bases de datos SQLite e integración de IA para sistemas narrativos.</p>
+      </details>
+
+      <details class="faq-item reveal reveal-delay-4 card px-7 py-5">
+        <summary class="flex items-center justify-between gap-4 font-display font-semibold">
+          ¿Cuánto tarda el desarrollo?
+          <i data-lucide="chevron-down" class="chevron shrink-0" style="width:18px;height:18px;color:var(--muted)"></i>
+        </summary>
+        <p class="faq-a mt-3 text-sm leading-relaxed" style="color:var(--muted)">Depende de la complejidad: desde unos pocos días para bots sencillos hasta varias semanas para sistemas avanzados a medida.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CONTACTO ============ -->
+<section id="contacto" class="relative py-28 md:py-40 px-6 overflow-hidden">
+  <div class="nova-glow blob" style="width:600px;height:600px; background:radial-gradient(circle, rgba(76,175,125,0.3), transparent 70%); bottom:-260px; left:50%; transform:translateX(-50%);"></div>
+  <div class="relative max-w-3xl mx-auto text-center">
+    <p class="reveal section-eyebrow mb-5">Empecemos</p>
+    <h2 class="reveal reveal-delay-1 font-display font-bold text-3xl sm:text-5xl mb-6 leading-tight">
+      ¿Listo para darle vida<br class="hidden sm:block"> a tu bot?
+    </h2>
+    <p class="reveal reveal-delay-2 text-lg mb-10" style="color:var(--muted)">Contame tu idea y te paso un presupuesto claro, sin compromiso.</p>
+
+    <a href="https://discord.com/users/1334723582592548884" target="_blank" rel="noopener noreferrer" class="reveal reveal-delay-3 btn btn-primary px-10 py-5 text-base inline-flex">
+      Solicitar presupuesto
+      <i data-lucide="send" style="width:18px;height:18px"></i>
+    </a>
+
+    <div class="reveal reveal-delay-4 flex flex-wrap items-center justify-center gap-4 mt-14">
+      <a href="https://discord.com/users/1334723582592548884" target="_blank" rel="noopener noreferrer" class="btn btn-ghost px-5 py-3 text-sm">
+        <i data-lucide="message-circle" style="width:16px;height:16px"></i> @ranarisfr
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer class="relative px-6 py-10 border-t" style="border-color:var(--border)">
+  <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 text-sm" style="color:var(--muted-2)">
+    <div class="flex items-center gap-2.5">
+      <span class="flex h-7 w-7 items-center justify-center rounded-lg overflow-hidden" style="background:var(--grad)"><img src="data:image/png;base64,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" alt="Ranaris Shop" style="width:16px;height:16px;object-fit:contain"></span>
+      <span class="font-display font-semibold">Ranaris Shop</span>
+    </div>
+    <p>© 2026 Ranaris Shop. Desarrollo de bots de Discord a medida.</p>
+  </div>
+</footer>
+
+<script>
+lucide.createIcons();
+
+// nav scroll state
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('scrolled', window.scrollY > 20);
+}, { passive:true });
+
+// mobile menu
+const menuBtn = document.getElementById('menuBtn');
+const menuIcon = document.getElementById('menuIcon');
+const mobileMenu = document.getElementById('mobileMenu');
+let menuOpen = false;
+menuBtn.addEventListener('click', () => {
+  menuOpen = !menuOpen;
+  menuBtn.setAttribute('aria-expanded', menuOpen);
+  if (menuOpen) {
+    mobileMenu.style.maxHeight = mobileMenu.scrollHeight + 'px';
+    mobileMenu.style.opacity = '1';
+    menuIcon.setAttribute('data-lucide', 'x');
+  } else {
+    mobileMenu.style.maxHeight = '0px';
+    mobileMenu.style.opacity = '0';
+    menuIcon.setAttribute('data-lucide', 'menu');
+  }
+  lucide.createIcons();
+});
+mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+  menuOpen = false;
+  mobileMenu.style.maxHeight = '0px';
+  mobileMenu.style.opacity = '0';
+  menuIcon.setAttribute('data-lucide', 'menu');
+  lucide.createIcons();
+}));
+
+// scroll reveal
+const revealEls = document.querySelectorAll('.reveal');
+const io = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('in');
+      io.unobserve(entry.target);
+    }
+  });
+}, { threshold:0.12, rootMargin:'0px 0px -60px 0px' });
+revealEls.forEach(el => io.observe(el));
+
+// "ver más" toggles on bot cards
+document.querySelectorAll('.ver-mas').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const card = btn.closest('[data-card]');
+    const hiddenItems = card.querySelectorAll('.more-feat');
+    const expanded = btn.getAttribute('data-expanded') === 'true';
+    hiddenItems.forEach(li => li.classList.toggle('hidden', expanded));
+    btn.setAttribute('data-expanded', String(!expanded));
+    btn.querySelector('.chev').style.transform = expanded ? 'rotate(0deg)' : 'rotate(180deg)';
+    btn.childNodes[0].textContent = expanded ? 'Ver más ' : 'Ver menos ';
+  });
+});
+
+// hero particles
+const particlesContainer = document.getElementById('heroParticles');
+const particleCount = window.innerWidth < 640 ? 14 : 28;
+for (let i = 0; i < particleCount; i++) {
+  const p = document.createElement('span');
+  p.className = 'particle';
+  p.style.left = Math.random() * 100 + '%';
+  p.style.top = Math.random() * 100 + '%';
+  p.style.animationDelay = (Math.random() * 6) + 's';
+  p.style.animationDuration = (4 + Math.random() * 5) + 's';
+  p.style.background = Math.random() > 0.5 ? '#1E6B49' : '#4CAF7D';
+  particlesContainer.appendChild(p);
+}
+
+// close other open faq items (accordion behavior)
+document.querySelectorAll('.faq-item').forEach(item => {
+  item.addEventListener('toggle', () => {
+    if (item.open) {
+      document.querySelectorAll('.faq-item').forEach(other => {
+        if (other !== item) other.open = false;
+      });
+    }
+  });
+});
+</script>
+
+</body>
+</html>

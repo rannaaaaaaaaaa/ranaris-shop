@@ -246,6 +246,8 @@ a:focus-visible, button:focus-visible, summary:focus-visible{
       <a href="#proceso" class="navlink">Cómo trabajo</a>
       <a href="#precios" class="navlink">Precios</a>
       <a href="#incluye" class="navlink">Qué incluye</a>
+      <a href="#portfolio" class="navlink">Portfolio</a>
+      <a href="#comentarios" class="navlink">Comentarios</a>
       <a href="#faq" class="navlink">FAQ</a>
     </nav>
 
@@ -267,6 +269,8 @@ a:focus-visible, button:focus-visible, summary:focus-visible{
       <a href="#proceso" class="navlink">Cómo trabajo</a>
       <a href="#precios" class="navlink">Precios</a>
       <a href="#incluye" class="navlink">Qué incluye</a>
+      <a href="#portfolio" class="navlink">Portfolio</a>
+      <a href="#comentarios" class="navlink">Comentarios</a>
       <a href="#faq" class="navlink">FAQ</a>
       <a href="#contacto" class="btn btn-primary px-5 py-3 text-sm mt-1">Solicitar presupuesto</a>
     </div>
@@ -506,49 +510,60 @@ a:focus-visible, button:focus-visible, summary:focus-visible{
 
     <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 items-stretch">
       <div class="reveal price-card card p-7 flex flex-col">
-        <p class="chip inline-block px-3 py-1 mb-5 self-start">Sencillo</p>
-        <p class="font-display font-bold text-3xl mb-1">Desde $4<span class="text-base font-normal" style="color:var(--muted)"> USD</span></p>
-        <p class="text-sm mb-6" style="color:var(--muted)">Comandos puntuales o ajustes simples sobre un bot ya existente.</p>
+        <p class="chip inline-block px-3 py-1 mb-5 self-start">Ayuda / consultas</p>
+        <p class="font-display font-bold text-3xl mb-1">$3<span class="text-base font-normal" style="color:var(--muted)"> USD</span></p>
+        <p class="text-sm mb-6" style="color:var(--muted)">Ayuda o consultas sobre bots ya creados, además de parches puntuales.</p>
         <ul class="space-y-2.5 text-sm mb-7" style="color:var(--muted)">
-          <li class="flex gap-2"><i data-lucide="check" style="width:15px;height:15px;color:var(--blue)" class="mt-0.5 shrink-0"></i>Funciones puntuales</li>
+          <li class="flex gap-2"><i data-lucide="check" style="width:15px;height:15px;color:var(--blue)" class="mt-0.5 shrink-0"></i>Diagnóstico y ayuda técnica</li>
+          <li class="flex gap-2"><i data-lucide="check" style="width:15px;height:15px;color:var(--blue)" class="mt-0.5 shrink-0"></i>Parches y correcciones puntuales</li>
+        </ul>
+        <a href="#contacto" class="btn btn-ghost mt-auto py-3 text-sm">Consultar</a>
+      </div>
+
+      <div class="reveal reveal-delay-1 price-card card p-7 flex flex-col">
+        <p class="chip inline-block px-3 py-1 mb-5 self-start">Bots chicos</p>
+        <p class="font-display font-bold text-3xl mb-1">$5 – $7<span class="text-base font-normal" style="color:var(--muted)"> USD</span></p>
+        <p class="text-sm mb-6" style="color:var(--muted)">Un sistema único: economía, moderación u otro, bien resuelto.</p>
+        <ul class="space-y-2.5 text-sm mb-7" style="color:var(--muted)">
+          <li class="flex gap-2"><i data-lucide="check" style="width:15px;height:15px;color:var(--blue)" class="mt-0.5 shrink-0"></i>Un sistema principal</li>
           <li class="flex gap-2"><i data-lucide="check" style="width:15px;height:15px;color:var(--blue)" class="mt-0.5 shrink-0"></i>Entrega rápida</li>
         </ul>
         <a href="#contacto" class="btn btn-ghost mt-auto py-3 text-sm">Consultar</a>
       </div>
 
-      <div class="reveal reveal-delay-1 price-card featured card p-7 flex flex-col">
-        <p class="chip inline-block px-3 py-1 mb-5 self-start">Intermedio</p>
-        <p class="font-display font-bold text-3xl mb-1">$8 – $15<span class="text-base font-normal" style="color:var(--muted)"> USD</span></p>
-        <p class="text-sm mb-6" style="color:var(--muted)">Bot con varios sistemas conectados: moderación, economía o tickets.</p>
+      <div class="reveal reveal-delay-2 price-card featured card p-7 flex flex-col">
+        <p class="chip inline-block px-3 py-1 mb-5 self-start">Bots medianos</p>
+        <p class="font-display font-bold text-3xl mb-1">$10 – $15<span class="text-base font-normal" style="color:var(--muted)"> USD</span></p>
+        <p class="text-sm mb-6" style="color:var(--muted)">Bot con 3 sistemas diferentes conectados entre sí.</p>
         <ul class="space-y-2.5 text-sm mb-7" style="color:var(--muted)">
+          <li class="flex gap-2"><i data-lucide="check" style="width:15px;height:15px;color:var(--violet)" class="mt-0.5 shrink-0"></i>3 sistemas integrados</li>
           <li class="flex gap-2"><i data-lucide="check" style="width:15px;height:15px;color:var(--violet)" class="mt-0.5 shrink-0"></i>Base de datos propia</li>
-          <li class="flex gap-2"><i data-lucide="check" style="width:15px;height:15px;color:var(--violet)" class="mt-0.5 shrink-0"></i>Configuración incluida</li>
           <li class="flex gap-2"><i data-lucide="check" style="width:15px;height:15px;color:var(--violet)" class="mt-0.5 shrink-0"></i>Soporte de 3 meses</li>
         </ul>
         <a href="#contacto" class="btn btn-primary mt-auto py-3 text-sm">Consultar</a>
       </div>
 
-      <div class="reveal reveal-delay-2 price-card card p-7 flex flex-col">
-        <p class="chip inline-block px-3 py-1 mb-5 self-start">Avanzado</p>
-        <p class="font-display font-bold text-3xl mb-1">$20+<span class="text-base font-normal" style="color:var(--muted)"> USD</span></p>
-        <p class="text-sm mb-6" style="color:var(--muted)">Sistemas complejos: RPG, combate, narrativa con IA, paneles propios.</p>
-        <ul class="space-y-2.5 text-sm mb-7" style="color:var(--muted)">
-          <li class="flex gap-2"><i data-lucide="check" style="width:15px;height:15px;color:var(--blue)" class="mt-0.5 shrink-0"></i>Arquitectura a medida</li>
-          <li class="flex gap-2"><i data-lucide="check" style="width:15px;height:15px;color:var(--blue)" class="mt-0.5 shrink-0"></i>Integración con IA</li>
-        </ul>
-        <a href="#contacto" class="btn btn-ghost mt-auto py-3 text-sm">Consultar</a>
-      </div>
-
       <div class="reveal reveal-delay-3 price-card card p-7 flex flex-col">
-        <p class="chip inline-block px-3 py-1 mb-5 self-start">A medida</p>
-        <p class="font-display font-bold text-3xl mb-1">Presupuesto<span class="block text-base font-normal" style="color:var(--muted)">según el proyecto</span></p>
-        <p class="text-sm mb-6" style="color:var(--muted)">Sistema totalmente personalizado, pensado desde cero para tu servidor.</p>
+        <p class="chip inline-block px-3 py-1 mb-5 self-start">Bots grandes</p>
+        <p class="font-display font-bold text-3xl mb-1">$20<span class="text-base font-normal" style="color:var(--muted)"> USD</span></p>
+        <p class="text-sm mb-6" style="color:var(--muted)">4 o más sistemas junto a IA: RPG, combate, narrativa, paneles propios.</p>
         <ul class="space-y-2.5 text-sm mb-7" style="color:var(--muted)">
-          <li class="flex gap-2"><i data-lucide="check" style="width:15px;height:15px;color:var(--violet)" class="mt-0.5 shrink-0"></i>Alcance definido juntos</li>
-          <li class="flex gap-2"><i data-lucide="check" style="width:15px;height:15px;color:var(--violet)" class="mt-0.5 shrink-0"></i>Sin límites de creatividad</li>
+          <li class="flex gap-2"><i data-lucide="check" style="width:15px;height:15px;color:var(--blue)" class="mt-0.5 shrink-0"></i>4+ sistemas integrados</li>
+          <li class="flex gap-2"><i data-lucide="check" style="width:15px;height:15px;color:var(--blue)" class="mt-0.5 shrink-0"></i>Incluye integración con IA</li>
         </ul>
         <a href="#contacto" class="btn btn-ghost mt-auto py-3 text-sm">Consultar</a>
       </div>
+    </div>
+
+    <div class="reveal reveal-delay-4 card mt-6 p-6 sm:p-7 flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-6">
+      <span class="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl" style="background:var(--grad-soft)">
+        <i data-lucide="brain-circuit" style="width:20px;height:20px;color:var(--violet)"></i>
+      </span>
+      <div class="flex-1">
+        <h3 class="font-display font-semibold mb-1">Agregar IA a un bot</h3>
+        <p class="text-sm" style="color:var(--muted)">Ya sea un bot creado o por crear: se suma <span style="color:var(--text)">+$4 USD</span> al precio final.</p>
+      </div>
+      <p class="font-display font-bold text-2xl shrink-0">+$4<span class="text-base font-normal" style="color:var(--muted)"> USD</span></p>
     </div>
 
     <p class="reveal reveal-delay-4 flex items-center gap-2 justify-center text-sm mt-10" style="color:var(--muted-2)">
@@ -592,6 +607,103 @@ a:focus-visible, button:focus-visible, summary:focus-visible{
         <span class="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl" style="background:var(--grad-soft)"><i data-lucide="bug" style="width:20px;height:20px;color:var(--violet)"></i></span>
         <div><h3 class="font-display font-semibold mb-1.5">Corrección de errores</h3><p class="text-sm" style="color:var(--muted)">Si algo falla, lo reviso y lo soluciono sin costo dentro del soporte.</p></div>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PORTFOLIO ============ -->
+<section id="portfolio" class="relative py-28 md:py-36 px-6">
+  <div class="max-w-6xl mx-auto">
+    <div class="reveal text-center max-w-2xl mx-auto mb-12">
+      <p class="section-eyebrow mb-4">Trabajos</p>
+      <h2 class="font-display font-bold text-3xl sm:text-4xl mb-5">Portfolio</h2>
+      <p style="color:var(--muted)" class="text-lg">Capturas, clips y detalles de bots que ya entregué.</p>
+    </div>
+
+    <div class="reveal flex items-center justify-center gap-3 mb-10">
+      <button id="adminToggleBtn" class="btn btn-ghost px-4 py-2 text-xs">
+        <i data-lucide="lock" style="width:14px;height:14px"></i>
+        <span id="adminToggleLabel">Modo admin</span>
+      </button>
+      <button id="newPostBtn" class="btn btn-primary px-4 py-2 text-xs hidden">
+        <i data-lucide="plus" style="width:14px;height:14px"></i>
+        Nueva publicación
+      </button>
+    </div>
+
+    <div id="portfolioStatus" class="text-center text-sm mb-8" style="color:var(--muted-2)">Cargando publicaciones…</div>
+    <div id="portfolioGrid" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+    <div id="portfolioEmpty" class="hidden text-center py-16" style="color:var(--muted-2)">
+      <i data-lucide="images" style="width:32px;height:32px" class="mx-auto mb-3 opacity-60"></i>
+      <p>Todavía no hay publicaciones en el portfolio.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Admin login modal -->
+<div id="adminModal" class="hidden fixed inset-0 z-[70] items-center justify-center p-6" style="background:rgba(0,0,0,0.6)">
+  <div class="card p-7 w-full max-w-sm">
+    <h3 class="font-display font-semibold text-lg mb-1">Acceso admin</h3>
+    <p class="text-sm mb-5" style="color:var(--muted)">Ingresá la contraseña para publicar en el portfolio.</p>
+    <input id="adminPasswordInput" type="password" placeholder="Contraseña" class="w-full mb-2 px-4 py-3 rounded-xl text-sm" style="background:var(--surface-2); border:1px solid var(--border-strong); color:var(--text)">
+    <p id="adminError" class="hidden text-xs mb-3" style="color:#f87171">Contraseña incorrecta.</p>
+    <div class="flex gap-3 mt-3">
+      <button id="adminCancelBtn" class="btn btn-ghost flex-1 py-2.5 text-sm">Cancelar</button>
+      <button id="adminSubmitBtn" class="btn btn-primary flex-1 py-2.5 text-sm">Entrar</button>
+    </div>
+  </div>
+</div>
+
+<!-- New post modal -->
+<div id="postModal" class="hidden fixed inset-0 z-[70] items-center justify-center p-6" style="background:rgba(0,0,0,0.6)">
+  <div class="card p-7 w-full max-w-lg max-h-[85vh] overflow-y-auto">
+    <h3 class="font-display font-semibold text-lg mb-5">Nueva publicación</h3>
+    <label class="block text-xs mb-1.5" style="color:var(--muted)">Título</label>
+    <input id="postTitle" type="text" placeholder="Ej: Bot RPG para servidor de anime" class="w-full mb-4 px-4 py-3 rounded-xl text-sm" style="background:var(--surface-2); border:1px solid var(--border-strong); color:var(--text)">
+
+    <label class="block text-xs mb-1.5" style="color:var(--muted)">Descripción</label>
+    <textarea id="postDescription" rows="3" placeholder="Contá de qué se trata este proyecto" class="w-full mb-4 px-4 py-3 rounded-xl text-sm" style="background:var(--surface-2); border:1px solid var(--border-strong); color:var(--text)"></textarea>
+
+    <label class="block text-xs mb-1.5" style="color:var(--muted)">Foto (opcional)</label>
+    <input id="postImageFile" type="file" accept="image/*" class="w-full mb-4 text-sm" style="color:var(--muted)">
+
+    <label class="block text-xs mb-1.5" style="color:var(--muted)">Video (opcional, pegá un link de YouTube o un .mp4)</label>
+    <input id="postVideoUrl" type="text" placeholder="https://..." class="w-full mb-5 px-4 py-3 rounded-xl text-sm" style="background:var(--surface-2); border:1px solid var(--border-strong); color:var(--text)">
+
+    <p id="postError" class="hidden text-xs mb-3" style="color:#f87171">Completá al menos el título.</p>
+    <div class="flex gap-3">
+      <button id="postCancelBtn" class="btn btn-ghost flex-1 py-2.5 text-sm">Cancelar</button>
+      <button id="postSubmitBtn" class="btn btn-primary flex-1 py-2.5 text-sm">Publicar</button>
+    </div>
+  </div>
+</div>
+
+<!-- ============ COMENTARIOS ============ -->
+<section id="comentarios" class="relative py-28 md:py-36 px-6" style="background:var(--bg-soft)">
+  <div class="max-w-3xl mx-auto">
+    <div class="reveal text-center max-w-2xl mx-auto mb-12">
+      <p class="section-eyebrow mb-4">Opiniones</p>
+      <h2 class="font-display font-bold text-3xl sm:text-4xl mb-5">Comentarios y recomendaciones</h2>
+      <p style="color:var(--muted)" class="text-lg">Dejá tu recomendación. Todos pueden verla, siempre.</p>
+    </div>
+
+    <div class="reveal card p-6 sm:p-7 mb-10">
+      <div class="grid sm:grid-cols-[1fr_auto] gap-4 mb-4">
+        <input id="commentName" type="text" placeholder="Tu nombre o usuario de Discord" class="w-full px-4 py-3 rounded-xl text-sm" style="background:var(--surface-2); border:1px solid var(--border-strong); color:var(--text)">
+      </div>
+      <textarea id="commentMessage" rows="3" placeholder="Contá tu experiencia con el bot o el servicio" class="w-full mb-4 px-4 py-3 rounded-xl text-sm" style="background:var(--surface-2); border:1px solid var(--border-strong); color:var(--text)"></textarea>
+      <p id="commentError" class="hidden text-xs mb-3" style="color:#f87171">Completá tu nombre y comentario.</p>
+      <button id="commentSubmitBtn" class="btn btn-primary px-6 py-3 text-sm">
+        <i data-lucide="send" style="width:15px;height:15px"></i>
+        Publicar comentario
+      </button>
+    </div>
+
+    <div id="commentsStatus" class="text-center text-sm mb-6" style="color:var(--muted-2)">Cargando comentarios…</div>
+    <div id="commentsList" class="space-y-4"></div>
+    <div id="commentsEmpty" class="hidden text-center py-10" style="color:var(--muted-2)">
+      <i data-lucide="message-square" style="width:28px;height:28px" class="mx-auto mb-3 opacity-60"></i>
+      <p>Sé el primero en dejar una recomendación.</p>
     </div>
   </div>
 </section>
@@ -811,6 +923,311 @@ document.querySelectorAll('.faq-item').forEach(item => {
     }
   });
 });
+
+/* ============================================================
+   PORTFOLIO (admin-gated posts) + COMENTARIOS (público)
+   Usa window.storage (persistente entre sesiones).
+   Nota: la contraseña de admin es una protección básica del lado
+   del cliente, pensada para uso informal (no es seguridad real).
+============================================================ */
+const ADMIN_PASSWORD = 'ranaris2026'; // <-- cambiá esto por tu propia contraseña
+let isAdmin = false;
+
+function escapeHTML(str){
+  const div = document.createElement('div');
+  div.textContent = str == null ? '' : String(str);
+  return div.innerHTML;
+}
+function timeAgoEs(iso){
+  const d = new Date(iso);
+  const diff = Math.max(0, Date.now() - d.getTime());
+  const mins = Math.floor(diff/60000);
+  if (mins < 1) return 'recién';
+  if (mins < 60) return `hace ${mins} min`;
+  const hrs = Math.floor(mins/60);
+  if (hrs < 24) return `hace ${hrs} h`;
+  const days = Math.floor(hrs/24);
+  if (days < 30) return `hace ${days} d`;
+  return d.toLocaleDateString('es-AR', { day:'numeric', month:'short', year:'numeric' });
+}
+
+/* ---------- Portfolio ---------- */
+const portfolioGrid = document.getElementById('portfolioGrid');
+const portfolioStatus = document.getElementById('portfolioStatus');
+const portfolioEmpty = document.getElementById('portfolioEmpty');
+const adminToggleBtn = document.getElementById('adminToggleBtn');
+const adminToggleLabel = document.getElementById('adminToggleLabel');
+const newPostBtn = document.getElementById('newPostBtn');
+const adminModal = document.getElementById('adminModal');
+const adminPasswordInput = document.getElementById('adminPasswordInput');
+const adminError = document.getElementById('adminError');
+const adminCancelBtn = document.getElementById('adminCancelBtn');
+const adminSubmitBtn = document.getElementById('adminSubmitBtn');
+const postModal = document.getElementById('postModal');
+const postTitle = document.getElementById('postTitle');
+const postDescription = document.getElementById('postDescription');
+const postImageFile = document.getElementById('postImageFile');
+const postVideoUrl = document.getElementById('postVideoUrl');
+const postError = document.getElementById('postError');
+const postCancelBtn = document.getElementById('postCancelBtn');
+const postSubmitBtn = document.getElementById('postSubmitBtn');
+
+function openModal(el){ el.classList.remove('hidden'); el.classList.add('flex'); }
+function closeModal(el){ el.classList.add('hidden'); el.classList.remove('flex'); }
+
+function toYouTubeEmbed(url){
+  try{
+    const u = new URL(url);
+    let id = null;
+    if (u.hostname.includes('youtu.be')) id = u.pathname.slice(1);
+    else if (u.hostname.includes('youtube.com')) id = u.searchParams.get('v');
+    if (id) return `https://www.youtube.com/embed/${id}`;
+  }catch(e){}
+  return null;
+}
+
+function renderPostMedia(post){
+  if (post.imageData){
+    return `<img src="${post.imageData}" alt="${escapeHTML(post.title)}" class="w-full h-48 object-cover" loading="lazy">`;
+  }
+  if (post.videoUrl){
+    const yt = toYouTubeEmbed(post.videoUrl);
+    if (yt){
+      return `<iframe class="w-full h-48" src="${yt}" title="${escapeHTML(post.title)}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>`;
+    }
+    return `<video class="w-full h-48 object-cover" src="${post.videoUrl}" controls preload="metadata"></video>`;
+  }
+  return `<div class="w-full h-48 flex items-center justify-center" style="background:var(--grad-soft)"><i data-lucide="bot" style="width:32px;height:32px;color:var(--violet)"></i></div>`;
+}
+
+async function loadPortfolio(){
+  portfolioStatus.textContent = 'Cargando publicaciones…';
+  portfolioGrid.innerHTML = '';
+  portfolioEmpty.classList.add('hidden');
+  try{
+    let idx;
+    try{ idx = await window.storage.get('portfolio:index', true); }catch(e){ idx = null; }
+    const ids = idx && idx.value ? JSON.parse(idx.value) : [];
+    if (!ids.length){
+      portfolioStatus.classList.add('hidden');
+      portfolioEmpty.classList.remove('hidden');
+      return;
+    }
+    const posts = [];
+    for (const id of ids){
+      try{
+        const r = await window.storage.get('portfolio:post:' + id, true);
+        if (r && r.value) posts.push(JSON.parse(r.value));
+      }catch(e){ /* post might've been deleted */ }
+    }
+    posts.sort((a,b) => new Date(b.createdAt) - new Date(a.createdAt));
+    portfolioStatus.classList.add('hidden');
+    if (!posts.length){
+      portfolioEmpty.classList.remove('hidden');
+      return;
+    }
+    portfolioGrid.innerHTML = posts.map(post => `
+      <article class="card overflow-hidden" data-post-id="${escapeHTML(post.id)}">
+        <div class="overflow-hidden">${renderPostMedia(post)}</div>
+        <div class="p-6">
+          <h3 class="font-display font-semibold text-lg mb-2">${escapeHTML(post.title)}</h3>
+          ${post.description ? `<p class="text-sm leading-relaxed mb-3" style="color:var(--muted)">${escapeHTML(post.description)}</p>` : ''}
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-mono" style="color:var(--muted-2)">${timeAgoEs(post.createdAt)}</span>
+            ${isAdmin ? `<button class="delete-post-btn text-xs font-semibold flex items-center gap-1" style="color:#f87171" data-id="${escapeHTML(post.id)}"><i data-lucide="trash-2" style="width:13px;height:13px"></i>Eliminar</button>` : ''}
+          </div>
+        </div>
+      </article>
+    `).join('');
+    lucide.createIcons();
+    portfolioGrid.querySelectorAll('.delete-post-btn').forEach(btn => {
+      btn.addEventListener('click', () => deletePost(btn.getAttribute('data-id')));
+    });
+  }catch(e){
+    portfolioStatus.textContent = 'No se pudieron cargar las publicaciones.';
+  }
+}
+
+async function deletePost(id){
+  if (!isAdmin) return;
+  if (!confirm('¿Eliminar esta publicación?')) return;
+  try{
+    let idx;
+    try{ idx = await window.storage.get('portfolio:index', true); }catch(e){ idx = null; }
+    let ids = idx && idx.value ? JSON.parse(idx.value) : [];
+    ids = ids.filter(x => x !== id);
+    await window.storage.set('portfolio:index', JSON.stringify(ids), true);
+    await window.storage.delete('portfolio:post:' + id, true);
+    loadPortfolio();
+  }catch(e){
+    alert('Ocurrió un error al eliminar la publicación.');
+  }
+}
+
+function updateAdminUI(){
+  adminToggleLabel.textContent = isAdmin ? 'Salir de admin' : 'Modo admin';
+  adminToggleBtn.querySelector('i')?.setAttribute('data-lucide', isAdmin ? 'lock-open' : 'lock');
+  newPostBtn.classList.toggle('hidden', !isAdmin);
+  lucide.createIcons();
+}
+
+adminToggleBtn.addEventListener('click', () => {
+  if (isAdmin){
+    isAdmin = false;
+    updateAdminUI();
+    loadPortfolio();
+  } else {
+    adminPasswordInput.value = '';
+    adminError.classList.add('hidden');
+    openModal(adminModal);
+    adminPasswordInput.focus();
+  }
+});
+adminCancelBtn.addEventListener('click', () => closeModal(adminModal));
+adminSubmitBtn.addEventListener('click', () => {
+  if (adminPasswordInput.value === ADMIN_PASSWORD){
+    isAdmin = true;
+    closeModal(adminModal);
+    updateAdminUI();
+    loadPortfolio();
+  } else {
+    adminError.classList.remove('hidden');
+  }
+});
+adminPasswordInput.addEventListener('keydown', (e) => { if (e.key === 'Enter') adminSubmitBtn.click(); });
+
+newPostBtn.addEventListener('click', () => {
+  postTitle.value = ''; postDescription.value = ''; postImageFile.value = ''; postVideoUrl.value = '';
+  postError.classList.add('hidden');
+  openModal(postModal);
+});
+postCancelBtn.addEventListener('click', () => closeModal(postModal));
+
+function readFileAsDataURL(file){
+  return new Promise((resolve, reject) => {
+    const r = new FileReader();
+    r.onload = () => resolve(r.result);
+    r.onerror = reject;
+    r.readAsDataURL(file);
+  });
+}
+
+postSubmitBtn.addEventListener('click', async () => {
+  const title = postTitle.value.trim();
+  if (!title){ postError.classList.remove('hidden'); return; }
+  postError.classList.add('hidden');
+  postSubmitBtn.disabled = true;
+  postSubmitBtn.textContent = 'Publicando…';
+  try{
+    let imageData = null;
+    const file = postImageFile.files[0];
+    if (file) imageData = await readFileAsDataURL(file);
+    const post = {
+      id: 'p_' + Date.now() + '_' + Math.random().toString(36).slice(2,8),
+      title,
+      description: postDescription.value.trim(),
+      imageData: imageData || null,
+      videoUrl: postVideoUrl.value.trim() || null,
+      createdAt: new Date().toISOString()
+    };
+    await window.storage.set('portfolio:post:' + post.id, JSON.stringify(post), true);
+    let idx;
+    try{ idx = await window.storage.get('portfolio:index', true); }catch(e){ idx = null; }
+    const ids = idx && idx.value ? JSON.parse(idx.value) : [];
+    ids.push(post.id);
+    await window.storage.set('portfolio:index', JSON.stringify(ids), true);
+    closeModal(postModal);
+    loadPortfolio();
+  }catch(e){
+    alert('Ocurrió un error al publicar. Probá con una imagen más liviana.');
+  }finally{
+    postSubmitBtn.disabled = false;
+    postSubmitBtn.textContent = 'Publicar';
+  }
+});
+
+/* ---------- Comentarios (público, todos pueden ver y publicar) ---------- */
+const commentsList = document.getElementById('commentsList');
+const commentsStatus = document.getElementById('commentsStatus');
+const commentsEmpty = document.getElementById('commentsEmpty');
+const commentName = document.getElementById('commentName');
+const commentMessage = document.getElementById('commentMessage');
+const commentError = document.getElementById('commentError');
+const commentSubmitBtn = document.getElementById('commentSubmitBtn');
+
+async function loadComments(){
+  commentsStatus.textContent = 'Cargando comentarios…';
+  commentsList.innerHTML = '';
+  commentsEmpty.classList.add('hidden');
+  try{
+    let idx;
+    try{ idx = await window.storage.get('comments:index', true); }catch(e){ idx = null; }
+    const ids = idx && idx.value ? JSON.parse(idx.value) : [];
+    if (!ids.length){
+      commentsStatus.classList.add('hidden');
+      commentsEmpty.classList.remove('hidden');
+      return;
+    }
+    const comments = [];
+    for (const id of ids){
+      try{
+        const r = await window.storage.get('comments:item:' + id, true);
+        if (r && r.value) comments.push(JSON.parse(r.value));
+      }catch(e){}
+    }
+    comments.sort((a,b) => new Date(b.createdAt) - new Date(a.createdAt));
+    commentsStatus.classList.add('hidden');
+    if (!comments.length){
+      commentsEmpty.classList.remove('hidden');
+      return;
+    }
+    commentsList.innerHTML = comments.map(c => `
+      <div class="card p-5">
+        <div class="flex items-center justify-between mb-2">
+          <span class="font-display font-semibold text-sm">${escapeHTML(c.name)}</span>
+          <span class="text-xs font-mono" style="color:var(--muted-2)">${timeAgoEs(c.createdAt)}</span>
+        </div>
+        <p class="text-sm leading-relaxed" style="color:var(--muted)">${escapeHTML(c.message)}</p>
+      </div>
+    `).join('');
+  }catch(e){
+    commentsStatus.textContent = 'No se pudieron cargar los comentarios.';
+  }
+}
+
+commentSubmitBtn.addEventListener('click', async () => {
+  const name = commentName.value.trim();
+  const message = commentMessage.value.trim();
+  if (!name || !message){ commentError.classList.remove('hidden'); return; }
+  commentError.classList.add('hidden');
+  commentSubmitBtn.disabled = true;
+  const original = commentSubmitBtn.innerHTML;
+  commentSubmitBtn.innerHTML = 'Publicando…';
+  try{
+    const comment = {
+      id: 'c_' + Date.now() + '_' + Math.random().toString(36).slice(2,8),
+      name, message,
+      createdAt: new Date().toISOString()
+    };
+    await window.storage.set('comments:item:' + comment.id, JSON.stringify(comment), true);
+    let idx;
+    try{ idx = await window.storage.get('comments:index', true); }catch(e){ idx = null; }
+    const ids = idx && idx.value ? JSON.parse(idx.value) : [];
+    ids.push(comment.id);
+    await window.storage.set('comments:index', JSON.stringify(ids), true);
+    commentName.value = ''; commentMessage.value = '';
+    loadComments();
+  }catch(e){
+    alert('Ocurrió un error al publicar el comentario.');
+  }finally{
+    commentSubmitBtn.disabled = false;
+    commentSubmitBtn.innerHTML = original;
+    lucide.createIcons();
+  }
+});
+
+loadPortfolio();
+loadComments();
 </script>
 
 </body>

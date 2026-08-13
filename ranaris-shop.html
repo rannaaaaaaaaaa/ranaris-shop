@@ -225,6 +225,11 @@ a:focus-visible, button:focus-visible, summary:focus-visible{
 }
 
 .mobile-menu{ transition:max-height .4s cubic-bezier(.16,.8,.28,1), opacity .3s ease; overflow:hidden; }
+
+/* lang switch */
+.lang-switch{ display:inline-flex; border:1px solid var(--border-strong); border-radius:9999px; overflow:hidden; }
+.lang-btn{ padding:6px 12px; font-family:'JetBrains Mono',monospace; font-size:.72rem; font-weight:600; color:var(--muted); background:transparent; transition:background .25s ease, color .25s ease; }
+.lang-btn.active{ background:var(--grad); color:#fff; }
 </style>
 </head>
 
@@ -242,37 +247,47 @@ a:focus-visible, button:focus-visible, summary:focus-visible{
     </a>
 
     <nav class="hidden md:flex items-center gap-9 font-mono text-sm">
-      <a href="#bots" class="navlink">Bots</a>
-      <a href="#proceso" class="navlink">Cómo trabajo</a>
-      <a href="#precios" class="navlink">Precios</a>
-      <a href="#incluye" class="navlink">Qué incluye</a>
-      <a href="#portfolio" class="navlink">Portfolio</a>
-      <a href="#comentarios" class="navlink">Comentarios</a>
-      <a href="#faq" class="navlink">FAQ</a>
+      <a href="#bots" class="navlink" data-i18n="nav.bots">Bots</a>
+      <a href="#proceso" class="navlink" data-i18n="nav.proceso">Cómo trabajo</a>
+      <a href="#precios" class="navlink" data-i18n="nav.precios">Precios</a>
+      <a href="#incluye" class="navlink" data-i18n="nav.incluye">Qué incluye</a>
+      <a href="#portfolio" class="navlink" data-i18n="nav.portfolio">Portfolio</a>
+      <a href="#comentarios" class="navlink" data-i18n="nav.comentarios">Comentarios</a>
+      <a href="#faq" class="navlink" data-i18n="nav.faq">FAQ</a>
     </nav>
 
-    <div class="hidden md:block">
+    <div class="hidden md:flex items-center gap-4">
+      <div class="lang-switch">
+        <button type="button" class="lang-btn" data-lang="es">ES</button>
+        <button type="button" class="lang-btn" data-lang="en">EN</button>
+      </div>
       <a href="#contacto" class="btn btn-primary px-5 py-2.5 text-sm">
-        Solicitar presupuesto
+        <span data-i18n="nav.cta">Solicitar presupuesto</span>
         <i data-lucide="arrow-right" style="width:15px;height:15px"></i>
       </a>
     </div>
 
-    <button id="menuBtn" aria-label="Abrir menú" aria-expanded="false" class="md:hidden flex items-center justify-center w-10 h-10 rounded-lg border" style="border-color:var(--border-strong)">
-      <i data-lucide="menu" id="menuIcon" style="width:20px;height:20px"></i>
-    </button>
+    <div class="md:hidden flex items-center gap-3">
+      <div class="lang-switch">
+        <button type="button" class="lang-btn" data-lang="es">ES</button>
+        <button type="button" class="lang-btn" data-lang="en">EN</button>
+      </div>
+      <button id="menuBtn" aria-label="Abrir menú" aria-expanded="false" class="flex items-center justify-center w-10 h-10 rounded-lg border" style="border-color:var(--border-strong)">
+        <i data-lucide="menu" id="menuIcon" style="width:20px;height:20px"></i>
+      </button>
+    </div>
   </div>
 
   <div id="mobileMenu" class="mobile-menu max-h-0 opacity-0 md:hidden border-t" style="border-color:var(--border)">
     <div class="px-6 py-6 flex flex-col gap-5 font-mono text-sm" style="background:rgba(5,5,8,0.96)">
-      <a href="#bots" class="navlink">Bots</a>
-      <a href="#proceso" class="navlink">Cómo trabajo</a>
-      <a href="#precios" class="navlink">Precios</a>
-      <a href="#incluye" class="navlink">Qué incluye</a>
-      <a href="#portfolio" class="navlink">Portfolio</a>
-      <a href="#comentarios" class="navlink">Comentarios</a>
-      <a href="#faq" class="navlink">FAQ</a>
-      <a href="#contacto" class="btn btn-primary px-5 py-3 text-sm mt-1">Solicitar presupuesto</a>
+      <a href="#bots" class="navlink" data-i18n="nav.bots">Bots</a>
+      <a href="#proceso" class="navlink" data-i18n="nav.proceso">Cómo trabajo</a>
+      <a href="#precios" class="navlink" data-i18n="nav.precios">Precios</a>
+      <a href="#incluye" class="navlink" data-i18n="nav.incluye">Qué incluye</a>
+      <a href="#portfolio" class="navlink" data-i18n="nav.portfolio">Portfolio</a>
+      <a href="#comentarios" class="navlink" data-i18n="nav.comentarios">Comentarios</a>
+      <a href="#faq" class="navlink" data-i18n="nav.faq">FAQ</a>
+      <a href="#contacto" class="btn btn-primary px-5 py-3 text-sm mt-1" data-i18n="nav.cta">Solicitar presupuesto</a>
     </div>
   </div>
 </header>
@@ -291,32 +306,32 @@ a:focus-visible, button:focus-visible, summary:focus-visible{
           <span class="animate-ping absolute inline-flex h-full w-full rounded-full opacity-60" style="background:var(--violet)"></span>
           <span class="relative inline-flex rounded-full h-2 w-2" style="background:var(--violet)"></span>
         </span>
-        Bots a medida, listos para producción
+        <span data-i18n="hero.badge">Bots a medida, listos para producción</span>
       </div>
 
       <h1 class="reveal in font-display font-bold text-4xl sm:text-5xl lg:text-[3.4rem] leading-[1.08] mb-6">
-        Bots de Discord diseñados para <span class="text-grad"> hacer crecer tu comunidad.</span>
+        <span data-i18n="hero.title1">Bots de Discord diseñados para</span> <span class="text-grad" data-i18n="hero.title2">hacer crecer tu comunidad.</span>
       </h1>
 
-      <p class="reveal in reveal-delay-1 text-lg leading-relaxed mb-9 max-w-xl" style="color:var(--muted)">
+      <p class="reveal in reveal-delay-1 text-lg leading-relaxed mb-9 max-w-xl" style="color:var(--muted)" data-i18n="hero.desc">
         Desarrollo bots personalizados para Discord: moderación, economía, tickets y sistemas propios de RPG con IA con código prolijo, base de datos dedicada y soporte real después de la entrega.
       </p>
 
       <div class="reveal in reveal-delay-2 flex flex-wrap gap-4 mb-12">
         <a href="#bots" class="btn btn-ghost px-6 py-3.5">
           <i data-lucide="bot" style="width:17px;height:17px"></i>
-          Ver bots
+          <span data-i18n="hero.btnVer">Ver bots</span>
         </a>
         <a href="#contacto" class="btn btn-primary px-6 py-3.5">
-          Solicitar presupuesto
+          <span data-i18n="nav.cta">Solicitar presupuesto</span>
           <i data-lucide="arrow-right" style="width:17px;height:17px"></i>
         </a>
       </div>
 
       <div class="reveal in reveal-delay-3 flex flex-wrap items-center gap-x-8 gap-y-3 font-mono text-xs" style="color:var(--muted-2)">
         <span class="flex items-center gap-2"><i data-lucide="code-2" style="width:14px;height:14px"></i> discord.py &amp; discord.js</span>
-        <span class="flex items-center gap-2"><i data-lucide="database" style="width:14px;height:14px"></i> SQLite dedicada</span>
-        <span class="flex items-center gap-2"><i data-lucide="brain-circuit" style="width:14px;height:14px"></i> IA narrativa (Groq)</span>
+        <span class="flex items-center gap-2"><i data-lucide="database" style="width:14px;height:14px"></i> <span data-i18n="hero.tag2">SQLite dedicada</span></span>
+        <span class="flex items-center gap-2"><i data-lucide="brain-circuit" style="width:14px;height:14px"></i> <span data-i18n="hero.tag3">IA narrativa (Groq)</span></span>
       </div>
     </div>
 
@@ -332,20 +347,20 @@ a:focus-visible, button:focus-visible, summary:focus-visible{
 
         <div class="mb-4">
           <span style="color:var(--muted-2)">Kaito</span>
-          <span style="color:var(--muted)"> usó </span>
+          <span style="color:var(--muted)" data-i18n="hero.mockUsed"> usó </span>
           <span style="color:var(--blue)">/perfil</span>
         </div>
 
         <div class="rounded-xl p-4 mb-4" style="background:var(--surface-2); border-left:3px solid var(--violet)">
           <div class="flex items-center justify-between mb-3">
-            <span class="font-semibold" style="color:var(--text)">Kaito — Nivel 34</span>
+            <span class="font-semibold" style="color:var(--text)"><span data-i18n="hero.mockLevel">Kaito — Nivel 34</span></span>
             <i data-lucide="shield-check" style="width:16px;height:16px; color:var(--blue)"></i>
           </div>
           <div class="flex justify-between mb-1.5" style="color:var(--muted)">
-            <span>❖ Monedas</span><span style="color:var(--text)">12,450</span>
+            <span data-i18n="hero.mockCoins">❖ Monedas</span><span style="color:var(--text)">12,450</span>
           </div>
           <div class="flex justify-between mb-1.5" style="color:var(--muted)">
-            <span>⚔ Clase</span><span style="color:var(--text)">Vanguardia</span>
+            <span data-i18n="hero.mockClass">⚔ Clase</span><span style="color:var(--text)" data-i18n="hero.mockClassVal">Vanguardia</span>
           </div>
           <div class="flex justify-between mb-3" style="color:var(--muted)">
             <span>♥ HP</span><span style="color:var(--text)">210 / 210</span>
@@ -357,7 +372,7 @@ a:focus-visible, button:focus-visible, summary:focus-visible{
 
         <div class="flex items-center gap-2" style="color:var(--muted-2)">
           <i data-lucide="terminal" style="width:14px;height:14px"></i>
-          <span>bot en línea · 99.9% uptime</span>
+          <span data-i18n="hero.mockOnline">bot en línea · 99.9% uptime</span>
           <span class="blink">▍</span>
         </div>
       </div>
@@ -369,9 +384,9 @@ a:focus-visible, button:focus-visible, summary:focus-visible{
 <section id="bots" class="relative py-28 md:py-36 px-6">
   <div class="max-w-7xl mx-auto">
     <div class="reveal text-center max-w-2xl mx-auto mb-16">
-      <p class="section-eyebrow mb-4">Catálogo</p>
-      <h2 class="font-display font-bold text-3xl sm:text-4xl mb-5">Mis bots</h2>
-      <p style="color:var(--muted)" class="text-lg">Cuatro puntos de partida sólidos. Cada uno se adapta al estilo, tema y reglas de tu servidor.</p>
+      <p class="section-eyebrow mb-4" data-i18n="bots.eyebrow">Catálogo</p>
+      <h2 class="font-display font-bold text-3xl sm:text-4xl mb-5" data-i18n="bots.title">Mis bots</h2>
+      <p style="color:var(--muted)" class="text-lg" data-i18n="bots.subtitle">Cuatro puntos de partida sólidos. Cada uno se adapta al estilo, tema y reglas de tu servidor.</p>
     </div>
 
     <div class="grid sm:grid-cols-2 gap-6" id="botsGrid">
@@ -382,18 +397,18 @@ a:focus-visible, button:focus-visible, summary:focus-visible{
           <span class="flex h-12 w-12 items-center justify-center rounded-2xl" style="background:var(--grad-soft); border:1px solid var(--border-strong)">
             <i data-lucide="shield" style="width:22px;height:22px; color:var(--blue)"></i>
           </span>
-          <span class="chip px-3 py-1">Moderación</span>
+          <span class="chip px-3 py-1" data-i18n="bots.c1.tag">Moderación</span>
         </div>
-        <h3 class="font-display font-semibold text-xl mb-2.5">Bot de Moderación</h3>
-        <p style="color:var(--muted)" class="text-sm leading-relaxed mb-5">Mantiene el orden en tu servidor con automoderación inteligente, sanciones y registros configurables.</p>
+        <h3 class="font-display font-semibold text-xl mb-2.5" data-i18n="bots.c1.title">Bot de Moderación</h3>
+        <p style="color:var(--muted)" class="text-sm leading-relaxed mb-5" data-i18n="bots.c1.desc">Mantiene el orden en tu servidor con automoderación inteligente, sanciones y registros configurables.</p>
         <ul class="space-y-2.5 mb-5 text-sm" style="color:var(--muted)">
-          <li class="flex gap-2"><i data-lucide="check" style="width:16px;height:16px;color:var(--violet)" class="shrink-0 mt-0.5"></i>Automoderación de spam, links e insultos</li>
-          <li class="flex gap-2"><i data-lucide="check" style="width:16px;height:16px;color:var(--violet)" class="shrink-0 mt-0.5"></i>Advertencias, mutes, kicks y baneos</li>
-          <li class="flex gap-2 more-feat hidden"><i data-lucide="check" style="width:16px;height:16px;color:var(--violet)" class="shrink-0 mt-0.5"></i>Logs de auditoría configurables por canal</li>
-          <li class="flex gap-2 more-feat hidden"><i data-lucide="check" style="width:16px;height:16px;color:var(--violet)" class="shrink-0 mt-0.5"></i>Filtros y palabras prohibidas personalizables</li>
+          <li class="flex gap-2"><i data-lucide="check" style="width:16px;height:16px;color:var(--violet)" class="shrink-0 mt-0.5"></i><span data-i18n="bots.c1.f1">Automoderación de spam, links e insultos</span></li>
+          <li class="flex gap-2"><i data-lucide="check" style="width:16px;height:16px;color:var(--violet)" class="shrink-0 mt-0.5"></i><span data-i18n="bots.c1.f2">Advertencias, mutes, kicks y baneos</span></li>
+          <li class="flex gap-2 more-feat hidden"><i data-lucide="check" style="width:16px;height:16px;color:var(--violet)" class="shrink-0 mt-0.5"></i><span data-i18n="bots.c1.f3">Logs de auditoría configurables por canal</span></li>
+          <li class="flex gap-2 more-feat hidden"><i data-lucide="check" style="width:16px;height:16px;color:var(--violet)" class="shrink-0 mt-0.5"></i><span data-i18n="bots.c1.f4">Filtros y palabras prohibidas personalizables</span></li>
         </ul>
         <button class="ver-mas flex items-center gap-1.5 text-sm font-semibold" style="color:var(--blue)">
-          Ver más <i data-lucide="chevron-down" class="chev" style="width:15px;height:15px"></i>
+          <span data-i18n="bots.verMas">Ver más</span> <i data-lucide="chevron-down" class="chev" style="width:15px;height:15px"></i>
         </button>
       </article>
 
@@ -402,18 +417,18 @@ a:focus-visible, button:focus-visible, summary:focus-visible{
           <span class="flex h-12 w-12 items-center justify-center rounded-2xl" style="background:var(--grad-soft); border:1px solid var(--border-strong)">
             <i data-lucide="coins" style="width:22px;height:22px; color:var(--violet)"></i>
           </span>
-          <span class="chip px-3 py-1">Economía</span>
+          <span class="chip px-3 py-1" data-i18n="bots.c2.tag">Economía</span>
         </div>
-        <h3 class="font-display font-semibold text-xl mb-2.5">Bot de Economía</h3>
-        <p style="color:var(--muted)" class="text-sm leading-relaxed mb-5">Un sistema económico completo con trabajos, tienda y rankings para mantener a la comunidad activa.</p>
+        <h3 class="font-display font-semibold text-xl mb-2.5" data-i18n="bots.c2.title">Bot de Economía</h3>
+        <p style="color:var(--muted)" class="text-sm leading-relaxed mb-5" data-i18n="bots.c2.desc">Un sistema económico completo con trabajos, tienda y rankings para mantener a la comunidad activa.</p>
         <ul class="space-y-2.5 mb-5 text-sm" style="color:var(--muted)">
-          <li class="flex gap-2"><i data-lucide="check" style="width:16px;height:16px;color:var(--violet)" class="shrink-0 mt-0.5"></i>Monedas, trabajos y recompensa diaria</li>
-          <li class="flex gap-2"><i data-lucide="check" style="width:16px;height:16px;color:var(--violet)" class="shrink-0 mt-0.5"></i>Tienda, inventario y objetos</li>
-          <li class="flex gap-2 more-feat hidden"><i data-lucide="check" style="width:16px;height:16px;color:var(--violet)" class="shrink-0 mt-0.5"></i>Transferencias entre usuarios</li>
-          <li class="flex gap-2 more-feat hidden"><i data-lucide="check" style="width:16px;height:16px;color:var(--violet)" class="shrink-0 mt-0.5"></i>Rankings, apuestas y minijuegos</li>
+          <li class="flex gap-2"><i data-lucide="check" style="width:16px;height:16px;color:var(--violet)" class="shrink-0 mt-0.5"></i><span data-i18n="bots.c2.f1">Monedas, trabajos y recompensa diaria</span></li>
+          <li class="flex gap-2"><i data-lucide="check" style="width:16px;height:16px;color:var(--violet)" class="shrink-0 mt-0.5"></i><span data-i18n="bots.c2.f2">Tienda, inventario y objetos</span></li>
+          <li class="flex gap-2 more-feat hidden"><i data-lucide="check" style="width:16px;height:16px;color:var(--violet)" class="shrink-0 mt-0.5"></i><span data-i18n="bots.c2.f3">Transferencias entre usuarios</span></li>
+          <li class="flex gap-2 more-feat hidden"><i data-lucide="check" style="width:16px;height:16px;color:var(--violet)" class="shrink-0 mt-0.5"></i><span data-i18n="bots.c2.f4">Rankings, apuestas y minijuegos</span></li>
         </ul>
         <button class="ver-mas flex items-center gap-1.5 text-sm font-semibold" style="color:var(--blue)">
-          Ver más <i data-lucide="chevron-down" class="chev" style="width:15px;height:15px"></i>
+          <span data-i18n="bots.verMas">Ver más</span> <i data-lucide="chevron-down" class="chev" style="width:15px;height:15px"></i>
         </button>
       </article>
 
@@ -422,18 +437,18 @@ a:focus-visible, button:focus-visible, summary:focus-visible{
           <span class="flex h-12 w-12 items-center justify-center rounded-2xl" style="background:var(--grad-soft); border:1px solid var(--border-strong)">
             <i data-lucide="ticket" style="width:22px;height:22px; color:var(--blue)"></i>
           </span>
-          <span class="chip px-3 py-1">Soporte</span>
+          <span class="chip px-3 py-1" data-i18n="bots.c3.tag">Soporte</span>
         </div>
-        <h3 class="font-display font-semibold text-xl mb-2.5">Bot de Tickets</h3>
-        <p style="color:var(--muted)" class="text-sm leading-relaxed mb-5">Soporte organizado para tu servidor con paneles, categorías y transcripciones automáticas.</p>
+        <h3 class="font-display font-semibold text-xl mb-2.5" data-i18n="bots.c3.title">Bot de Tickets</h3>
+        <p style="color:var(--muted)" class="text-sm leading-relaxed mb-5" data-i18n="bots.c3.desc">Soporte organizado para tu servidor con paneles, categorías y transcripciones automáticas.</p>
         <ul class="space-y-2.5 mb-5 text-sm" style="color:var(--muted)">
-          <li class="flex gap-2"><i data-lucide="check" style="width:16px;height:16px;color:var(--violet)" class="shrink-0 mt-0.5"></i>Panel de tickets con botones</li>
-          <li class="flex gap-2"><i data-lucide="check" style="width:16px;height:16px;color:var(--violet)" class="shrink-0 mt-0.5"></i>Categorías y roles de staff configurables</li>
-          <li class="flex gap-2 more-feat hidden"><i data-lucide="check" style="width:16px;height:16px;color:var(--violet)" class="shrink-0 mt-0.5"></i>Transcripciones automáticas al cerrar</li>
-          <li class="flex gap-2 more-feat hidden"><i data-lucide="check" style="width:16px;height:16px;color:var(--violet)" class="shrink-0 mt-0.5"></i>Notificaciones y logs de actividad</li>
+          <li class="flex gap-2"><i data-lucide="check" style="width:16px;height:16px;color:var(--violet)" class="shrink-0 mt-0.5"></i><span data-i18n="bots.c3.f1">Panel de tickets con botones</span></li>
+          <li class="flex gap-2"><i data-lucide="check" style="width:16px;height:16px;color:var(--violet)" class="shrink-0 mt-0.5"></i><span data-i18n="bots.c3.f2">Categorías y roles de staff configurables</span></li>
+          <li class="flex gap-2 more-feat hidden"><i data-lucide="check" style="width:16px;height:16px;color:var(--violet)" class="shrink-0 mt-0.5"></i><span data-i18n="bots.c3.f3">Transcripciones automáticas al cerrar</span></li>
+          <li class="flex gap-2 more-feat hidden"><i data-lucide="check" style="width:16px;height:16px;color:var(--violet)" class="shrink-0 mt-0.5"></i><span data-i18n="bots.c3.f4">Notificaciones y logs de actividad</span></li>
         </ul>
         <button class="ver-mas flex items-center gap-1.5 text-sm font-semibold" style="color:var(--blue)">
-          Ver más <i data-lucide="chevron-down" class="chev" style="width:15px;height:15px"></i>
+          <span data-i18n="bots.verMas">Ver más</span> <i data-lucide="chevron-down" class="chev" style="width:15px;height:15px"></i>
         </button>
       </article>
 
@@ -442,18 +457,18 @@ a:focus-visible, button:focus-visible, summary:focus-visible{
           <span class="flex h-12 w-12 items-center justify-center rounded-2xl" style="background:var(--grad-soft); border:1px solid var(--border-strong)">
             <i data-lucide="wand-sparkles" style="width:22px;height:22px; color:var(--violet)"></i>
           </span>
-          <span class="chip px-3 py-1">A medida</span>
+          <span class="chip px-3 py-1" data-i18n="bots.c4.tag">A medida</span>
         </div>
-        <h3 class="font-display font-semibold text-xl mb-2.5">Bot Personalizado</h3>
-        <p style="color:var(--muted)" class="text-sm leading-relaxed mb-5">¿Tenés una idea distinta? Desarrollo sistemas propios de RPG, narrativa con IA y rol para comunidades de anime.</p>
+        <h3 class="font-display font-semibold text-xl mb-2.5" data-i18n="bots.c4.title">Bot Personalizado</h3>
+        <p style="color:var(--muted)" class="text-sm leading-relaxed mb-5" data-i18n="bots.c4.desc">¿Tenés una idea distinta? Desarrollo sistemas propios de RPG, narrativa con IA y rol para comunidades de anime.</p>
         <ul class="space-y-2.5 mb-5 text-sm" style="color:var(--muted)">
-          <li class="flex gap-2"><i data-lucide="check" style="width:16px;height:16px;color:var(--violet)" class="shrink-0 mt-0.5"></i>Sistemas de combate y estadísticas</li>
-          <li class="flex gap-2"><i data-lucide="check" style="width:16px;height:16px;color:var(--violet)" class="shrink-0 mt-0.5"></i>Narrativa asistida por IA</li>
-          <li class="flex gap-2 more-feat hidden"><i data-lucide="check" style="width:16px;height:16px;color:var(--violet)" class="shrink-0 mt-0.5"></i>Base de datos y paneles de administración propios</li>
-          <li class="flex gap-2 more-feat hidden"><i data-lucide="check" style="width:16px;height:16px;color:var(--violet)" class="shrink-0 mt-0.5"></i>Integraciones y funciones a medida</li>
+          <li class="flex gap-2"><i data-lucide="check" style="width:16px;height:16px;color:var(--violet)" class="shrink-0 mt-0.5"></i><span data-i18n="bots.c4.f1">Sistemas de combate y estadísticas</span></li>
+          <li class="flex gap-2"><i data-lucide="check" style="width:16px;height:16px;color:var(--violet)" class="shrink-0 mt-0.5"></i><span data-i18n="bots.c4.f2">Narrativa asistida por IA</span></li>
+          <li class="flex gap-2 more-feat hidden"><i data-lucide="check" style="width:16px;height:16px;color:var(--violet)" class="shrink-0 mt-0.5"></i><span data-i18n="bots.c4.f3">Base de datos y paneles de administración propios</span></li>
+          <li class="flex gap-2 more-feat hidden"><i data-lucide="check" style="width:16px;height:16px;color:var(--violet)" class="shrink-0 mt-0.5"></i><span data-i18n="bots.c4.f4">Integraciones y funciones a medida</span></li>
         </ul>
         <button class="ver-mas flex items-center gap-1.5 text-sm font-semibold" style="color:var(--blue)">
-          Ver más <i data-lucide="chevron-down" class="chev" style="width:15px;height:15px"></i>
+          <span data-i18n="bots.verMas">Ver más</span> <i data-lucide="chevron-down" class="chev" style="width:15px;height:15px"></i>
         </button>
       </article>
     </div>
@@ -465,9 +480,9 @@ a:focus-visible, button:focus-visible, summary:focus-visible{
   <div class="absolute inset-0 grid-overlay" style="opacity:0.5"></div>
   <div class="relative max-w-5xl mx-auto">
     <div class="reveal text-center max-w-2xl mx-auto mb-20">
-      <p class="section-eyebrow mb-4">Proceso</p>
-      <h2 class="font-display font-bold text-3xl sm:text-4xl mb-5">¿Cómo trabajo?</h2>
-      <p style="color:var(--muted)" class="text-lg">Cuatro pasos, sin vueltas, con comunicación clara de principio a fin.</p>
+      <p class="section-eyebrow mb-4" data-i18n="proceso.eyebrow">Proceso</p>
+      <h2 class="font-display font-bold text-3xl sm:text-4xl mb-5" data-i18n="proceso.title">¿Cómo trabajo?</h2>
+      <p style="color:var(--muted)" class="text-lg" data-i18n="proceso.subtitle">Cuatro pasos, sin vueltas, con comunicación clara de principio a fin.</p>
     </div>
 
     <div class="relative pl-14 sm:pl-20">
@@ -476,23 +491,23 @@ a:focus-visible, button:focus-visible, summary:focus-visible{
       <div class="relative space-y-14">
         <div class="reveal relative">
           <span class="step-dot absolute -left-14 sm:-left-20 top-0 w-10 h-10 rounded-full flex items-center justify-center font-display font-bold text-sm text-white">01</span>
-          <h3 class="font-display font-semibold text-lg mb-2">Contame tu idea</h3>
-          <p style="color:var(--muted)" class="max-w-xl">Me explicás qué necesitás para tu servidor: tema, funciones, referencias. Cuanto más contexto, mejor propuesta.</p>
+          <h3 class="font-display font-semibold text-lg mb-2" data-i18n="proceso.s1.title">Contame tu idea</h3>
+          <p style="color:var(--muted)" class="max-w-xl" data-i18n="proceso.s1.desc">Me explicás qué necesitás para tu servidor: tema, funciones, referencias. Cuanto más contexto, mejor propuesta.</p>
         </div>
         <div class="reveal reveal-delay-1 relative">
           <span class="step-dot absolute -left-14 sm:-left-20 top-0 w-10 h-10 rounded-full flex items-center justify-center font-display font-bold text-sm text-white">02</span>
-          <h3 class="font-display font-semibold text-lg mb-2">Acordamos el presupuesto</h3>
-          <p style="color:var(--muted)" class="max-w-xl">Con la idea clara, definimos alcance, tiempos y precio final antes de escribir una sola línea de código.</p>
+          <h3 class="font-display font-semibold text-lg mb-2" data-i18n="proceso.s2.title">Acordamos el presupuesto</h3>
+          <p style="color:var(--muted)" class="max-w-xl" data-i18n="proceso.s2.desc">Con la idea clara, definimos alcance, tiempos y precio final antes de escribir una sola línea de código.</p>
         </div>
         <div class="reveal reveal-delay-2 relative">
           <span class="step-dot absolute -left-14 sm:-left-20 top-0 w-10 h-10 rounded-full flex items-center justify-center font-display font-bold text-sm text-white">03</span>
-          <h3 class="font-display font-semibold text-lg mb-2">Desarrollo el bot</h3>
-          <p style="color:var(--muted)" class="max-w-xl">Construyo tu bot con código limpio y base de datos propia, con avances y consultas durante el proceso.</p>
+          <h3 class="font-display font-semibold text-lg mb-2" data-i18n="proceso.s3.title">Desarrollo el bot</h3>
+          <p style="color:var(--muted)" class="max-w-xl" data-i18n="proceso.s3.desc">Construyo tu bot con código limpio y base de datos propia, con avances y consultas durante el proceso.</p>
         </div>
         <div class="reveal reveal-delay-3 relative">
           <span class="step-dot absolute -left-14 sm:-left-20 top-0 w-10 h-10 rounded-full flex items-center justify-center font-display font-bold text-sm text-white">04</span>
-          <h3 class="font-display font-semibold text-lg mb-2">Entrega y soporte</h3>
-          <p style="color:var(--muted)" class="max-w-xl">Recibís el bot instalado y configurado, con 3 meses de soporte incluido para corregir cualquier error.</p>
+          <h3 class="font-display font-semibold text-lg mb-2" data-i18n="proceso.s4.title">Entrega y soporte</h3>
+          <p style="color:var(--muted)" class="max-w-xl" data-i18n="proceso.s4.desc">Recibís el bot instalado y configurado, con 3 meses de soporte incluido para corregir cualquier error.</p>
         </div>
       </div>
     </div>
@@ -503,72 +518,85 @@ a:focus-visible, button:focus-visible, summary:focus-visible{
 <section id="precios" class="relative py-28 md:py-36 px-6">
   <div class="max-w-6xl mx-auto">
     <div class="reveal text-center max-w-2xl mx-auto mb-16">
-      <p class="section-eyebrow mb-4">Inversión</p>
-      <h2 class="font-display font-bold text-3xl sm:text-4xl mb-5">Precios</h2>
-      <p style="color:var(--muted)" class="text-lg">Rangos orientativos según la complejidad. El valor final siempre se acuerda antes de empezar.</p>
+      <p class="section-eyebrow mb-4" data-i18n="precios.eyebrow">Inversión</p>
+      <h2 class="font-display font-bold text-3xl sm:text-4xl mb-5" data-i18n="precios.title">Precios</h2>
+      <p style="color:var(--muted)" class="text-lg" data-i18n="precios.subtitle">Rangos orientativos según la complejidad. El valor final siempre se acuerda antes de empezar.</p>
     </div>
 
     <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 items-stretch">
       <div class="reveal price-card card p-7 flex flex-col">
-        <p class="chip inline-block px-3 py-1 mb-5 self-start">Ayuda / consultas</p>
+        <p class="chip inline-block px-3 py-1 mb-5 self-start" data-i18n="precios.p1.tag">Ayuda / consultas</p>
         <p class="font-display font-bold text-3xl mb-1">$3<span class="text-base font-normal" style="color:var(--muted)"> USD</span></p>
-        <p class="text-sm mb-6" style="color:var(--muted)">Ayuda o consultas sobre bots ya creados, además de parches puntuales.</p>
+        <p class="text-sm mb-6" style="color:var(--muted)" data-i18n="precios.p1.desc">Ayuda o consultas sobre bots ya creados, además de parches puntuales.</p>
         <ul class="space-y-2.5 text-sm mb-7" style="color:var(--muted)">
-          <li class="flex gap-2"><i data-lucide="check" style="width:15px;height:15px;color:var(--blue)" class="mt-0.5 shrink-0"></i>Diagnóstico y ayuda técnica</li>
-          <li class="flex gap-2"><i data-lucide="check" style="width:15px;height:15px;color:var(--blue)" class="mt-0.5 shrink-0"></i>Parches y correcciones puntuales</li>
+          <li class="flex gap-2"><i data-lucide="check" style="width:15px;height:15px;color:var(--blue)" class="mt-0.5 shrink-0"></i><span data-i18n="precios.p1.f1">Diagnóstico y ayuda técnica</span></li>
+          <li class="flex gap-2"><i data-lucide="check" style="width:15px;height:15px;color:var(--blue)" class="mt-0.5 shrink-0"></i><span data-i18n="precios.p1.f2">Parches y correcciones puntuales</span></li>
         </ul>
-        <a href="#contacto" class="btn btn-ghost mt-auto py-3 text-sm">Consultar</a>
+        <a href="#contacto" class="btn btn-ghost mt-auto py-3 text-sm" data-i18n="precios.consultar">Consultar</a>
       </div>
 
       <div class="reveal reveal-delay-1 price-card card p-7 flex flex-col">
-        <p class="chip inline-block px-3 py-1 mb-5 self-start">Bots chicos</p>
+        <p class="chip inline-block px-3 py-1 mb-5 self-start" data-i18n="precios.p2.tag">Bots chicos</p>
         <p class="font-display font-bold text-3xl mb-1">$5 – $7<span class="text-base font-normal" style="color:var(--muted)"> USD</span></p>
-        <p class="text-sm mb-6" style="color:var(--muted)">Un sistema único: economía, moderación u otro, bien resuelto.</p>
+        <p class="text-sm mb-6" style="color:var(--muted)" data-i18n="precios.p2.desc">Un sistema único: economía, moderación u otro, bien resuelto.</p>
         <ul class="space-y-2.5 text-sm mb-7" style="color:var(--muted)">
-          <li class="flex gap-2"><i data-lucide="check" style="width:15px;height:15px;color:var(--blue)" class="mt-0.5 shrink-0"></i>Un sistema principal</li>
-          <li class="flex gap-2"><i data-lucide="check" style="width:15px;height:15px;color:var(--blue)" class="mt-0.5 shrink-0"></i>Entrega rápida</li>
+          <li class="flex gap-2"><i data-lucide="check" style="width:15px;height:15px;color:var(--blue)" class="mt-0.5 shrink-0"></i><span data-i18n="precios.p2.f1">Un sistema principal</span></li>
+          <li class="flex gap-2"><i data-lucide="check" style="width:15px;height:15px;color:var(--blue)" class="mt-0.5 shrink-0"></i><span data-i18n="precios.p2.f2">Entrega rápida</span></li>
         </ul>
-        <a href="#contacto" class="btn btn-ghost mt-auto py-3 text-sm">Consultar</a>
+        <a href="#contacto" class="btn btn-ghost mt-auto py-3 text-sm" data-i18n="precios.consultar">Consultar</a>
       </div>
 
       <div class="reveal reveal-delay-2 price-card featured card p-7 flex flex-col">
-        <p class="chip inline-block px-3 py-1 mb-5 self-start">Bots medianos</p>
+        <p class="chip inline-block px-3 py-1 mb-5 self-start" data-i18n="precios.p3.tag">Bots medianos</p>
         <p class="font-display font-bold text-3xl mb-1">$10 – $15<span class="text-base font-normal" style="color:var(--muted)"> USD</span></p>
-        <p class="text-sm mb-6" style="color:var(--muted)">Bot con 3 sistemas diferentes conectados entre sí.</p>
+        <p class="text-sm mb-6" style="color:var(--muted)" data-i18n="precios.p3.desc">Bot con 3 sistemas diferentes conectados entre sí.</p>
         <ul class="space-y-2.5 text-sm mb-7" style="color:var(--muted)">
-          <li class="flex gap-2"><i data-lucide="check" style="width:15px;height:15px;color:var(--violet)" class="mt-0.5 shrink-0"></i>3 sistemas integrados</li>
-          <li class="flex gap-2"><i data-lucide="check" style="width:15px;height:15px;color:var(--violet)" class="mt-0.5 shrink-0"></i>Base de datos propia</li>
-          <li class="flex gap-2"><i data-lucide="check" style="width:15px;height:15px;color:var(--violet)" class="mt-0.5 shrink-0"></i>Soporte de 3 meses</li>
+          <li class="flex gap-2"><i data-lucide="check" style="width:15px;height:15px;color:var(--violet)" class="mt-0.5 shrink-0"></i><span data-i18n="precios.p3.f1">3 sistemas integrados</span></li>
+          <li class="flex gap-2"><i data-lucide="check" style="width:15px;height:15px;color:var(--violet)" class="mt-0.5 shrink-0"></i><span data-i18n="precios.p3.f2">Base de datos propia</span></li>
+          <li class="flex gap-2"><i data-lucide="check" style="width:15px;height:15px;color:var(--violet)" class="mt-0.5 shrink-0"></i><span data-i18n="precios.p3.f3">Soporte de 3 meses</span></li>
         </ul>
-        <a href="#contacto" class="btn btn-primary mt-auto py-3 text-sm">Consultar</a>
+        <a href="#contacto" class="btn btn-primary mt-auto py-3 text-sm" data-i18n="precios.consultar">Consultar</a>
       </div>
 
       <div class="reveal reveal-delay-3 price-card card p-7 flex flex-col">
-        <p class="chip inline-block px-3 py-1 mb-5 self-start">Bots grandes</p>
+        <p class="chip inline-block px-3 py-1 mb-5 self-start" data-i18n="precios.p4.tag">Bots grandes</p>
         <p class="font-display font-bold text-3xl mb-1">$20<span class="text-base font-normal" style="color:var(--muted)"> USD</span></p>
-        <p class="text-sm mb-6" style="color:var(--muted)">4 o más sistemas junto a IA: RPG, combate, narrativa, paneles propios.</p>
+        <p class="text-sm mb-6" style="color:var(--muted)" data-i18n="precios.p4.desc">4 o más sistemas junto a IA: RPG, combate, narrativa, paneles propios.</p>
         <ul class="space-y-2.5 text-sm mb-7" style="color:var(--muted)">
-          <li class="flex gap-2"><i data-lucide="check" style="width:15px;height:15px;color:var(--blue)" class="mt-0.5 shrink-0"></i>4+ sistemas integrados</li>
-          <li class="flex gap-2"><i data-lucide="check" style="width:15px;height:15px;color:var(--blue)" class="mt-0.5 shrink-0"></i>Incluye integración con IA</li>
+          <li class="flex gap-2"><i data-lucide="check" style="width:15px;height:15px;color:var(--blue)" class="mt-0.5 shrink-0"></i><span data-i18n="precios.p4.f1">4+ sistemas integrados</span></li>
+          <li class="flex gap-2"><i data-lucide="check" style="width:15px;height:15px;color:var(--blue)" class="mt-0.5 shrink-0"></i><span data-i18n="precios.p4.f2">Incluye integración con IA</span></li>
         </ul>
-        <a href="#contacto" class="btn btn-ghost mt-auto py-3 text-sm">Consultar</a>
+        <a href="#contacto" class="btn btn-ghost mt-auto py-3 text-sm" data-i18n="precios.consultar">Consultar</a>
       </div>
     </div>
 
-    <div class="reveal reveal-delay-4 card mt-6 p-6 sm:p-7 flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-6">
-      <span class="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl" style="background:var(--grad-soft)">
-        <i data-lucide="brain-circuit" style="width:20px;height:20px;color:var(--violet)"></i>
-      </span>
-      <div class="flex-1">
-        <h3 class="font-display font-semibold mb-1">Agregar IA a un bot</h3>
-        <p class="text-sm" style="color:var(--muted)">Ya sea un bot creado o por crear: se suma <span style="color:var(--text)">+$4 USD</span> al precio final.</p>
+    <div class="grid sm:grid-cols-2 gap-6 mt-6">
+      <div class="reveal reveal-delay-4 card p-6 sm:p-7 flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-6">
+        <span class="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl" style="background:var(--grad-soft)">
+          <i data-lucide="brain-circuit" style="width:20px;height:20px;color:var(--violet)"></i>
+        </span>
+        <div class="flex-1">
+          <h3 class="font-display font-semibold mb-1" data-i18n="precios.addonIA.title">Agregar IA a un bot</h3>
+          <p class="text-sm" style="color:var(--muted)" data-i18n="precios.addonIA.desc">Ya sea un bot creado o por crear: se suma <span style="color:var(--text)">+$4 USD</span> al precio final.</p>
+        </div>
+        <p class="font-display font-bold text-2xl shrink-0">+$4<span class="text-base font-normal" style="color:var(--muted)"> USD</span></p>
       </div>
-      <p class="font-display font-bold text-2xl shrink-0">+$4<span class="text-base font-normal" style="color:var(--muted)"> USD</span></p>
+
+      <div class="reveal reveal-delay-4 card p-6 sm:p-7 flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-6">
+        <span class="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl" style="background:var(--grad-soft)">
+          <i data-lucide="layout-dashboard" style="width:20px;height:20px;color:var(--blue)"></i>
+        </span>
+        <div class="flex-1">
+          <h3 class="font-display font-semibold mb-1" data-i18n="precios.addonDash.title">Dashboard web funcional</h3>
+          <p class="text-sm" style="color:var(--muted)" data-i18n="precios.addonDash.desc">Panel web para gestionar tu bot desde el navegador: se suma <span style="color:var(--text)">+$1 USD</span> al precio final.</p>
+        </div>
+        <p class="font-display font-bold text-2xl shrink-0">+$1<span class="text-base font-normal" style="color:var(--muted)"> USD</span></p>
+      </div>
     </div>
 
     <p class="reveal reveal-delay-4 flex items-center gap-2 justify-center text-sm mt-10" style="color:var(--muted-2)">
       <i data-lucide="info" style="width:15px;height:15px"></i>
-      El precio final depende de la complejidad, cantidad de funciones y tiempo de desarrollo del bot.
+      <span data-i18n="precios.nota">El precio final depende de la complejidad, cantidad de funciones y tiempo de desarrollo del bot.</span>
     </p>
   </div>
 </section>
@@ -577,35 +605,35 @@ a:focus-visible, button:focus-visible, summary:focus-visible{
 <section id="incluye" class="relative py-28 md:py-36 px-6" style="background:var(--bg-soft)">
   <div class="max-w-6xl mx-auto">
     <div class="reveal text-center max-w-2xl mx-auto mb-16">
-      <p class="section-eyebrow mb-4">Todo resuelto</p>
-      <h2 class="font-display font-bold text-3xl sm:text-4xl mb-5">¿Qué incluye?</h2>
-      <p style="color:var(--muted)" class="text-lg">Cada proyecto se entrega listo para usar, no solo el código.</p>
+      <p class="section-eyebrow mb-4" data-i18n="incluye.eyebrow">Todo resuelto</p>
+      <h2 class="font-display font-bold text-3xl sm:text-4xl mb-5" data-i18n="incluye.title">¿Qué incluye?</h2>
+      <p style="color:var(--muted)" class="text-lg" data-i18n="incluye.subtitle">Cada proyecto se entrega listo para usar, no solo el código.</p>
     </div>
 
     <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
       <div class="reveal card p-7 flex items-start gap-4">
         <span class="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl" style="background:var(--grad-soft)"><i data-lucide="file-code-2" style="width:20px;height:20px;color:var(--blue)"></i></span>
-        <div><h3 class="font-display font-semibold mb-1.5">Código limpio</h3><p class="text-sm" style="color:var(--muted)">Organizado, comentado y fácil de mantener o ampliar más adelante.</p></div>
+        <div><h3 class="font-display font-semibold mb-1.5" data-i18n="incluye.i1.title">Código limpio</h3><p class="text-sm" style="color:var(--muted)" data-i18n="incluye.i1.desc">Organizado, comentado y fácil de mantener o ampliar más adelante.</p></div>
       </div>
       <div class="reveal reveal-delay-1 card p-7 flex items-start gap-4">
         <span class="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl" style="background:var(--grad-soft)"><i data-lucide="database" style="width:20px;height:20px;color:var(--violet)"></i></span>
-        <div><h3 class="font-display font-semibold mb-1.5">Base de datos</h3><p class="text-sm" style="color:var(--muted)">Persistencia propia para que ningún dato se pierda al reiniciar el bot.</p></div>
+        <div><h3 class="font-display font-semibold mb-1.5" data-i18n="incluye.i2.title">Base de datos</h3><p class="text-sm" style="color:var(--muted)" data-i18n="incluye.i2.desc">Persistencia propia para que ningún dato se pierda al reiniciar el bot.</p></div>
       </div>
       <div class="reveal reveal-delay-2 card p-7 flex items-start gap-4">
         <span class="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl" style="background:var(--grad-soft)"><i data-lucide="sliders-horizontal" style="width:20px;height:20px;color:var(--blue)"></i></span>
-        <div><h3 class="font-display font-semibold mb-1.5">Configuración</h3><p class="text-sm" style="color:var(--muted)">Ajustado a los roles, canales y reglas específicas de tu servidor.</p></div>
+        <div><h3 class="font-display font-semibold mb-1.5" data-i18n="incluye.i3.title">Configuración</h3><p class="text-sm" style="color:var(--muted)" data-i18n="incluye.i3.desc">Ajustado a los roles, canales y reglas específicas de tu servidor.</p></div>
       </div>
       <div class="reveal card p-7 flex items-start gap-4">
         <span class="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl" style="background:var(--grad-soft)"><i data-lucide="rocket" style="width:20px;height:20px;color:var(--violet)"></i></span>
-        <div><h3 class="font-display font-semibold mb-1.5">Instalación</h3><p class="text-sm" style="color:var(--muted)">Me encargo de que el bot quede online y funcionando en tu servidor.</p></div>
+        <div><h3 class="font-display font-semibold mb-1.5" data-i18n="incluye.i4.title">Instalación</h3><p class="text-sm" style="color:var(--muted)" data-i18n="incluye.i4.desc">Me encargo de que el bot quede online y funcionando en tu servidor.</p></div>
       </div>
       <div class="reveal reveal-delay-1 card p-7 flex items-start gap-4">
         <span class="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl" style="background:var(--grad-soft)"><i data-lucide="life-buoy" style="width:20px;height:20px;color:var(--blue)"></i></span>
-        <div><h3 class="font-display font-semibold mb-1.5">Soporte 3 meses</h3><p class="text-sm" style="color:var(--muted)">Acompañamiento después de la entrega para dudas o ajustes.</p></div>
+        <div><h3 class="font-display font-semibold mb-1.5" data-i18n="incluye.i5.title">Soporte 3 meses</h3><p class="text-sm" style="color:var(--muted)" data-i18n="incluye.i5.desc">Acompañamiento después de la entrega para dudas o ajustes.</p></div>
       </div>
       <div class="reveal reveal-delay-2 card p-7 flex items-start gap-4">
         <span class="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl" style="background:var(--grad-soft)"><i data-lucide="bug" style="width:20px;height:20px;color:var(--violet)"></i></span>
-        <div><h3 class="font-display font-semibold mb-1.5">Corrección de errores</h3><p class="text-sm" style="color:var(--muted)">Si algo falla, lo reviso y lo soluciono sin costo dentro del soporte.</p></div>
+        <div><h3 class="font-display font-semibold mb-1.5" data-i18n="incluye.i6.title">Corrección de errores</h3><p class="text-sm" style="color:var(--muted)" data-i18n="incluye.i6.desc">Si algo falla, lo reviso y lo soluciono sin costo dentro del soporte.</p></div>
       </div>
     </div>
   </div>
@@ -615,27 +643,27 @@ a:focus-visible, button:focus-visible, summary:focus-visible{
 <section id="portfolio" class="relative py-28 md:py-36 px-6">
   <div class="max-w-6xl mx-auto">
     <div class="reveal text-center max-w-2xl mx-auto mb-12">
-      <p class="section-eyebrow mb-4">Trabajos</p>
-      <h2 class="font-display font-bold text-3xl sm:text-4xl mb-5">Portfolio</h2>
-      <p style="color:var(--muted)" class="text-lg">Capturas, clips y detalles de bots que ya entregué.</p>
+      <p class="section-eyebrow mb-4" data-i18n="portfolio.eyebrow">Trabajos</p>
+      <h2 class="font-display font-bold text-3xl sm:text-4xl mb-5" data-i18n="portfolio.title">Portfolio</h2>
+      <p style="color:var(--muted)" class="text-lg" data-i18n="portfolio.subtitle">Capturas, clips y detalles de bots que ya entregué.</p>
     </div>
 
     <div class="reveal flex items-center justify-center gap-3 mb-10">
       <button id="adminToggleBtn" class="btn btn-ghost px-4 py-2 text-xs">
         <i data-lucide="lock" style="width:14px;height:14px"></i>
-        <span id="adminToggleLabel">Modo admin</span>
+        <span id="adminToggleLabel" data-i18n="portfolio.adminMode">Modo admin</span>
       </button>
       <button id="newPostBtn" class="btn btn-primary px-4 py-2 text-xs hidden">
         <i data-lucide="plus" style="width:14px;height:14px"></i>
-        Nueva publicación
+        <span data-i18n="portfolio.newPost">Nueva publicación</span>
       </button>
     </div>
 
-    <div id="portfolioStatus" class="text-center text-sm mb-8" style="color:var(--muted-2)">Cargando publicaciones…</div>
+    <div id="portfolioStatus" class="text-center text-sm mb-8" style="color:var(--muted-2)" data-i18n="portfolio.loading">Cargando publicaciones…</div>
     <div id="portfolioGrid" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6"></div>
     <div id="portfolioEmpty" class="hidden text-center py-16" style="color:var(--muted-2)">
       <i data-lucide="images" style="width:32px;height:32px" class="mx-auto mb-3 opacity-60"></i>
-      <p>Todavía no hay publicaciones en el portfolio.</p>
+      <p data-i18n="portfolio.empty">Todavía no hay publicaciones en el portfolio.</p>
     </div>
   </div>
 </section>
@@ -643,13 +671,13 @@ a:focus-visible, button:focus-visible, summary:focus-visible{
 <!-- Admin login modal -->
 <div id="adminModal" class="hidden fixed inset-0 z-[70] items-center justify-center p-6" style="background:rgba(0,0,0,0.6)">
   <div class="card p-7 w-full max-w-sm">
-    <h3 class="font-display font-semibold text-lg mb-1">Acceso admin</h3>
-    <p class="text-sm mb-5" style="color:var(--muted)">Ingresá la contraseña para publicar en el portfolio.</p>
-    <input id="adminPasswordInput" type="password" placeholder="Contraseña" class="w-full mb-2 px-4 py-3 rounded-xl text-sm" style="background:var(--surface-2); border:1px solid var(--border-strong); color:var(--text)">
-    <p id="adminError" class="hidden text-xs mb-3" style="color:#f87171">Contraseña incorrecta.</p>
+    <h3 class="font-display font-semibold text-lg mb-1" data-i18n="adminModal.title">Acceso admin</h3>
+    <p class="text-sm mb-5" style="color:var(--muted)" data-i18n="adminModal.desc">Ingresá la contraseña para publicar en el portfolio.</p>
+    <input id="adminPasswordInput" type="password" data-i18n-placeholder="adminModal.placeholder" placeholder="Contraseña" class="w-full mb-2 px-4 py-3 rounded-xl text-sm" style="background:var(--surface-2); border:1px solid var(--border-strong); color:var(--text)">
+    <p id="adminError" class="hidden text-xs mb-3" style="color:#f87171" data-i18n="adminModal.error">Contraseña incorrecta.</p>
     <div class="flex gap-3 mt-3">
-      <button id="adminCancelBtn" class="btn btn-ghost flex-1 py-2.5 text-sm">Cancelar</button>
-      <button id="adminSubmitBtn" class="btn btn-primary flex-1 py-2.5 text-sm">Entrar</button>
+      <button id="adminCancelBtn" class="btn btn-ghost flex-1 py-2.5 text-sm" data-i18n="common.cancel">Cancelar</button>
+      <button id="adminSubmitBtn" class="btn btn-primary flex-1 py-2.5 text-sm" data-i18n="common.enter">Entrar</button>
     </div>
   </div>
 </div>
@@ -657,23 +685,23 @@ a:focus-visible, button:focus-visible, summary:focus-visible{
 <!-- New post modal -->
 <div id="postModal" class="hidden fixed inset-0 z-[70] items-center justify-center p-6" style="background:rgba(0,0,0,0.6)">
   <div class="card p-7 w-full max-w-lg max-h-[85vh] overflow-y-auto">
-    <h3 class="font-display font-semibold text-lg mb-5">Nueva publicación</h3>
-    <label class="block text-xs mb-1.5" style="color:var(--muted)">Título</label>
-    <input id="postTitle" type="text" placeholder="Ej: Bot RPG para servidor de anime" class="w-full mb-4 px-4 py-3 rounded-xl text-sm" style="background:var(--surface-2); border:1px solid var(--border-strong); color:var(--text)">
+    <h3 class="font-display font-semibold text-lg mb-5" data-i18n="postModal.title">Nueva publicación</h3>
+    <label class="block text-xs mb-1.5" style="color:var(--muted)" data-i18n="postModal.labelTitle">Título</label>
+    <input id="postTitle" type="text" data-i18n-placeholder="postModal.phTitle" placeholder="Ej: Bot RPG para servidor de anime" class="w-full mb-4 px-4 py-3 rounded-xl text-sm" style="background:var(--surface-2); border:1px solid var(--border-strong); color:var(--text)">
 
-    <label class="block text-xs mb-1.5" style="color:var(--muted)">Descripción</label>
-    <textarea id="postDescription" rows="3" placeholder="Contá de qué se trata este proyecto" class="w-full mb-4 px-4 py-3 rounded-xl text-sm" style="background:var(--surface-2); border:1px solid var(--border-strong); color:var(--text)"></textarea>
+    <label class="block text-xs mb-1.5" style="color:var(--muted)" data-i18n="postModal.labelDesc">Descripción</label>
+    <textarea id="postDescription" rows="3" data-i18n-placeholder="postModal.phDesc" placeholder="Contá de qué se trata este proyecto" class="w-full mb-4 px-4 py-3 rounded-xl text-sm" style="background:var(--surface-2); border:1px solid var(--border-strong); color:var(--text)"></textarea>
 
-    <label class="block text-xs mb-1.5" style="color:var(--muted)">Foto (opcional)</label>
+    <label class="block text-xs mb-1.5" style="color:var(--muted)" data-i18n="postModal.labelImg">Foto (opcional)</label>
     <input id="postImageFile" type="file" accept="image/*" class="w-full mb-4 text-sm" style="color:var(--muted)">
 
-    <label class="block text-xs mb-1.5" style="color:var(--muted)">Video (opcional, pegá un link de YouTube o un .mp4)</label>
-    <input id="postVideoUrl" type="text" placeholder="https://..." class="w-full mb-5 px-4 py-3 rounded-xl text-sm" style="background:var(--surface-2); border:1px solid var(--border-strong); color:var(--text)">
+    <label class="block text-xs mb-1.5" style="color:var(--muted)" data-i18n="postModal.labelVid">Video (opcional, pegá un link de YouTube o un .mp4)</label>
+    <input id="postVideoUrl" type="text" data-i18n-placeholder="postModal.phVid" placeholder="https://..." class="w-full mb-5 px-4 py-3 rounded-xl text-sm" style="background:var(--surface-2); border:1px solid var(--border-strong); color:var(--text)">
 
-    <p id="postError" class="hidden text-xs mb-3" style="color:#f87171">Completá al menos el título.</p>
+    <p id="postError" class="hidden text-xs mb-3" style="color:#f87171" data-i18n="postModal.error">Completá al menos el título.</p>
     <div class="flex gap-3">
-      <button id="postCancelBtn" class="btn btn-ghost flex-1 py-2.5 text-sm">Cancelar</button>
-      <button id="postSubmitBtn" class="btn btn-primary flex-1 py-2.5 text-sm">Publicar</button>
+      <button id="postCancelBtn" class="btn btn-ghost flex-1 py-2.5 text-sm" data-i18n="common.cancel">Cancelar</button>
+      <button id="postSubmitBtn" class="btn btn-primary flex-1 py-2.5 text-sm" data-i18n="common.publish">Publicar</button>
     </div>
   </div>
 </div>
@@ -682,28 +710,28 @@ a:focus-visible, button:focus-visible, summary:focus-visible{
 <section id="comentarios" class="relative py-28 md:py-36 px-6" style="background:var(--bg-soft)">
   <div class="max-w-3xl mx-auto">
     <div class="reveal text-center max-w-2xl mx-auto mb-12">
-      <p class="section-eyebrow mb-4">Opiniones</p>
-      <h2 class="font-display font-bold text-3xl sm:text-4xl mb-5">Comentarios y recomendaciones</h2>
-      <p style="color:var(--muted)" class="text-lg">Dejá tu recomendación. Todos pueden verla, siempre.</p>
+      <p class="section-eyebrow mb-4" data-i18n="comentarios.eyebrow">Opiniones</p>
+      <h2 class="font-display font-bold text-3xl sm:text-4xl mb-5" data-i18n="comentarios.title">Comentarios y recomendaciones</h2>
+      <p style="color:var(--muted)" class="text-lg" data-i18n="comentarios.subtitle">Dejá tu recomendación. Todos pueden verla, siempre.</p>
     </div>
 
     <div class="reveal card p-6 sm:p-7 mb-10">
       <div class="grid sm:grid-cols-[1fr_auto] gap-4 mb-4">
-        <input id="commentName" type="text" placeholder="Tu nombre o usuario de Discord" class="w-full px-4 py-3 rounded-xl text-sm" style="background:var(--surface-2); border:1px solid var(--border-strong); color:var(--text)">
+        <input id="commentName" type="text" data-i18n-placeholder="comentarios.phName" placeholder="Tu nombre o usuario de Discord" class="w-full px-4 py-3 rounded-xl text-sm" style="background:var(--surface-2); border:1px solid var(--border-strong); color:var(--text)">
       </div>
-      <textarea id="commentMessage" rows="3" placeholder="Contá tu experiencia con el bot o el servicio" class="w-full mb-4 px-4 py-3 rounded-xl text-sm" style="background:var(--surface-2); border:1px solid var(--border-strong); color:var(--text)"></textarea>
-      <p id="commentError" class="hidden text-xs mb-3" style="color:#f87171">Completá tu nombre y comentario.</p>
+      <textarea id="commentMessage" rows="3" data-i18n-placeholder="comentarios.phMsg" placeholder="Contá tu experiencia con el bot o el servicio" class="w-full mb-4 px-4 py-3 rounded-xl text-sm" style="background:var(--surface-2); border:1px solid var(--border-strong); color:var(--text)"></textarea>
+      <p id="commentError" class="hidden text-xs mb-3" style="color:#f87171" data-i18n="comentarios.error">Completá tu nombre y comentario.</p>
       <button id="commentSubmitBtn" class="btn btn-primary px-6 py-3 text-sm">
         <i data-lucide="send" style="width:15px;height:15px"></i>
-        Publicar comentario
+        <span data-i18n="comentarios.submit">Publicar comentario</span>
       </button>
     </div>
 
-    <div id="commentsStatus" class="text-center text-sm mb-6" style="color:var(--muted-2)">Cargando comentarios…</div>
+    <div id="commentsStatus" class="text-center text-sm mb-6" style="color:var(--muted-2)" data-i18n="comentarios.loading">Cargando comentarios…</div>
     <div id="commentsList" class="space-y-4"></div>
     <div id="commentsEmpty" class="hidden text-center py-10" style="color:var(--muted-2)">
       <i data-lucide="message-square" style="width:28px;height:28px" class="mx-auto mb-3 opacity-60"></i>
-      <p>Sé el primero en dejar una recomendación.</p>
+      <p data-i18n="comentarios.empty">Sé el primero en dejar una recomendación.</p>
     </div>
   </div>
 </section>
@@ -712,40 +740,40 @@ a:focus-visible, button:focus-visible, summary:focus-visible{
 <section id="terminos" class="relative py-28 md:py-36 px-6">
   <div class="max-w-4xl mx-auto">
     <div class="reveal text-center max-w-2xl mx-auto mb-14">
-      <p class="section-eyebrow mb-4">Reglas claras</p>
-      <h2 class="font-display font-bold text-3xl sm:text-4xl mb-5">Términos y condiciones</h2>
-      <p style="color:var(--muted)" class="text-lg">Para que ambas partes sepamos exactamente qué esperar.</p>
+      <p class="section-eyebrow mb-4" data-i18n="terminos.eyebrow">Reglas claras</p>
+      <h2 class="font-display font-bold text-3xl sm:text-4xl mb-5" data-i18n="terminos.title">Términos y condiciones</h2>
+      <p style="color:var(--muted)" class="text-lg" data-i18n="terminos.subtitle">Para que ambas partes sepamos exactamente qué esperar.</p>
     </div>
 
     <div class="reveal card p-8 sm:p-12">
       <ul class="space-y-6">
         <li class="flex gap-4">
           <i data-lucide="handshake" class="shrink-0 mt-0.5" style="width:20px;height:20px;color:var(--blue)"></i>
-          <p style="color:var(--muted)">El presupuesto se acuerda <span style="color:var(--text)">antes de comenzar</span> el desarrollo.</p>
+          <p style="color:var(--muted)" data-i18n="terminos.t1">El presupuesto se acuerda <span style="color:var(--text)">antes de comenzar</span> el desarrollo.</p>
         </li>
         <li class="flex gap-4">
           <i data-lucide="clock" class="shrink-0 mt-0.5" style="width:20px;height:20px;color:var(--violet)"></i>
-          <p style="color:var(--muted)">El desarrollo puede tardar <span style="color:var(--text)">entre algunos días y varias semanas</span>, según la complejidad del proyecto.</p>
+          <p style="color:var(--muted)" data-i18n="terminos.t2">El desarrollo puede tardar <span style="color:var(--text)">entre algunos días y varias semanas</span>, según la complejidad del proyecto.</p>
         </li>
         <li class="flex gap-4">
           <i data-lucide="bell-ring" class="shrink-0 mt-0.5" style="width:20px;height:20px;color:var(--blue)"></i>
-          <p style="color:var(--muted)">Si existe algún retraso, <span style="color:var(--text)">el cliente es informado</span> con anticipación.</p>
+          <p style="color:var(--muted)" data-i18n="terminos.t3">Si existe algún retraso, <span style="color:var(--text)">el cliente es informado</span> con anticipación.</p>
         </li>
         <li class="flex gap-4">
           <i data-lucide="life-buoy" class="shrink-0 mt-0.5" style="width:20px;height:20px;color:var(--violet)"></i>
-          <p style="color:var(--muted)">Incluye <span style="color:var(--text)">soporte durante 3 meses</span> para corregir errores del bot.</p>
+          <p style="color:var(--muted)" data-i18n="terminos.t4">Incluye <span style="color:var(--text)">soporte durante 3 meses</span> para corregir errores del bot.</p>
         </li>
         <li class="flex gap-4">
           <i data-lucide="plus-circle" class="shrink-0 mt-0.5" style="width:20px;height:20px;color:var(--blue)"></i>
-          <p style="color:var(--muted)">Las <span style="color:var(--text)">funciones nuevas</span> pedidas después de la entrega pueden tener un costo adicional.</p>
+          <p style="color:var(--muted)" data-i18n="terminos.t5">Las <span style="color:var(--text)">funciones nuevas</span> pedidas después de la entrega pueden tener un costo adicional.</p>
         </li>
         <li class="flex gap-4">
           <i data-lucide="ban" class="shrink-0 mt-0.5" style="width:20px;height:20px;color:var(--violet)"></i>
-          <p style="color:var(--muted)">No hay reembolsos una vez <span style="color:var(--text)">iniciado el desarrollo</span>, salvo acuerdo entre ambas partes.</p>
+          <p style="color:var(--muted)" data-i18n="terminos.t6">No hay reembolsos una vez <span style="color:var(--text)">iniciado el desarrollo</span>, salvo acuerdo entre ambas partes.</p>
         </li>
         <li class="flex gap-4">
           <i data-lucide="server" class="shrink-0 mt-0.5" style="width:20px;height:20px;color:var(--blue)"></i>
-          <p style="color:var(--muted)">El <span style="color:var(--text)">hosting del bot es responsabilidad del cliente</span>: lo contrata por su cuenta, no está incluido ni administrado por Ranaris.</p>
+          <p style="color:var(--muted)" data-i18n="terminos.t7">El <span style="color:var(--text)">hosting del bot es responsabilidad del cliente</span>: lo contrata por su cuenta, no está incluido ni administrado por Ranaris.</p>
         </li>
       </ul>
     </div>
@@ -756,49 +784,49 @@ a:focus-visible, button:focus-visible, summary:focus-visible{
 <section id="faq" class="relative py-28 md:py-36 px-6" style="background:var(--bg-soft)">
   <div class="max-w-3xl mx-auto">
     <div class="reveal text-center mb-14">
-      <p class="section-eyebrow mb-4">Dudas frecuentes</p>
-      <h2 class="font-display font-bold text-3xl sm:text-4xl mb-5">Preguntas frecuentes</h2>
+      <p class="section-eyebrow mb-4" data-i18n="faq.eyebrow">Dudas frecuentes</p>
+      <h2 class="font-display font-bold text-3xl sm:text-4xl mb-5" data-i18n="faq.title">Preguntas frecuentes</h2>
     </div>
 
     <div class="space-y-4">
       <details class="faq-item reveal card px-7 py-5" open>
         <summary class="flex items-center justify-between gap-4 font-display font-semibold">
-          ¿El bot funciona 24/7?
+          <span data-i18n="faq.q1">¿El bot funciona 24/7?</span>
           <i data-lucide="chevron-down" class="chevron shrink-0" style="width:18px;height:18px;color:var(--muted)"></i>
         </summary>
-        <p class="faq-a mt-3 text-sm leading-relaxed" style="color:var(--muted)">Sí, siempre que esté alojado en un hosting activo. Te oriento sobre las opciones disponibles según tu presupuesto.</p>
+        <p class="faq-a mt-3 text-sm leading-relaxed" style="color:var(--muted)" data-i18n="faq.a1">Sí, siempre que esté alojado en un hosting activo. Te oriento sobre las opciones disponibles según tu presupuesto.</p>
       </details>
 
       <details class="faq-item reveal reveal-delay-1 card px-7 py-5">
         <summary class="flex items-center justify-between gap-4 font-display font-semibold">
-          ¿Necesito contratar hosting?
+          <span data-i18n="faq.q2">¿Necesito contratar hosting?</span>
           <i data-lucide="chevron-down" class="chevron shrink-0" style="width:18px;height:18px;color:var(--muted)"></i>
         </summary>
-        <p class="faq-a mt-3 text-sm leading-relaxed" style="color:var(--muted)">Sí, el bot necesita un servidor donde ejecutarse 24/7. El hosting lo contratás vos por tu cuenta; yo te oriento sobre opciones económicas y te ayudo con la instalación.</p>
+        <p class="faq-a mt-3 text-sm leading-relaxed" style="color:var(--muted)" data-i18n="faq.a2">Sí, el bot necesita un servidor donde ejecutarse 24/7. El hosting lo contratás vos por tu cuenta; yo te oriento sobre opciones económicas y te ayudo con la instalación.</p>
       </details>
 
       <details class="faq-item reveal reveal-delay-2 card px-7 py-5">
         <summary class="flex items-center justify-between gap-4 font-display font-semibold">
-          ¿Hacés bots totalmente personalizados?
+          <span data-i18n="faq.q3">¿Hacés bots totalmente personalizados?</span>
           <i data-lucide="chevron-down" class="chevron shrink-0" style="width:18px;height:18px;color:var(--muted)"></i>
         </summary>
-        <p class="faq-a mt-3 text-sm leading-relaxed" style="color:var(--muted)">Sí, es una de mis especialidades: sistemas de RPG, combate, economía o narrativa con IA construidos desde cero para tu servidor.</p>
+        <p class="faq-a mt-3 text-sm leading-relaxed" style="color:var(--muted)" data-i18n="faq.a3">Sí, es una de mis especialidades: sistemas de RPG, combate, economía o narrativa con IA construidos desde cero para tu servidor.</p>
       </details>
 
       <details class="faq-item reveal reveal-delay-3 card px-7 py-5">
         <summary class="flex items-center justify-between gap-4 font-display font-semibold">
-          ¿Qué tecnologías usás?
+          <span data-i18n="faq.q4">¿Qué tecnologías usás?</span>
           <i data-lucide="chevron-down" class="chevron shrink-0" style="width:18px;height:18px;color:var(--muted)"></i>
         </summary>
-        <p class="faq-a mt-3 text-sm leading-relaxed" style="color:var(--muted)">Trabajo principalmente con Python (discord.py) y JavaScript (discord.js), bases de datos SQLite e integración de IA para sistemas narrativos.</p>
+        <p class="faq-a mt-3 text-sm leading-relaxed" style="color:var(--muted)" data-i18n="faq.a4">Trabajo principalmente con Python (discord.py) y JavaScript (discord.js), bases de datos SQLite e integración de IA para sistemas narrativos.</p>
       </details>
 
       <details class="faq-item reveal reveal-delay-4 card px-7 py-5">
         <summary class="flex items-center justify-between gap-4 font-display font-semibold">
-          ¿Cuánto tarda el desarrollo?
+          <span data-i18n="faq.q5">¿Cuánto tarda el desarrollo?</span>
           <i data-lucide="chevron-down" class="chevron shrink-0" style="width:18px;height:18px;color:var(--muted)"></i>
         </summary>
-        <p class="faq-a mt-3 text-sm leading-relaxed" style="color:var(--muted)">Depende de la complejidad: desde unos pocos días para bots sencillos hasta varias semanas para sistemas avanzados a medida.</p>
+        <p class="faq-a mt-3 text-sm leading-relaxed" style="color:var(--muted)" data-i18n="faq.a5">Depende de la complejidad: desde unos pocos días para bots sencillos hasta varias semanas para sistemas avanzados a medida.</p>
       </details>
     </div>
   </div>
@@ -808,14 +836,14 @@ a:focus-visible, button:focus-visible, summary:focus-visible{
 <section id="contacto" class="relative py-28 md:py-40 px-6 overflow-hidden">
   <div class="nova-glow blob" style="width:600px;height:600px; background:radial-gradient(circle, rgba(76,175,125,0.3), transparent 70%); bottom:-260px; left:50%; transform:translateX(-50%);"></div>
   <div class="relative max-w-3xl mx-auto text-center">
-    <p class="reveal section-eyebrow mb-5">Empecemos</p>
-    <h2 class="reveal reveal-delay-1 font-display font-bold text-3xl sm:text-5xl mb-6 leading-tight">
+    <p class="reveal section-eyebrow mb-5" data-i18n="contacto.eyebrow">Empecemos</p>
+    <h2 class="reveal reveal-delay-1 font-display font-bold text-3xl sm:text-5xl mb-6 leading-tight" data-i18n="contacto.title">
       ¿Listo para darle vida<br class="hidden sm:block"> a tu bot?
     </h2>
-    <p class="reveal reveal-delay-2 text-lg mb-10" style="color:var(--muted)">Contame tu idea y te paso un presupuesto claro, sin compromiso.</p>
+    <p class="reveal reveal-delay-2 text-lg mb-10" style="color:var(--muted)" data-i18n="contacto.subtitle">Contame tu idea y te paso un presupuesto claro, sin compromiso.</p>
 
     <a href="https://discord.com/users/1334723582592548884" target="_blank" rel="noopener noreferrer" class="reveal reveal-delay-3 btn btn-primary px-10 py-5 text-base inline-flex">
-      Solicitar presupuesto
+      <span data-i18n="nav.cta">Solicitar presupuesto</span>
       <i data-lucide="send" style="width:18px;height:18px"></i>
     </a>
 
@@ -834,12 +862,179 @@ a:focus-visible, button:focus-visible, summary:focus-visible{
       <span class="flex h-7 w-7 items-center justify-center rounded-lg overflow-hidden" style="background:var(--grad)"><img src="data:image/png;base64,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" alt="Ranaris Shop" style="width:16px;height:16px;object-fit:contain"></span>
       <span class="font-display font-semibold">Ranaris Shop</span>
     </div>
-    <p>© 2026 Ranaris Shop. Desarrollo de bots de Discord a medida.</p>
+    <p data-i18n="footer.text">© 2026 Ranaris Shop. Desarrollo de bots de Discord a medida.</p>
   </div>
 </footer>
 
 <script>
 lucide.createIcons();
+
+/* ============================================================
+   I18N (ES / EN)
+============================================================ */
+const I18N = {
+  es: {
+    "nav.bots":"Bots","nav.proceso":"Cómo trabajo","nav.precios":"Precios","nav.incluye":"Qué incluye",
+    "nav.portfolio":"Portfolio","nav.comentarios":"Comentarios","nav.faq":"FAQ","nav.cta":"Solicitar presupuesto",
+    "hero.badge":"Bots a medida, listos para producción",
+    "hero.title1":"Bots de Discord diseñados para","hero.title2":"hacer crecer tu comunidad.",
+    "hero.desc":"Desarrollo bots personalizados para Discord: moderación, economía, tickets y sistemas propios de RPG con IA con código prolijo, base de datos dedicada y soporte real después de la entrega.",
+    "hero.btnVer":"Ver bots","hero.tag2":"SQLite dedicada","hero.tag3":"IA narrativa (Groq)",
+    "hero.mockUsed":" usó ","hero.mockLevel":"Kaito — Nivel 34","hero.mockCoins":"❖ Monedas","hero.mockClass":"⚔ Clase","hero.mockClassVal":"Vanguardia","hero.mockOnline":"bot en línea · 99.9% uptime",
+    "bots.eyebrow":"Catálogo","bots.title":"Mis bots","bots.subtitle":"Cuatro puntos de partida sólidos. Cada uno se adapta al estilo, tema y reglas de tu servidor.","bots.verMas":"Ver más",
+    "bots.c1.tag":"Moderación","bots.c1.title":"Bot de Moderación","bots.c1.desc":"Mantiene el orden en tu servidor con automoderación inteligente, sanciones y registros configurables.",
+    "bots.c1.f1":"Automoderación de spam, links e insultos","bots.c1.f2":"Advertencias, mutes, kicks y baneos","bots.c1.f3":"Logs de auditoría configurables por canal","bots.c1.f4":"Filtros y palabras prohibidas personalizables",
+    "bots.c2.tag":"Economía","bots.c2.title":"Bot de Economía","bots.c2.desc":"Un sistema económico completo con trabajos, tienda y rankings para mantener a la comunidad activa.",
+    "bots.c2.f1":"Monedas, trabajos y recompensa diaria","bots.c2.f2":"Tienda, inventario y objetos","bots.c2.f3":"Transferencias entre usuarios","bots.c2.f4":"Rankings, apuestas y minijuegos",
+    "bots.c3.tag":"Soporte","bots.c3.title":"Bot de Tickets","bots.c3.desc":"Soporte organizado para tu servidor con paneles, categorías y transcripciones automáticas.",
+    "bots.c3.f1":"Panel de tickets con botones","bots.c3.f2":"Categorías y roles de staff configurables","bots.c3.f3":"Transcripciones automáticas al cerrar","bots.c3.f4":"Notificaciones y logs de actividad",
+    "bots.c4.tag":"A medida","bots.c4.title":"Bot Personalizado","bots.c4.desc":"¿Tenés una idea distinta? Desarrollo sistemas propios de RPG, narrativa con IA y rol para comunidades de anime.",
+    "bots.c4.f1":"Sistemas de combate y estadísticas","bots.c4.f2":"Narrativa asistida por IA","bots.c4.f3":"Base de datos y paneles de administración propios","bots.c4.f4":"Integraciones y funciones a medida",
+    "proceso.eyebrow":"Proceso","proceso.title":"¿Cómo trabajo?","proceso.subtitle":"Cuatro pasos, sin vueltas, con comunicación clara de principio a fin.",
+    "proceso.s1.title":"Contame tu idea","proceso.s1.desc":"Me explicás qué necesitás para tu servidor: tema, funciones, referencias. Cuanto más contexto, mejor propuesta.",
+    "proceso.s2.title":"Acordamos el presupuesto","proceso.s2.desc":"Con la idea clara, definimos alcance, tiempos y precio final antes de escribir una sola línea de código.",
+    "proceso.s3.title":"Desarrollo el bot","proceso.s3.desc":"Construyo tu bot con código limpio y base de datos propia, con avances y consultas durante el proceso.",
+    "proceso.s4.title":"Entrega y soporte","proceso.s4.desc":"Recibís el bot instalado y configurado, con 3 meses de soporte incluido para corregir cualquier error.",
+    "precios.eyebrow":"Inversión","precios.title":"Precios","precios.subtitle":"Rangos orientativos según la complejidad. El valor final siempre se acuerda antes de empezar.","precios.consultar":"Consultar",
+    "precios.p1.tag":"Ayuda / consultas","precios.p1.desc":"Ayuda o consultas sobre bots ya creados, además de parches puntuales.","precios.p1.f1":"Diagnóstico y ayuda técnica","precios.p1.f2":"Parches y correcciones puntuales",
+    "precios.p2.tag":"Bots chicos","precios.p2.desc":"Un sistema único: economía, moderación u otro, bien resuelto.","precios.p2.f1":"Un sistema principal","precios.p2.f2":"Entrega rápida",
+    "precios.p3.tag":"Bots medianos","precios.p3.desc":"Bot con 3 sistemas diferentes conectados entre sí.","precios.p3.f1":"3 sistemas integrados","precios.p3.f2":"Base de datos propia","precios.p3.f3":"Soporte de 3 meses",
+    "precios.p4.tag":"Bots grandes","precios.p4.desc":"4 o más sistemas junto a IA: RPG, combate, narrativa, paneles propios.","precios.p4.f1":"4+ sistemas integrados","precios.p4.f2":"Incluye integración con IA",
+    "precios.addonIA.title":"Agregar IA a un bot","precios.addonIA.desc":"Ya sea un bot creado o por crear: se suma <span style=\"color:var(--text)\">+$4 USD</span> al precio final.",
+    "precios.addonDash.title":"Dashboard web funcional","precios.addonDash.desc":"Panel web para gestionar tu bot desde el navegador: se suma <span style=\"color:var(--text)\">+$1 USD</span> al precio final.",
+    "precios.nota":"El precio final depende de la complejidad, cantidad de funciones y tiempo de desarrollo del bot.",
+    "incluye.eyebrow":"Todo resuelto","incluye.title":"¿Qué incluye?","incluye.subtitle":"Cada proyecto se entrega listo para usar, no solo el código.",
+    "incluye.i1.title":"Código limpio","incluye.i1.desc":"Organizado, comentado y fácil de mantener o ampliar más adelante.",
+    "incluye.i2.title":"Base de datos","incluye.i2.desc":"Persistencia propia para que ningún dato se pierda al reiniciar el bot.",
+    "incluye.i3.title":"Configuración","incluye.i3.desc":"Ajustado a los roles, canales y reglas específicas de tu servidor.",
+    "incluye.i4.title":"Instalación","incluye.i4.desc":"Me encargo de que el bot quede online y funcionando en tu servidor.",
+    "incluye.i5.title":"Soporte 3 meses","incluye.i5.desc":"Acompañamiento después de la entrega para dudas o ajustes.",
+    "incluye.i6.title":"Corrección de errores","incluye.i6.desc":"Si algo falla, lo reviso y lo soluciono sin costo dentro del soporte.",
+    "portfolio.eyebrow":"Trabajos","portfolio.title":"Portfolio","portfolio.subtitle":"Capturas, clips y detalles de bots que ya entregué.",
+    "portfolio.adminMode":"Modo admin","portfolio.newPost":"Nueva publicación","portfolio.loading":"Cargando publicaciones…","portfolio.empty":"Todavía no hay publicaciones en el portfolio.",
+    "adminModal.title":"Acceso admin","adminModal.desc":"Ingresá la contraseña para publicar en el portfolio.","adminModal.placeholder":"Contraseña","adminModal.error":"Contraseña incorrecta.",
+    "postModal.title":"Nueva publicación","postModal.labelTitle":"Título","postModal.phTitle":"Ej: Bot RPG para servidor de anime",
+    "postModal.labelDesc":"Descripción","postModal.phDesc":"Contá de qué se trata este proyecto",
+    "postModal.labelImg":"Foto (opcional)","postModal.labelVid":"Video (opcional, pegá un link de YouTube o un .mp4)","postModal.phVid":"https://...","postModal.error":"Completá al menos el título.",
+    "common.cancel":"Cancelar","common.enter":"Entrar","common.publish":"Publicar",
+    "comentarios.eyebrow":"Opiniones","comentarios.title":"Comentarios y recomendaciones","comentarios.subtitle":"Dejá tu recomendación. Todos pueden verla, siempre.",
+    "comentarios.phName":"Tu nombre o usuario de Discord","comentarios.phMsg":"Contá tu experiencia con el bot o el servicio","comentarios.error":"Completá tu nombre y comentario.","comentarios.submit":"Publicar comentario",
+    "comentarios.loading":"Cargando comentarios…","comentarios.empty":"Sé el primero en dejar una recomendación.",
+    "terminos.eyebrow":"Reglas claras","terminos.title":"Términos y condiciones","terminos.subtitle":"Para que ambas partes sepamos exactamente qué esperar.",
+    "terminos.t1":"El presupuesto se acuerda <span style=\"color:var(--text)\">antes de comenzar</span> el desarrollo.",
+    "terminos.t2":"El desarrollo puede tardar <span style=\"color:var(--text)\">entre algunos días y varias semanas</span>, según la complejidad del proyecto.",
+    "terminos.t3":"Si existe algún retraso, <span style=\"color:var(--text)\">el cliente es informado</span> con anticipación.",
+    "terminos.t4":"Incluye <span style=\"color:var(--text)\">soporte durante 3 meses</span> para corregir errores del bot.",
+    "terminos.t5":"Las <span style=\"color:var(--text)\">funciones nuevas</span> pedidas después de la entrega pueden tener un costo adicional.",
+    "terminos.t6":"No hay reembolsos una vez <span style=\"color:var(--text)\">iniciado el desarrollo</span>, salvo acuerdo entre ambas partes.",
+    "terminos.t7":"El <span style=\"color:var(--text)\">hosting del bot es responsabilidad del cliente</span>: lo contrata por su cuenta, no está incluido ni administrado por Ranaris.",
+    "faq.eyebrow":"Dudas frecuentes","faq.title":"Preguntas frecuentes",
+    "faq.q1":"¿El bot funciona 24/7?","faq.a1":"Sí, siempre que esté alojado en un hosting activo. Te oriento sobre las opciones disponibles según tu presupuesto.",
+    "faq.q2":"¿Necesito contratar hosting?","faq.a2":"Sí, el bot necesita un servidor donde ejecutarse 24/7. El hosting lo contratás vos por tu cuenta; yo te oriento sobre opciones económicas y te ayudo con la instalación.",
+    "faq.q3":"¿Hacés bots totalmente personalizados?","faq.a3":"Sí, es una de mis especialidades: sistemas de RPG, combate, economía o narrativa con IA construidos desde cero para tu servidor.",
+    "faq.q4":"¿Qué tecnologías usás?","faq.a4":"Trabajo principalmente con Python (discord.py) y JavaScript (discord.js), bases de datos SQLite e integración de IA para sistemas narrativos.",
+    "faq.q5":"¿Cuánto tarda el desarrollo?","faq.a5":"Depende de la complejidad: desde unos pocos días para bots sencillos hasta varias semanas para sistemas avanzados a medida.",
+    "contacto.eyebrow":"Empecemos","contacto.title":"¿Listo para darle vida<br class=\"hidden sm:block\"> a tu bot?","contacto.subtitle":"Contame tu idea y te paso un presupuesto claro, sin compromiso.",
+    "footer.text":"© 2026 Ranaris Shop. Desarrollo de bots de Discord a medida."
+  },
+  en: {
+    "nav.bots":"Bots","nav.proceso":"How I work","nav.precios":"Pricing","nav.incluye":"What's included",
+    "nav.portfolio":"Portfolio","nav.comentarios":"Reviews","nav.faq":"FAQ","nav.cta":"Request a quote",
+    "hero.badge":"Custom bots, production-ready",
+    "hero.title1":"Discord bots designed to","hero.title2":"grow your community.",
+    "hero.desc":"I build custom Discord bots: moderation, economy, tickets, and AI-powered RPG systems, with clean code, a dedicated database, and real support after delivery.",
+    "hero.btnVer":"View bots","hero.tag2":"Dedicated SQLite","hero.tag3":"AI storytelling (Groq)",
+    "hero.mockUsed":" used ","hero.mockLevel":"Kaito — Level 34","hero.mockCoins":"❖ Coins","hero.mockClass":"⚔ Class","hero.mockClassVal":"Vanguard","hero.mockOnline":"bot online · 99.9% uptime",
+    "bots.eyebrow":"Catalog","bots.title":"My bots","bots.subtitle":"Four solid starting points. Each one adapts to your server's style, theme, and rules.","bots.verMas":"See more",
+    "bots.c1.tag":"Moderation","bots.c1.title":"Moderation Bot","bots.c1.desc":"Keeps your server in order with smart automod, sanctions, and configurable logs.",
+    "bots.c1.f1":"Automod for spam, links, and insults","bots.c1.f2":"Warnings, mutes, kicks, and bans","bots.c1.f3":"Configurable audit logs per channel","bots.c1.f4":"Custom filters and banned words",
+    "bots.c2.tag":"Economy","bots.c2.title":"Economy Bot","bots.c2.desc":"A full economy system with jobs, shop, and leaderboards to keep the community active.",
+    "bots.c2.f1":"Coins, jobs, and daily rewards","bots.c2.f2":"Shop, inventory, and items","bots.c2.f3":"Transfers between users","bots.c2.f4":"Leaderboards, betting, and minigames",
+    "bots.c3.tag":"Support","bots.c3.title":"Ticket Bot","bots.c3.desc":"Organized support for your server with panels, categories, and automatic transcripts.",
+    "bots.c3.f1":"Ticket panel with buttons","bots.c3.f2":"Configurable categories and staff roles","bots.c3.f3":"Automatic transcripts on close","bots.c3.f4":"Notifications and activity logs",
+    "bots.c4.tag":"Custom","bots.c4.title":"Custom Bot","bots.c4.desc":"Got a different idea? I build custom RPG systems, AI-driven storytelling, and roleplay for anime communities.",
+    "bots.c4.f1":"Combat and stats systems","bots.c4.f2":"AI-assisted storytelling","bots.c4.f3":"Own database and admin panels","bots.c4.f4":"Custom integrations and features",
+    "proceso.eyebrow":"Process","proceso.title":"How I work","proceso.subtitle":"Four steps, no detours, with clear communication from start to finish.",
+    "proceso.s1.title":"Tell me your idea","proceso.s1.desc":"You explain what your server needs: theme, features, references. The more context, the better the proposal.",
+    "proceso.s2.title":"We agree on the budget","proceso.s2.desc":"Once the idea is clear, we define scope, timeline, and final price before writing a single line of code.",
+    "proceso.s3.title":"I build the bot","proceso.s3.desc":"I build your bot with clean code and its own database, with updates and check-ins during the process.",
+    "proceso.s4.title":"Delivery and support","proceso.s4.desc":"You get the bot installed and configured, with 3 months of support included to fix any bugs.",
+    "precios.eyebrow":"Investment","precios.title":"Pricing","precios.subtitle":"Ballpark ranges based on complexity. The final price is always agreed before starting.","precios.consultar":"Ask",
+    "precios.p1.tag":"Help / questions","precios.p1.desc":"Help or questions about existing bots, plus one-off patches.","precios.p1.f1":"Diagnosis and technical help","precios.p1.f2":"Patches and one-off fixes",
+    "precios.p2.tag":"Small bots","precios.p2.desc":"A single system: economy, moderation, or other, well built.","precios.p2.f1":"One main system","precios.p2.f2":"Fast delivery",
+    "precios.p3.tag":"Medium bots","precios.p3.desc":"Bot with 3 different systems connected together.","precios.p3.f1":"3 integrated systems","precios.p3.f2":"Own database","precios.p3.f3":"3 months of support",
+    "precios.p4.tag":"Large bots","precios.p4.desc":"4+ systems plus AI: RPG, combat, storytelling, custom panels.","precios.p4.f1":"4+ integrated systems","precios.p4.f2":"Includes AI integration",
+    "precios.addonIA.title":"Add AI to a bot","precios.addonIA.desc":"Whether it's an existing bot or a new one: adds <span style=\"color:var(--text)\">+$4 USD</span> to the final price.",
+    "precios.addonDash.title":"Functional web dashboard","precios.addonDash.desc":"A web panel to manage your bot from the browser: adds <span style=\"color:var(--text)\">+$1 USD</span> to the final price.",
+    "precios.nota":"The final price depends on complexity, number of features, and development time.",
+    "incluye.eyebrow":"All handled","incluye.title":"What's included?","incluye.subtitle":"Every project is delivered ready to use, not just the code.",
+    "incluye.i1.title":"Clean code","incluye.i1.desc":"Organized, commented, and easy to maintain or extend later on.",
+    "incluye.i2.title":"Database","incluye.i2.desc":"Its own persistence so no data is lost when the bot restarts.",
+    "incluye.i3.title":"Configuration","incluye.i3.desc":"Adjusted to your server's specific roles, channels, and rules.",
+    "incluye.i4.title":"Installation","incluye.i4.desc":"I make sure the bot goes online and works on your server.",
+    "incluye.i5.title":"3 months of support","incluye.i5.desc":"Follow-up after delivery for questions or adjustments.",
+    "incluye.i6.title":"Bug fixes","incluye.i6.desc":"If something breaks, I review and fix it at no cost within support.",
+    "portfolio.eyebrow":"Work","portfolio.title":"Portfolio","portfolio.subtitle":"Screenshots, clips, and details from bots I've already delivered.",
+    "portfolio.adminMode":"Admin mode","portfolio.newPost":"New post","portfolio.loading":"Loading posts…","portfolio.empty":"No portfolio posts yet.",
+    "adminModal.title":"Admin access","adminModal.desc":"Enter the password to post to the portfolio.","adminModal.placeholder":"Password","adminModal.error":"Incorrect password.",
+    "postModal.title":"New post","postModal.labelTitle":"Title","postModal.phTitle":"E.g.: RPG bot for an anime server",
+    "postModal.labelDesc":"Description","postModal.phDesc":"Tell us what this project is about",
+    "postModal.labelImg":"Photo (optional)","postModal.labelVid":"Video (optional, paste a YouTube link or a .mp4)","postModal.phVid":"https://...","postModal.error":"Fill in at least the title.",
+    "common.cancel":"Cancel","common.enter":"Enter","common.publish":"Publish",
+    "comentarios.eyebrow":"Reviews","comentarios.title":"Comments and recommendations","comentarios.subtitle":"Leave your recommendation. Everyone can always see it.",
+    "comentarios.phName":"Your name or Discord username","comentarios.phMsg":"Tell us about your experience with the bot or the service","comentarios.error":"Fill in your name and comment.","comentarios.submit":"Post comment",
+    "comentarios.loading":"Loading comments…","comentarios.empty":"Be the first to leave a recommendation.",
+    "terminos.eyebrow":"Clear rules","terminos.title":"Terms and conditions","terminos.subtitle":"So both sides know exactly what to expect.",
+    "terminos.t1":"The budget is agreed <span style=\"color:var(--text)\">before</span> development starts.",
+    "terminos.t2":"Development can take <span style=\"color:var(--text)\">anywhere from a few days to several weeks</span>, depending on the project's complexity.",
+    "terminos.t3":"If there's any delay, <span style=\"color:var(--text)\">the client is notified</span> in advance.",
+    "terminos.t4":"Includes <span style=\"color:var(--text)\">3 months of support</span> to fix bot errors.",
+    "terminos.t5":"New features requested after delivery may have an <span style=\"color:var(--text)\">additional cost</span>.",
+    "terminos.t6":"No refunds once <span style=\"color:var(--text)\">development has started</span>, unless agreed by both parties.",
+    "terminos.t7":"<span style=\"color:var(--text)\">Bot hosting is the client's responsibility</span>: it's hired independently, not included or managed by Ranaris.",
+    "faq.eyebrow":"Common questions","faq.title":"Frequently asked questions",
+    "faq.q1":"Does the bot run 24/7?","faq.a1":"Yes, as long as it's hosted on active hosting. I'll guide you through the options based on your budget.",
+    "faq.q2":"Do I need to get hosting?","faq.a2":"Yes, the bot needs a server to run 24/7. You hire the hosting yourself; I guide you toward affordable options and help with installation.",
+    "faq.q3":"Do you build fully custom bots?","faq.a3":"Yes, it's one of my specialties: RPG, combat, economy, or AI-driven storytelling systems built from scratch for your server.",
+    "faq.q4":"What technologies do you use?","faq.a4":"I mainly work with Python (discord.py) and JavaScript (discord.js), SQLite databases, and AI integration for narrative systems.",
+    "faq.q5":"How long does development take?","faq.a5":"It depends on complexity: from a few days for simple bots to several weeks for advanced custom systems.",
+    "contacto.eyebrow":"Let's start","contacto.title":"Ready to bring<br class=\"hidden sm:block\"> your bot to life?","contacto.subtitle":"Tell me your idea and I'll give you a clear, no-obligation quote.",
+    "footer.text":"© 2026 Ranaris Shop. Custom Discord bot development."
+  }
+};
+
+function detectLang(){
+  const saved = localStorage.getItem('ranaris_lang');
+  if (saved === 'es' || saved === 'en') return saved;
+  const nav = (navigator.language || navigator.userLanguage || 'es').toLowerCase();
+  return nav.startsWith('es') ? 'es' : 'en';
+}
+
+let currentLang = detectLang();
+
+function applyLang(lang){
+  currentLang = lang;
+  document.documentElement.setAttribute('lang', lang);
+  const dict = I18N[lang];
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    if (dict[key] !== undefined) el.innerHTML = dict[key];
+  });
+  document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+    const key = el.getAttribute('data-i18n-placeholder');
+    if (dict[key] !== undefined) el.setAttribute('placeholder', dict[key]);
+  });
+  document.querySelectorAll('.lang-btn').forEach(btn => {
+    btn.classList.toggle('active', btn.getAttribute('data-lang') === lang);
+  });
+  localStorage.setItem('ranaris_lang', lang);
+}
+
+document.querySelectorAll('.lang-btn').forEach(btn => {
+  btn.addEventListener('click', () => applyLang(btn.getAttribute('data-lang')));
+});
+
+applyLang(currentLang);
 
 // nav scroll state
 const nav = document.getElementById('nav');
@@ -895,7 +1090,9 @@ document.querySelectorAll('.ver-mas').forEach(btn => {
     hiddenItems.forEach(li => li.classList.toggle('hidden', expanded));
     btn.setAttribute('data-expanded', String(!expanded));
     btn.querySelector('.chev').style.transform = expanded ? 'rotate(0deg)' : 'rotate(180deg)';
-    btn.childNodes[0].textContent = expanded ? 'Ver más ' : 'Ver menos ';
+    const label = btn.querySelector('span');
+    const dict = I18N[currentLang];
+    label.textContent = expanded ? dict['bots.verMas'] : (currentLang === 'es' ? 'Ver menos' : 'See less');
   });
 });
 
@@ -942,6 +1139,15 @@ function timeAgoEs(iso){
   const d = new Date(iso);
   const diff = Math.max(0, Date.now() - d.getTime());
   const mins = Math.floor(diff/60000);
+  if (currentLang === 'en'){
+    if (mins < 1) return 'just now';
+    if (mins < 60) return `${mins} min ago`;
+    const hrs = Math.floor(mins/60);
+    if (hrs < 24) return `${hrs} h ago`;
+    const days = Math.floor(hrs/24);
+    if (days < 30) return `${days} d ago`;
+    return d.toLocaleDateString('en-US', { day:'numeric', month:'short', year:'numeric' });
+  }
   if (mins < 1) return 'recién';
   if (mins < 60) return `hace ${mins} min`;
   const hrs = Math.floor(mins/60);
@@ -1001,7 +1207,8 @@ function renderPostMedia(post){
 }
 
 async function loadPortfolio(){
-  portfolioStatus.textContent = 'Cargando publicaciones…';
+  portfolioStatus.textContent = I18N[currentLang]['portfolio.loading'];
+  portfolioStatus.classList.remove('hidden');
   portfolioGrid.innerHTML = '';
   portfolioEmpty.classList.add('hidden');
   try{
@@ -1026,6 +1233,7 @@ async function loadPortfolio(){
       portfolioEmpty.classList.remove('hidden');
       return;
     }
+    const deleteLabel = currentLang === 'en' ? 'Delete' : 'Eliminar';
     portfolioGrid.innerHTML = posts.map(post => `
       <article class="card overflow-hidden" data-post-id="${escapeHTML(post.id)}">
         <div class="overflow-hidden">${renderPostMedia(post)}</div>
@@ -1034,7 +1242,7 @@ async function loadPortfolio(){
           ${post.description ? `<p class="text-sm leading-relaxed mb-3" style="color:var(--muted)">${escapeHTML(post.description)}</p>` : ''}
           <div class="flex items-center justify-between">
             <span class="text-xs font-mono" style="color:var(--muted-2)">${timeAgoEs(post.createdAt)}</span>
-            ${isAdmin ? `<button class="delete-post-btn text-xs font-semibold flex items-center gap-1" style="color:#f87171" data-id="${escapeHTML(post.id)}"><i data-lucide="trash-2" style="width:13px;height:13px"></i>Eliminar</button>` : ''}
+            ${isAdmin ? `<button class="delete-post-btn text-xs font-semibold flex items-center gap-1" style="color:#f87171" data-id="${escapeHTML(post.id)}"><i data-lucide="trash-2" style="width:13px;height:13px"></i>${deleteLabel}</button>` : ''}
           </div>
         </div>
       </article>
@@ -1044,13 +1252,15 @@ async function loadPortfolio(){
       btn.addEventListener('click', () => deletePost(btn.getAttribute('data-id')));
     });
   }catch(e){
-    portfolioStatus.textContent = 'No se pudieron cargar las publicaciones.';
+    portfolioStatus.textContent = currentLang === 'en' ? 'Could not load posts.' : 'No se pudieron cargar las publicaciones.';
+    portfolioStatus.classList.remove('hidden');
   }
 }
 
 async function deletePost(id){
   if (!isAdmin) return;
-  if (!confirm('¿Eliminar esta publicación?')) return;
+  const confirmMsg = currentLang === 'en' ? 'Delete this post?' : '¿Eliminar esta publicación?';
+  if (!confirm(confirmMsg)) return;
   try{
     let idx;
     try{ idx = await window.storage.get('portfolio:index', true); }catch(e){ idx = null; }
@@ -1060,12 +1270,12 @@ async function deletePost(id){
     await window.storage.delete('portfolio:post:' + id, true);
     loadPortfolio();
   }catch(e){
-    alert('Ocurrió un error al eliminar la publicación.');
+    alert(currentLang === 'en' ? 'An error occurred while deleting the post.' : 'Ocurrió un error al eliminar la publicación.');
   }
 }
 
 function updateAdminUI(){
-  adminToggleLabel.textContent = isAdmin ? 'Salir de admin' : 'Modo admin';
+  adminToggleLabel.textContent = isAdmin ? (currentLang === 'en' ? 'Exit admin' : 'Salir de admin') : I18N[currentLang]['portfolio.adminMode'];
   adminToggleBtn.querySelector('i')?.setAttribute('data-lucide', isAdmin ? 'lock-open' : 'lock');
   newPostBtn.classList.toggle('hidden', !isAdmin);
   lucide.createIcons();
@@ -1117,7 +1327,7 @@ postSubmitBtn.addEventListener('click', async () => {
   if (!title){ postError.classList.remove('hidden'); return; }
   postError.classList.add('hidden');
   postSubmitBtn.disabled = true;
-  postSubmitBtn.textContent = 'Publicando…';
+  postSubmitBtn.textContent = currentLang === 'en' ? 'Publishing…' : 'Publicando…';
   try{
     let imageData = null;
     const file = postImageFile.files[0];
@@ -1139,10 +1349,10 @@ postSubmitBtn.addEventListener('click', async () => {
     closeModal(postModal);
     loadPortfolio();
   }catch(e){
-    alert('Ocurrió un error al publicar. Probá con una imagen más liviana.');
+    alert(currentLang === 'en' ? 'An error occurred while publishing. Try a lighter image.' : 'Ocurrió un error al publicar. Probá con una imagen más liviana.');
   }finally{
     postSubmitBtn.disabled = false;
-    postSubmitBtn.textContent = 'Publicar';
+    postSubmitBtn.textContent = I18N[currentLang]['common.publish'];
   }
 });
 
@@ -1156,7 +1366,8 @@ const commentError = document.getElementById('commentError');
 const commentSubmitBtn = document.getElementById('commentSubmitBtn');
 
 async function loadComments(){
-  commentsStatus.textContent = 'Cargando comentarios…';
+  commentsStatus.textContent = I18N[currentLang]['comentarios.loading'];
+  commentsStatus.classList.remove('hidden');
   commentsList.innerHTML = '';
   commentsEmpty.classList.add('hidden');
   try{
@@ -1191,7 +1402,8 @@ async function loadComments(){
       </div>
     `).join('');
   }catch(e){
-    commentsStatus.textContent = 'No se pudieron cargar los comentarios.';
+    commentsStatus.textContent = currentLang === 'en' ? 'Could not load comments.' : 'No se pudieron cargar los comentarios.';
+    commentsStatus.classList.remove('hidden');
   }
 }
 
@@ -1202,7 +1414,7 @@ commentSubmitBtn.addEventListener('click', async () => {
   commentError.classList.add('hidden');
   commentSubmitBtn.disabled = true;
   const original = commentSubmitBtn.innerHTML;
-  commentSubmitBtn.innerHTML = 'Publicando…';
+  commentSubmitBtn.innerHTML = currentLang === 'en' ? 'Publishing…' : 'Publicando…';
   try{
     const comment = {
       id: 'c_' + Date.now() + '_' + Math.random().toString(36).slice(2,8),
@@ -1218,7 +1430,7 @@ commentSubmitBtn.addEventListener('click', async () => {
     commentName.value = ''; commentMessage.value = '';
     loadComments();
   }catch(e){
-    alert('Ocurrió un error al publicar el comentario.');
+    alert(currentLang === 'en' ? 'An error occurred while posting the comment.' : 'Ocurrió un error al publicar el comentario.');
   }finally{
     commentSubmitBtn.disabled = false;
     commentSubmitBtn.innerHTML = original;

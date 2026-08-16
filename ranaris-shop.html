@@ -15,19 +15,19 @@
 
 <style>
 :root{
-  --bg:#050508;
-  --bg-soft:#08080d;
-  --surface:#0f0f16;
-  --surface-2:#14141d;
+  --bg:#07070c;
+  --bg-soft:#0a0a12;
+  --surface:#101018;
+  --surface-2:#161620;
   --border:rgba(255,255,255,0.08);
-  --border-strong:rgba(255,255,255,0.14);
+  --border-strong:rgba(255,255,255,0.16);
   --text:#f2f2f7;
   --muted:#9ca0ae;
   --muted-2:#6b7080;
-  --blue:#1E6B49;
-  --violet:#4CAF7D;
-  --grad: linear-gradient(135deg,#1E6B49 0%, #4CAF7D 100%);
-  --grad-soft: linear-gradient(135deg, rgba(30,107,73,0.18), rgba(76,175,125,0.15));
+  --blue:#6D28D9;
+  --violet:#06B6D4;
+  --grad: linear-gradient(135deg,#6D28D9 0%, #06B6D4 100%);
+  --grad-soft: linear-gradient(135deg, rgba(109,40,217,0.18), rgba(6,182,212,0.15));
 }
 
 *{box-sizing:border-box;}
@@ -45,7 +45,7 @@ h1,h2,h3,h4,.font-display{
 }
 .font-mono{font-family:'JetBrains Mono',monospace;}
 
-::selection{ background:rgba(76,175,125,0.35); color:#fff; }
+::selection{ background:rgba(6,182,212,0.35); color:#fff; }
 
 /* focus visibility */
 a:focus-visible, button:focus-visible, summary:focus-visible{
@@ -57,8 +57,8 @@ a:focus-visible, button:focus-visible, summary:focus-visible{
 /* scrollbar */
 ::-webkit-scrollbar{ width:10px; }
 ::-webkit-scrollbar-track{ background:var(--bg); }
-::-webkit-scrollbar-thumb{ background:#22222e; border-radius:10px; }
-::-webkit-scrollbar-thumb:hover{ background:#33334a; }
+::-webkit-scrollbar-thumb{ background:#1c1c28; border-radius:10px; }
+::-webkit-scrollbar-thumb:hover{ background:#2a2a3c; }
 
 /* ---------- backgrounds ---------- */
 .grain{
@@ -111,17 +111,18 @@ a:focus-visible, button:focus-visible, summary:focus-visible{
 .card{
   background:linear-gradient(180deg, var(--surface), var(--surface-2));
   border:1px solid var(--border);
-  border-radius:20px;
+  border-radius:22px;
+  box-shadow:0 1px 0 0 rgba(255,255,255,0.03) inset, 0 24px 60px -42px rgba(0,0,0,0.75);
   transition:transform .35s cubic-bezier(.16,.8,.28,1), border-color .35s ease, box-shadow .35s ease, background .35s ease;
 }
 .card:hover{
   transform:translateY(-6px);
   border-color:var(--border-strong);
-  box-shadow:0 20px 60px -20px rgba(30,107,73,0.3), 0 8px 30px -10px rgba(76,175,125,0.22);
+  box-shadow:0 20px 60px -20px rgba(109,40,217,0.32), 0 8px 30px -10px rgba(6,182,212,0.24);
 }
 .card-glow{ position:relative; isolation:isolate; }
 .card-glow::before{
-  content:""; position:absolute; inset:-1px; z-index:-1; border-radius:21px; opacity:0;
+  content:""; position:absolute; inset:-1px; z-index:-1; border-radius:23px; opacity:0;
   background:var(--grad); transition:opacity .35s ease;
 }
 .card-glow:hover::before{ opacity:0.5; filter:blur(10px); }
@@ -150,9 +151,9 @@ a:focus-visible, button:focus-visible, summary:focus-visible{
 .btn:active{ transform:scale(0.97); }
 .btn-primary{
   background:var(--grad); color:#fff;
-  box-shadow:0 8px 30px -8px rgba(76,175,125,0.55);
+  box-shadow:0 8px 30px -8px rgba(6,182,212,0.5);
 }
-.btn-primary:hover{ box-shadow:0 12px 40px -6px rgba(76,175,125,0.75); transform:translateY(-2px); }
+.btn-primary:hover{ box-shadow:0 12px 40px -6px rgba(6,182,212,0.7); transform:translateY(-2px); }
 .btn-primary::after{
   content:""; position:absolute; inset:0; border-radius:inherit; opacity:0;
   background:linear-gradient(120deg, transparent 30%, rgba(255,255,255,0.4) 50%, transparent 70%);
@@ -165,7 +166,7 @@ a:focus-visible, button:focus-visible, summary:focus-visible{
 .btn-ghost{
   background:rgba(255,255,255,0.03); color:var(--text); border:1px solid var(--border-strong);
 }
-.btn-ghost:hover{ background:rgba(255,255,255,0.07); border-color:rgba(255,255,255,0.25); transform:translateY(-2px); }
+.btn-ghost:hover{ background:rgba(255,255,255,0.07); border-color:rgba(255,255,255,0.28); transform:translateY(-2px); }
 
 .chip{
   border:1px solid var(--border-strong); background:rgba(255,255,255,0.03);
@@ -174,9 +175,9 @@ a:focus-visible, button:focus-visible, summary:focus-visible{
 
 /* nav */
 #nav{ transition:background .35s ease, border-color .35s ease, backdrop-filter .35s ease; }
-#nav.scrolled{ background:rgba(5,5,8,0.72); backdrop-filter:blur(14px); border-bottom:1px solid var(--border); }
+#nav.scrolled{ background:rgba(7,7,12,0.75); backdrop-filter:blur(14px); border-bottom:1px solid var(--border); }
 
-.navlink{ position:relative; color:var(--muted); transition:color .25s ease; }
+.navlink{ position:relative; color:var(--muted); transition:color .25s ease; white-space:nowrap; }
 .navlink::after{
   content:""; position:absolute; left:0; bottom:-4px; width:0%; height:1.5px; background:var(--grad);
   transition:width .25s ease;
@@ -187,7 +188,7 @@ a:focus-visible, button:focus-visible, summary:focus-visible{
 /* timeline */
 .timeline-line{ background:linear-gradient(180deg, var(--blue), var(--violet)); }
 .step-dot{
-  background:var(--grad); box-shadow:0 0 0 6px rgba(76,175,125,0.14), 0 0 24px rgba(76,175,125,0.5);
+  background:var(--grad); box-shadow:0 0 0 6px rgba(6,182,212,0.14), 0 0 24px rgba(6,182,212,0.5);
 }
 
 /* pricing */
@@ -212,8 +213,8 @@ a:focus-visible, button:focus-visible, summary:focus-visible{
 
 /* discord mock */
 .discord-mock{
-  background:#0a100c; border:1px solid var(--border-strong); border-radius:18px;
-  box-shadow:0 30px 90px -25px rgba(30,107,73,0.4), 0 10px 40px -15px rgba(76,175,125,0.3);
+  background:#0b0b14; border:1px solid var(--border-strong); border-radius:18px;
+  box-shadow:0 30px 90px -25px rgba(109,40,217,0.45), 0 10px 40px -15px rgba(6,182,212,0.32);
 }
 .dot{ width:10px; height:10px; border-radius:50%; }
 .blink{ animation:blink 1.4s step-end infinite; }
@@ -246,7 +247,7 @@ a:focus-visible, button:focus-visible, summary:focus-visible{
       <span class="font-display font-bold text-lg tracking-tight text-grad">Ranaris Shop</span>
     </a>
 
-    <nav class="hidden md:flex items-center gap-9 font-mono text-sm">
+    <nav class="hidden xl:flex items-center gap-7 font-mono text-sm">
       <a href="#bots" class="navlink" data-i18n="nav.bots">Bots</a>
       <a href="#proceso" class="navlink" data-i18n="nav.proceso">Cómo trabajo</a>
       <a href="#precios" class="navlink" data-i18n="nav.precios">Precios</a>
@@ -256,7 +257,7 @@ a:focus-visible, button:focus-visible, summary:focus-visible{
       <a href="#faq" class="navlink" data-i18n="nav.faq">FAQ</a>
     </nav>
 
-    <div class="hidden md:flex items-center gap-4">
+    <div class="hidden xl:flex items-center gap-4">
       <div class="lang-switch">
         <button type="button" class="lang-btn" data-lang="es">ES</button>
         <button type="button" class="lang-btn" data-lang="en">EN</button>
@@ -267,7 +268,7 @@ a:focus-visible, button:focus-visible, summary:focus-visible{
       </a>
     </div>
 
-    <div class="md:hidden flex items-center gap-3">
+    <div class="xl:hidden flex items-center gap-3">
       <div class="lang-switch">
         <button type="button" class="lang-btn" data-lang="es">ES</button>
         <button type="button" class="lang-btn" data-lang="en">EN</button>
@@ -278,8 +279,8 @@ a:focus-visible, button:focus-visible, summary:focus-visible{
     </div>
   </div>
 
-  <div id="mobileMenu" class="mobile-menu max-h-0 opacity-0 md:hidden border-t" style="border-color:var(--border)">
-    <div class="px-6 py-6 flex flex-col gap-5 font-mono text-sm" style="background:rgba(5,5,8,0.96)">
+  <div id="mobileMenu" class="mobile-menu max-h-0 opacity-0 xl:hidden border-t" style="border-color:var(--border)">
+    <div class="px-6 py-6 flex flex-col gap-5 font-mono text-sm" style="background:rgba(7,7,12,0.97)">
       <a href="#bots" class="navlink" data-i18n="nav.bots">Bots</a>
       <a href="#proceso" class="navlink" data-i18n="nav.proceso">Cómo trabajo</a>
       <a href="#precios" class="navlink" data-i18n="nav.precios">Precios</a>
@@ -295,8 +296,8 @@ a:focus-visible, button:focus-visible, summary:focus-visible{
 <!-- ============ HERO ============ -->
 <section id="top" class="relative pt-40 pb-28 md:pt-52 md:pb-36 px-6 overflow-hidden">
   <div class="absolute inset-0 grid-overlay"></div>
-  <div class="nova-glow blob" style="width:520px;height:520px; background:radial-gradient(circle, rgba(30,107,73,0.4), transparent 70%); top:-160px; left:-120px;"></div>
-  <div class="nova-glow blob-2" style="width:560px;height:560px; background:radial-gradient(circle, rgba(76,175,125,0.3), transparent 70%); top:-100px; right:-160px;"></div>
+  <div class="nova-glow blob" style="width:520px;height:520px; background:radial-gradient(circle, rgba(109,40,217,0.4), transparent 70%); top:-160px; left:-120px;"></div>
+  <div class="nova-glow blob-2" style="width:560px;height:560px; background:radial-gradient(circle, rgba(6,182,212,0.32), transparent 70%); top:-100px; right:-160px;"></div>
   <div class="particles" id="heroParticles"></div>
 
   <div class="relative max-w-7xl mx-auto grid lg:grid-cols-2 gap-16 items-center">
@@ -834,7 +835,7 @@ a:focus-visible, button:focus-visible, summary:focus-visible{
 
 <!-- ============ CONTACTO ============ -->
 <section id="contacto" class="relative py-28 md:py-40 px-6 overflow-hidden">
-  <div class="nova-glow blob" style="width:600px;height:600px; background:radial-gradient(circle, rgba(76,175,125,0.3), transparent 70%); bottom:-260px; left:50%; transform:translateX(-50%);"></div>
+  <div class="nova-glow blob" style="width:600px;height:600px; background:radial-gradient(circle, rgba(6,182,212,0.3), transparent 70%); bottom:-260px; left:50%; transform:translateX(-50%);"></div>
   <div class="relative max-w-3xl mx-auto text-center">
     <p class="reveal section-eyebrow mb-5" data-i18n="contacto.eyebrow">Empecemos</p>
     <h2 class="reveal reveal-delay-1 font-display font-bold text-3xl sm:text-5xl mb-6 leading-tight" data-i18n="contacto.title">
@@ -1106,7 +1107,7 @@ for (let i = 0; i < particleCount; i++) {
   p.style.top = Math.random() * 100 + '%';
   p.style.animationDelay = (Math.random() * 6) + 's';
   p.style.animationDuration = (4 + Math.random() * 5) + 's';
-  p.style.background = Math.random() > 0.5 ? '#1E6B49' : '#4CAF7D';
+  p.style.background = Math.random() > 0.5 ? '#6D28D9' : '#06B6D4';
   particlesContainer.appendChild(p);
 }
 

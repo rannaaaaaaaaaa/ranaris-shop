@@ -1,1447 +1,311 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" data-theme="dark">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Ranaris Shop — Bots de Discord a medida</title>
-<meta name="description" content="Desarrollo bots personalizados para Discord: moderación, economía, tickets y sistemas a medida. Código limpio, soporte real.">
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-
-<script src="https://cdn.tailwindcss.com"></script>
-<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
-
+<title>Ranaris Shop — Bots de Discord hechos a mano</title>
+<meta name="description" content="Bots de Discord a medida: economía, moderación, tickets, rol y más. Con soporte después de la entrega.">
+<link rel="icon" href="data:image/png;base64,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">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Space+Grotesk:wght@500;700&family=Manrope:wght@400;500;700;800&display=swap" rel="stylesheet">
 <style>
-:root{
-  --bg:#07070c;
-  --bg-soft:#0a0a12;
-  --surface:#101018;
-  --surface-2:#161620;
-  --border:rgba(255,255,255,0.08);
-  --border-strong:rgba(255,255,255,0.16);
-  --text:#f2f2f7;
-  --muted:#9ca0ae;
-  --muted-2:#6b7080;
-  --blue:#6D28D9;
-  --violet:#06B6D4;
-  --grad: linear-gradient(135deg,#6D28D9 0%, #06B6D4 100%);
-  --grad-soft: linear-gradient(135deg, rgba(109,40,217,0.18), rgba(6,182,212,0.15));
-}
-
-*{box-sizing:border-box;}
-html{scroll-behavior:smooth;}
-body{
-  background:var(--bg);
-  color:var(--text);
-  font-family:'Inter',system-ui,sans-serif;
-  -webkit-font-smoothing:antialiased;
-  overflow-x:hidden;
-}
-h1,h2,h3,h4,.font-display{
-  font-family:'Sora',system-ui,sans-serif;
-  letter-spacing:-0.02em;
-}
-.font-mono{font-family:'JetBrains Mono',monospace;}
-
-::selection{ background:rgba(6,182,212,0.35); color:#fff; }
-
-/* focus visibility */
-a:focus-visible, button:focus-visible, summary:focus-visible{
-  outline:2px solid var(--violet);
-  outline-offset:3px;
-  border-radius:6px;
-}
-
-/* scrollbar */
-::-webkit-scrollbar{ width:10px; }
-::-webkit-scrollbar-track{ background:var(--bg); }
-::-webkit-scrollbar-thumb{ background:#1c1c28; border-radius:10px; }
-::-webkit-scrollbar-thumb:hover{ background:#2a2a3c; }
-
-/* ---------- backgrounds ---------- */
-.grain{
-  position:fixed; inset:0; pointer-events:none; z-index:1; opacity:0.035; mix-blend-mode:overlay;
-  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-}
-.grid-overlay{
-  position:absolute; inset:0;
-  background-image:
-    linear-gradient(rgba(255,255,255,0.035) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255,255,255,0.035) 1px, transparent 1px);
-  background-size:64px 64px;
-  mask-image:radial-gradient(ellipse 80% 55% at 50% 0%, black 40%, transparent 90%);
-}
-.nova-glow{
-  position:absolute; border-radius:50%; filter:blur(90px); pointer-events:none;
-}
-.blob{ animation:float 16s ease-in-out infinite; }
-.blob-2{ animation:float 20s ease-in-out infinite reverse; }
-@keyframes float{
-  0%,100%{ transform:translate(0,0) scale(1); }
-  33%{ transform:translate(30px,-40px) scale(1.08); }
-  66%{ transform:translate(-25px,25px) scale(0.95); }
-}
-
-.particles{ position:absolute; inset:0; overflow:hidden; pointer-events:none; }
-.particle{
-  position:absolute; width:3px; height:3px; border-radius:50%;
-  background:#fff; opacity:0; animation:twinkle 6s ease-in-out infinite;
-}
-@keyframes twinkle{
-  0%,100%{ opacity:0; transform:translateY(0) scale(0.6); }
-  50%{ opacity:0.8; transform:translateY(-18px) scale(1); }
-}
-
-/* ---------- reveal on scroll ---------- */
-.reveal{ opacity:0; transform:translateY(24px); transition:opacity .7s cubic-bezier(.16,.8,.28,1), transform .7s cubic-bezier(.16,.8,.28,1); }
-.reveal.in{ opacity:1; transform:translateY(0); }
-.reveal-delay-1{ transition-delay:.08s; }
-.reveal-delay-2{ transition-delay:.16s; }
-.reveal-delay-3{ transition-delay:.24s; }
-.reveal-delay-4{ transition-delay:.32s; }
-
-@media (prefers-reduced-motion: reduce){
-  *{ animation-duration:0.001ms !important; animation-iteration-count:1 !important; transition-duration:0.001ms !important; scroll-behavior:auto !important; }
-  .reveal{ opacity:1; transform:none; }
-}
-
-/* ---------- surfaces ---------- */
-.card{
-  background:linear-gradient(180deg, var(--surface), var(--surface-2));
-  border:1px solid var(--border);
-  border-radius:22px;
-  box-shadow:0 1px 0 0 rgba(255,255,255,0.03) inset, 0 24px 60px -42px rgba(0,0,0,0.75);
-  transition:transform .35s cubic-bezier(.16,.8,.28,1), border-color .35s ease, box-shadow .35s ease, background .35s ease;
-}
-.card:hover{
-  transform:translateY(-6px);
-  border-color:var(--border-strong);
-  box-shadow:0 20px 60px -20px rgba(109,40,217,0.32), 0 8px 30px -10px rgba(6,182,212,0.24);
-}
-.card-glow{ position:relative; isolation:isolate; }
-.card-glow::before{
-  content:""; position:absolute; inset:-1px; z-index:-1; border-radius:23px; opacity:0;
-  background:var(--grad); transition:opacity .35s ease;
-}
-.card-glow:hover::before{ opacity:0.5; filter:blur(10px); }
-
-.text-grad{
-  background:var(--grad);
-  -webkit-background-clip:text; background-clip:text; color:transparent;
-}
-.border-grad{
-  position:relative; border-radius:9999px;
-}
-.border-grad::before{
-  content:""; position:absolute; inset:0; border-radius:inherit; padding:1px;
-  background:var(--grad);
-  -webkit-mask:linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-  -webkit-mask-composite:xor; mask-composite:exclude;
-  pointer-events:none;
-}
-
-/* buttons */
-.btn{
-  position:relative; display:inline-flex; align-items:center; justify-content:center; gap:.5rem;
-  font-weight:600; border-radius:12px; transition:transform .25s ease, box-shadow .25s ease, background .25s ease, border-color .25s ease;
-  white-space:nowrap;
-}
-.btn:active{ transform:scale(0.97); }
-.btn-primary{
-  background:var(--grad); color:#fff;
-  box-shadow:0 8px 30px -8px rgba(6,182,212,0.5);
-}
-.btn-primary:hover{ box-shadow:0 12px 40px -6px rgba(6,182,212,0.7); transform:translateY(-2px); }
-.btn-primary::after{
-  content:""; position:absolute; inset:0; border-radius:inherit; opacity:0;
-  background:linear-gradient(120deg, transparent 30%, rgba(255,255,255,0.4) 50%, transparent 70%);
-  background-size:200% 100%; background-position:120% 0;
-  transition:opacity .2s ease;
-}
-.btn-primary:hover::after{ opacity:1; animation:shine 1.1s ease forwards; }
-@keyframes shine{ to{ background-position:-20% 0; } }
-
-.btn-ghost{
-  background:rgba(255,255,255,0.03); color:var(--text); border:1px solid var(--border-strong);
-}
-.btn-ghost:hover{ background:rgba(255,255,255,0.07); border-color:rgba(255,255,255,0.28); transform:translateY(-2px); }
-
-.chip{
-  border:1px solid var(--border-strong); background:rgba(255,255,255,0.03);
-  border-radius:9999px; font-size:.8rem; color:var(--muted);
-}
-
+:root{--bg:#f4efe5;--bg2:#ebe4d4;--card:#fffdf8;--ink:#18150f;--mut:#6a6355;--line:#18150f;--acc:#3b7bff;--accink:#fff;--wip:#f08a00;--ok:#1f9d57;--sh:4px 4px 0 var(--line)}
+[data-theme=dark]{--bg:#12100c;--bg2:#1a1712;--card:#201c16;--ink:#f4efe5;--mut:#a79f8d;--line:#f4efe5;--sh:4px 4px 0 rgba(244,239,229,.9)}
+*{box-sizing:border-box;margin:0}html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);font:16px/1.6 'Manrope',system-ui,sans-serif;overflow-x:hidden;transition:background .3s,color .3s}
+h1,h2,h3,.disp{font-family:'Space Grotesk',sans-serif;letter-spacing:-.02em;line-height:1.05}
+a{color:inherit}.wrap{max-width:1120px;margin:0 auto;padding:0 24px}
+section{padding:96px 0}.alt{background:var(--bg2)}
+.num{font:700 13px 'Manrope';letter-spacing:.14em;text-transform:uppercase;color:var(--acc);margin-bottom:12px;display:block}
+h2{font-size:clamp(32px,5vw,52px);margin-bottom:14px}.sub{color:var(--mut);max-width:560px;margin-bottom:48px;font-size:18px}
 /* nav */
-#nav{ transition:background .35s ease, border-color .35s ease, backdrop-filter .35s ease; }
-#nav.scrolled{ background:rgba(7,7,12,0.75); backdrop-filter:blur(14px); border-bottom:1px solid var(--border); }
+header{position:fixed;top:0;left:0;right:0;z-index:50;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(10px);border-bottom:2px solid var(--line)}
+.nav{display:flex;align-items:center;justify-content:space-between;height:68px;gap:16px}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none;font:800 20px 'Space Grotesk'}
+.logo img{width:36px;height:36px;border-radius:10px;border:2px solid var(--line)}
+nav.links{display:flex;gap:22px;font-size:14px;font-weight:500}
+nav.links a{text-decoration:none;position:relative;padding:4px 0}
+nav.links a:after{content:"";position:absolute;left:0;bottom:0;height:2px;width:0;background:var(--acc);transition:width .25s}
+nav.links a:hover:after{width:100%}
+.right{display:flex;align-items:center;gap:10px}
+.lang{display:flex;border:2px solid var(--line);border-radius:999px;overflow:hidden}
+.lang button{background:none;border:0;color:var(--ink);font:700 12px 'Manrope';padding:6px 10px;cursor:pointer}
+.lang button.on{background:var(--ink);color:var(--bg)}
+.btn{display:inline-flex;align-items:center;gap:8px;font:700 15px 'Manrope';padding:12px 22px;border:2px solid var(--line);border-radius:12px;background:var(--acc);color:var(--accink);text-decoration:none;box-shadow:var(--sh);cursor:pointer;transition:transform .15s,box-shadow .15s}
+.btn:hover{transform:translate(-2px,-2px);box-shadow:6px 6px 0 var(--line)}.btn:active{transform:translate(3px,3px);box-shadow:1px 1px 0 var(--line)}
+.btn.ghost{background:var(--card);color:var(--ink)}.btn.sm{padding:8px 16px;font-size:14px}
+#burger{display:none;background:var(--card);border:2px solid var(--line);border-radius:10px;width:40px;height:40px;color:var(--ink);font-size:18px;cursor:pointer}
+@media(max-width:960px){nav.links{display:none;position:absolute;top:68px;left:0;right:0;flex-direction:column;background:var(--bg);padding:20px 24px;border-bottom:2px solid var(--line);gap:16px}nav.links.open{display:flex}#burger{display:block}.hide-m{display:none}}
+/* hero */
+.hero{padding:150px 0 70px;position:relative}
+.hero h1{font-size:clamp(44px,8vw,96px);max-width:900px}
+.hero h1 em{font-style:normal;background:var(--acc);color:var(--accink);padding:0 .15em;border-radius:12px;display:inline-block;transform:rotate(-2deg);animation:wob 4s ease-in-out infinite}
+@keyframes wob{50%{transform:rotate(1.5deg)}}
+.hero p{font-size:20px;color:var(--mut);max-width:560px;margin:26px 0 34px}
+.cta{display:flex;gap:14px;flex-wrap:wrap}
+.float{position:absolute;right:24px;top:140px;width:min(340px,34vw);height:340px;pointer-events:none}
+.float img{position:absolute;width:110px;height:110px;border-radius:24px;border:3px solid var(--line);box-shadow:var(--sh);animation:bob 5s ease-in-out infinite}
+.float img:nth-child(1){left:0;top:30px;animation-delay:0s}.float img:nth-child(2){right:0;top:0;animation-delay:-1.3s}
+.float img:nth-child(3){left:70px;bottom:0;animation-delay:-2.6s}.float img:nth-child(4){right:10px;bottom:50px;width:90px;height:90px;animation-delay:-3.4s}
+@keyframes bob{50%{transform:translateY(-14px) rotate(3deg)}}
+@media(max-width:900px){.float{display:none}}
+.marq{border-block:2px solid var(--line);background:var(--ink);color:var(--bg);overflow:hidden;white-space:nowrap;padding:14px 0;font:700 18px 'Space Grotesk'}
+.marq div{display:inline-block;animation:mq 28s linear infinite}.marq span{margin:0 26px}
+@keyframes mq{to{transform:translateX(-50%)}}
+.stats{display:flex;gap:40px;flex-wrap:wrap;margin-top:56px}.stats b{display:block;font:800 40px 'Space Grotesk'}.stats span{color:var(--mut);font-size:14px}
+/* bots */
+.group{margin-bottom:64px}.group h3{font-size:28px;display:flex;align-items:center;gap:12px;margin-bottom:22px}
+.dot{width:14px;height:14px;border-radius:50%;display:inline-block;animation:pulse 2s infinite}
+.g-ok .dot{background:var(--ok)}.g-wip .dot{background:var(--wip)}
+@keyframes pulse{0%{box-shadow:0 0 0 0 currentColor}70%{box-shadow:0 0 0 10px transparent}}
+.g-ok .dot{color:rgba(31,157,87,.6)}.g-wip .dot{color:rgba(240,138,0,.6)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:24px}
+.bot{background:var(--card);border-radius:20px;padding:24px;border:3px solid;display:flex;flex-direction:column;gap:14px;transition:transform .25s,box-shadow .25s}
+.g-ok .bot{border-color:var(--ok)}.g-wip .bot{border-color:var(--wip)}
+.g-ok .bot:hover{transform:translateY(-6px) rotate(-.6deg);box-shadow:0 10px 0 -2px var(--ok)}
+.g-wip .bot:hover{transform:translateY(-6px) rotate(.6deg);box-shadow:0 10px 0 -2px var(--wip)}
+.bh{display:flex;align-items:center;gap:14px}.bh img{width:68px;height:68px;border-radius:18px;object-fit:cover;background:var(--bg2)}
+.bh h4{font:800 22px 'Space Grotesk'}
+.pill{display:inline-block;font:700 11px 'Manrope';letter-spacing:.08em;text-transform:uppercase;padding:3px 10px;border-radius:999px;color:#fff;margin-top:4px}
+.g-ok .pill{background:var(--ok)}.g-wip .pill{background:var(--wip)}
+.bot p{color:var(--mut);font-size:15px;flex:1}.rel{font-size:13px;font-weight:700;border-top:2px dashed var(--mut);padding-top:12px;opacity:.9}
+/* servicios */
+.svc{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px}
+.box{background:var(--card);border:2px solid var(--line);border-radius:18px;padding:24px;box-shadow:var(--sh);transition:transform .2s}.box:hover{transform:translateY(-4px)}
+.box h3{font-size:22px;margin-bottom:8px}.box p{color:var(--mut);font-size:15px}.ico{font-size:28px;margin-bottom:10px;display:block}
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:20px;counter-reset:s}
+.steps .box:before{counter-increment:s;content:counter(s);display:grid;place-items:center;width:42px;height:42px;border-radius:50%;background:var(--acc);color:var(--accink);font:800 20px 'Space Grotesk';border:2px solid var(--line);margin-bottom:14px}
+/* precios */
+.price{font:800 40px 'Space Grotesk';margin:6px 0}.price small{font:500 14px 'Manrope';color:var(--mut)}
+.box ul{list-style:none;padding:0;margin-top:12px;font-size:14px}.box li{padding:3px 0}.box li:before{content:"✓ ";color:var(--ok);font-weight:700}
+.tag{font:700 12px 'Manrope';letter-spacing:.1em;text-transform:uppercase;color:var(--acc)}
+.add{margin-top:24px;display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:20px}
+.add .box{display:flex;justify-content:space-between;gap:16px;align-items:center;background:var(--bg2)}.add .price{font-size:30px;margin:0}
+.note{margin-top:22px;color:var(--mut);font-size:14px}
+/* terminos faq */
+.two{display:grid;grid-template-columns:1fr 1fr;gap:56px}@media(max-width:860px){.two{grid-template-columns:1fr}}
+.terms{list-style:none;padding:0}.terms li{padding:14px 0 14px 34px;border-bottom:2px dashed color-mix(in srgb,var(--mut) 50%,transparent);position:relative;font-size:15px}
+.terms li:before{content:"→";position:absolute;left:0;color:var(--acc);font-weight:800}
+details{background:var(--card);border:2px solid var(--line);border-radius:14px;margin-bottom:12px;padding:16px 20px;transition:box-shadow .2s}details[open]{box-shadow:var(--sh)}
+summary{font-weight:700;cursor:pointer;list-style:none;display:flex;justify-content:space-between}summary:after{content:"+";font-size:22px;line-height:1;transition:transform .2s}details[open] summary:after{transform:rotate(45deg)}
+details p{color:var(--mut);margin-top:10px;font-size:15px}
+/* comentarios */
+input,textarea{width:100%;background:var(--bg);color:var(--ink);border:2px solid var(--line);border-radius:12px;padding:12px 14px;font:inherit;margin-bottom:12px}
+.cform{max-width:640px;background:var(--card);border:2px solid var(--line);border-radius:18px;padding:24px;box-shadow:var(--sh);margin-bottom:32px}
+.cm{background:var(--card);border:2px solid var(--line);border-radius:14px;padding:16px 20px;margin-bottom:12px;max-width:640px}.cm b{font-family:'Space Grotesk'}.cm small{color:var(--mut);float:right}.cm p{color:var(--mut);font-size:15px;margin-top:4px}
+.err{color:#d33;font-size:13px;margin-bottom:10px}.hidden{display:none}
+/* contacto */
+.contact{text-align:center;background:var(--acc);color:var(--accink);border-block:2px solid var(--line)}.contact h2{font-size:clamp(36px,7vw,80px)}.contact p{font-size:20px;margin-bottom:30px;opacity:.95}
+.contact .btn{background:var(--ink);color:var(--bg);box-shadow:4px 4px 0 rgba(0,0,0,.35)}
+footer{padding:28px 0;font-size:14px;color:var(--mut)}footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+/* personalizar */
+#cz{position:fixed;right:18px;bottom:18px;z-index:60}
+#czb{width:52px;height:52px;border-radius:50%;border:2px solid var(--line);background:var(--acc);color:var(--accink);font-size:22px;cursor:pointer;box-shadow:var(--sh);transition:transform .3s}#czb:hover{transform:rotate(90deg)}
+#czp{position:absolute;right:0;bottom:64px;width:230px;background:var(--card);border:2px solid var(--line);border-radius:16px;padding:16px;box-shadow:var(--sh);display:none}#czp.open{display:block;animation:pop .2s}
+@keyframes pop{from{opacity:0;transform:translateY(8px)}}
+#czp h5{font:700 12px 'Manrope';letter-spacing:.1em;text-transform:uppercase;color:var(--mut);margin:10px 0 8px}#czp h5:first-child{margin-top:0}
+.sw{display:flex;gap:8px;flex-wrap:wrap}.sw button{width:30px;height:30px;border-radius:50%;border:2px solid var(--line);cursor:pointer}.sw button.on{outline:3px solid var(--ink);outline-offset:2px}
+.seg{display:flex;gap:6px}.seg button{flex:1;border:2px solid var(--line);background:var(--bg);color:var(--ink);border-radius:10px;padding:6px;font:700 13px 'Manrope';cursor:pointer}.seg button.on{background:var(--ink);color:var(--bg)}
+/* reveal */
+.rv{opacity:0;transform:translateY(28px);transition:opacity .7s cubic-bezier(.16,.8,.28,1),transform .7s cubic-bezier(.16,.8,.28,1)}.rv.in{opacity:1;transform:none}
+.noanim *{animation:none!important;transition:none!important}.noanim .rv{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.rv{opacity:1;transform:none}}
 
-.navlink{ position:relative; color:var(--muted); transition:color .25s ease; white-space:nowrap; }
-.navlink::after{
-  content:""; position:absolute; left:0; bottom:-4px; width:0%; height:1.5px; background:var(--grad);
-  transition:width .25s ease;
-}
-.navlink:hover{ color:var(--text); }
-.navlink:hover::after{ width:100%; }
+:root{--bg:#f6f3ec;--bg2:#ede8dc;--line:rgba(24,21,15,.16);--sh:0 14px 32px -16px rgba(24,21,15,.4)}
+[data-theme=dark]{--bg:#0f0e12;--bg2:#16151b;--card:#1c1b22;--ink:#f1eee8;--mut:#9d9aa6;--line:rgba(241,238,232,.14);--sh:0 14px 32px -16px rgba(0,0,0,.8)}
+header{border-bottom:1px solid var(--line)}.logo img{border:0}
+.btn{border:0;border-radius:999px;padding:13px 26px}.btn:hover{transform:translateY(-3px);box-shadow:0 16px 28px -12px var(--acc)}.btn:active{transform:scale(.97);box-shadow:var(--sh)}
+.btn.ghost{border:1px solid var(--line);box-shadow:none}.btn.ghost:hover{box-shadow:none;border-color:var(--ink)}
+.lang{border:1px solid var(--line)}
+.box,.cform,.cm,details,#czp{border:1px solid var(--line);border-radius:24px}.box:hover{border-color:var(--acc)}
+.cm{border-radius:18px}details{border-radius:18px}#czb{border:0}.sw button,.seg button{border:1px solid var(--line)}
+input,textarea{border:1px solid var(--line);border-radius:14px}
+.hero h1 em{background:none;color:var(--acc);padding:0;transform:none;animation:none;font-style:italic;text-decoration:underline wavy;text-decoration-thickness:3px;text-underline-offset:10px}
+.float img{border:0;border-radius:28px}
+.bot{border-radius:26px}
+.marq{border:0;background:var(--bg2);color:var(--mut)}
+.steps .box:before{border:0}
+.contact{background:var(--bg2);color:var(--ink);border:0}.contact .btn{background:var(--acc);color:#fff;box-shadow:none}
+.add .box{background:var(--card)}
 
-/* timeline */
-.timeline-line{ background:linear-gradient(180deg, var(--blue), var(--violet)); }
-.step-dot{
-  background:var(--grad); box-shadow:0 0 0 6px rgba(6,182,212,0.14), 0 0 24px rgba(6,182,212,0.5);
-}
-
-/* pricing */
-.price-card{ position:relative; }
-.price-card.featured{
-  border:1px solid transparent;
-  background:linear-gradient(var(--surface), var(--surface)) padding-box, var(--grad) border-box;
-}
-.price-card.featured::before{
-  content:"Más elegido"; position:absolute; top:-13px; left:50%; transform:translateX(-50%);
-  background:var(--grad); color:#fff; font-size:.7rem; font-weight:700; letter-spacing:.04em;
-  padding:5px 14px; border-radius:9999px; text-transform:uppercase;
-}
-
-/* faq */
-.faq-item summary{ cursor:pointer; list-style:none; }
-.faq-item summary::-webkit-details-marker{ display:none; }
-.faq-item .chevron{ transition:transform .3s ease; }
-.faq-item[open] .chevron{ transform:rotate(180deg); }
-.faq-item[open] .faq-a{ animation:faqOpen .3s ease; }
-@keyframes faqOpen{ from{ opacity:0; transform:translateY(-6px);} to{ opacity:1; transform:translateY(0);} }
-
-/* discord mock */
-.discord-mock{
-  background:#0b0b14; border:1px solid var(--border-strong); border-radius:18px;
-  box-shadow:0 30px 90px -25px rgba(109,40,217,0.45), 0 10px 40px -15px rgba(6,182,212,0.32);
-}
-.dot{ width:10px; height:10px; border-radius:50%; }
-.blink{ animation:blink 1.4s step-end infinite; }
-@keyframes blink{ 50%{ opacity:0; } }
-
-.section-eyebrow{
-  font-family:'JetBrains Mono',monospace; letter-spacing:.12em; font-size:.72rem; color:var(--violet);
-  text-transform:uppercase;
-}
-
-.mobile-menu{ transition:max-height .4s cubic-bezier(.16,.8,.28,1), opacity .3s ease; overflow:hidden; }
-
-/* lang switch */
-.lang-switch{ display:inline-flex; border:1px solid var(--border-strong); border-radius:9999px; overflow:hidden; }
-.lang-btn{ padding:6px 12px; font-family:'JetBrains Mono',monospace; font-size:.72rem; font-weight:600; color:var(--muted); background:transparent; transition:background .25s ease, color .25s ease; }
-.lang-btn.active{ background:var(--grad); color:#fff; }
+.hand{font:700 28px 'Caveat',cursive;color:var(--acc);display:inline-block;rotate:-2deg;margin-bottom:8px;line-height:1}
+.hnote{margin-top:34px;font-size:26px;rotate:-1.5deg}
+.ico svg{width:32px;height:32px;stroke:var(--acc);stroke-width:1.8}
+.btn svg{width:18px;height:18px}#burger svg,#czb svg{width:22px;height:22px}
+.svc .box:nth-child(odd),.steps .box:nth-child(odd){rotate:-.7deg}.svc .box:nth-child(even),.steps .box:nth-child(even){rotate:.6deg}
+.grid .bot:nth-child(odd){rotate:-.5deg}.grid .bot:nth-child(even){rotate:.5deg}
+.box:hover,.bot:hover{rotate:0deg}
+section h2{margin-left:-2px}.sub{margin-bottom:40px}
+.hero h1{max-width:760px}
+.terms li:nth-child(even){padding-left:44px}
 </style>
+<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
 </head>
+<body>
+<header><div class="wrap nav">
+  <a href="#top" class="logo"><img src="data:image/png;base64,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" alt="">Ranaris Shop</a>
+  <nav class="links" id="links">
+    <a href="#bots" data-en="Bots">Bots</a><a href="#servicios" data-en="Services">Servicios</a><a href="#proceso" data-en="Process">Proceso</a><a href="#precios" data-en="Prices">Precios</a><a href="#opiniones" data-en="Reviews">Opiniones</a><a href="#faq" data-en="Terms & FAQ">Términos y FAQ</a>
+  </nav>
+  <div class="right"><div class="lang"><button data-l="es">ES</button><button data-l="en">EN</button></div>
+  <a href="#contacto" class="btn sm hide-m" data-en="Get a quote">Pedir presupuesto</a><button id="burger" aria-label="Menú"><i data-lucide="menu"></i></button></div>
+</div></header>
 
-<body class="antialiased">
-<div class="grain"></div>
+<main id="top">
+<section class="hero" style="padding-bottom:70px"><div class="wrap">
+  <div class="float"><img src="https://cdn.discordapp.com/avatars/1556089654082670732/b0db5c8bc83e7d3f09057e01858fea33.png?size=2048" alt=""><img src="https://cdn.discordapp.com/avatars/1563412943541116948/a55830b47c320bfaabf1d94e6a5f5e60.png?size=2048" alt=""><img src="https://cdn.discordapp.com/avatars/1534049309669064765/affe063ecf2fa091df65dd4c37765938.png?size=2048" alt=""><img src="https://cdn.discordapp.com/avatars/1556086541728620614/e1dc36851141115c40accbe0a5aef50a.png?size=2048" alt=""></div>
+  <h1 class="rv" data-en="Discord bots <em>made</em> for your server.">Bots de Discord <em>hechos</em> para tu servidor.</h1>
+  <p class="rv" data-en="I'm Ranaris and I make Discord bots, one at a time. Economy, roleplay, tickets, whatever you can think of. If something breaks after delivery, message me and I'll fix it.">Soy Ranaris y hago bots para Discord, uno por uno. Economía, rol, tickets, lo que se te ocurra. Si algo se rompe después de entregarlo, me escribís y lo arreglo.</p>
+  <div class="cta rv"><a href="#bots" class="btn" data-en="See my bots">Ver mis bots</a><a href="#contacto" class="btn ghost" data-en="Tell me your idea">Contame tu idea</a></div>
+  <p class="hand hnote rv" data-en="↖ you talk to me, not a form. I answer myself.">↖ hablás conmigo, no con un formulario. Contesto yo.</p>
+</div></section>
+<div class="marq"><div id="mq"></div></div>
 
-<!-- ============ NAV ============ -->
-<header id="nav" class="fixed top-0 inset-x-0 z-50">
-  <div class="max-w-7xl mx-auto px-6 lg:px-10 flex items-center justify-between h-20">
-    <a href="#top" class="flex items-center gap-2.5 group">
-      <span class="relative flex h-9 w-9 items-center justify-center rounded-xl overflow-hidden" style="background:var(--grad)">
-        <img src="data:image/png;base64,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" alt="Ranaris Shop" style="width:22px;height:22px;object-fit:contain">
-      </span>
-      <span class="font-display font-bold text-lg tracking-tight text-grad">Ranaris Shop</span>
-    </a>
+<section id="bots"><div class="wrap">
+  <span class="hand" data-en="the ones that already run ↓">los que ya andan ↓</span><h2 class="rv" data-en="What I've built">Lo que ya armé</h2>
+  <p class="sub rv" data-en="Bots running right now, and the ones still in the oven.">Bots que ya andan, y los que todavía están en el horno.</p>
+  <div class="group g-ok"><h3 class="rv"><i class="dot"></i><span data-en="Finished">Hechos</span></h3><div class="grid">
+    <article class="bot rv"><div class="bh"><img src="https://cdn.discordapp.com/avatars/1556089654082670732/b0db5c8bc83e7d3f09057e01858fea33.png?size=2048" alt="MILIL"><div><h4>MILIL</h4><span class="pill" data-en="Finished">Hecho</span></div></div><p data-en="D&D bot with voice commands. It can chat with players, run commands and play music that fits what the narrator is saying. Fully custom system.">Bot de DND con comandos de voz. Puede hablar con los usuarios, ejecutar comandos y poner música según lo que diga el narrador. Sistema totalmente personalizado.</p></article>
+    <article class="bot rv"><div class="bh"><img src="https://cdn.discordapp.com/avatars/1563412943541116948/a55830b47c320bfaabf1d94e6a5f5e60.png?size=2048" alt="LuvieBot"><div><h4>LuvieBot</h4><span class="pill" data-en="Finished">Hecho</span></div></div><p data-en="Economy, gachapon and rewards, built on a free tier. Dozens of random events, logs and a staff panel.">Economía, gachapon y recompensas varias, hecho con cupo gratuito. Decenas de eventos aleatorios, logs y panel de staff.</p></article>
+    <article class="bot rv"><div class="bh"><img src="https://cdn.discordapp.com/avatars/1556086541728620614/e1dc36851141115c40accbe0a5aef50a.png?size=2048" alt="ALL-IN"><div><h4>ALL-IN</h4><span class="pill" data-en="Finished">Hecho</span></div></div><p data-en="Economy, levels, anti-raid, tickets, autoroles, auto-replies and more. It can read a member's status and reward them if it mentions your server.">Economía, niveles, antiraid, tickets, autoroles, autorespuestas y más. Detecta el estado del usuario y lo recompensa si menciona tu servidor.</p></article>
+    <article class="bot rv"><div class="bh"><img src="https://cdn.discordapp.com/avatars/1534049309669064765/affe063ecf2fa091df65dd4c37765938.png?size=2048" alt="NINI BOT"><div><h4>NINI BOT</h4><span class="pill" data-en="Finished">Hecho</span></div></div><p data-en="A football game for your server, more interactive and polished than what you'd get with ProBot or auto-reply bots. Profile, shop, inventory and a full economy.">Sistema de fútbol con un juego divertido, más interactivo y mejor hecho que uno armado con ProBot o bots de autorespuesta. Perfil, tienda, inventario y economía completa.</p></article>
+  </div></div>
+  <div class="group g-wip"><h3 class="rv"><i class="dot"></i><span data-en="In development">En desarrollo</span></h3><div class="grid">
+    <article class="bot rv"><div class="bh"><img src="https://cdn.discordapp.com/avatars/1440411609582407702/50455b2d41e8dcd6e15e2aad40fb1bb7.png?size=2048" alt="Tableware Bot"><div><h4>Tableware Bot</h4><span class="pill" data-en="In development">En desarrollo</span></div></div><p data-en="For a post-apocalyptic survival roleplay: specialised systems for PvP, infection, status and plenty more to make it properly hardcore.">Para un rol de supervivencia post-apocalíptica: sistemas especializados para PVP, infección, estado y muchas cosas más para hacerlo bien hardcore.</p><div class="rel"><span data-en="Release:">Lanzamiento:</span> 10/1/27 · Tableware Return</div></article>
+    <article class="bot rv"><div class="bh"><img src="https://cdn.discordapp.com/avatars/1485787699230277725/4ee3ce87f716de7a619412b013922fc0.png?size=2048" alt="SATOM"><div><h4>SATOM</h4><span class="pill" data-en="In development">En desarrollo</span></div></div><p data-en="RNG system for a medieval fantasy and magic roleplay server. Dice, combat systems, races and more.">Sistema RNG para un servidor de fantasía, rol y magia medieval. Dados, sistemas de combate, razas y más.</p><div class="rel"><span data-en="Release:">Lanzamiento:</span> <span data-en="TBA">Indefinida</span></div></article>
+    <article class="bot rv"><div class="bh"><img src="https://cdn.discordapp.com/avatars/1557021257071853620/3d681f59ca489c69b1173bb7b9fe75c3.png?size=2048" alt="LUNA"><div><h4>LUNA</h4><span class="pill" data-en="In development">En desarrollo</span></div></div><p data-en="A bot that plays and follows a single character, with a custom economy system.">Bot para seguir un personaje y mantener ese papel, con un sistema de economía personalizado.</p><div class="rel"><span data-en="Release:">Lanzamiento:</span> <span data-en="TBA">Indefinida</span></div></article>
+  </div></div>
+</div></section>
 
-    <nav class="hidden xl:flex items-center gap-7 font-mono text-sm">
-      <a href="#bots" class="navlink" data-i18n="nav.bots">Bots</a>
-      <a href="#proceso" class="navlink" data-i18n="nav.proceso">Cómo trabajo</a>
-      <a href="#precios" class="navlink" data-i18n="nav.precios">Precios</a>
-      <a href="#incluye" class="navlink" data-i18n="nav.incluye">Qué incluye</a>
-      <a href="#portfolio" class="navlink" data-i18n="nav.portfolio">Portfolio</a>
-      <a href="#comentarios" class="navlink" data-i18n="nav.comentarios">Comentarios</a>
-      <a href="#faq" class="navlink" data-i18n="nav.faq">FAQ</a>
-    </nav>
-
-    <div class="hidden xl:flex items-center gap-4">
-      <div class="lang-switch">
-        <button type="button" class="lang-btn" data-lang="es">ES</button>
-        <button type="button" class="lang-btn" data-lang="en">EN</button>
-      </div>
-      <a href="#contacto" class="btn btn-primary px-5 py-2.5 text-sm">
-        <span data-i18n="nav.cta">Solicitar presupuesto</span>
-        <i data-lucide="arrow-right" style="width:15px;height:15px"></i>
-      </a>
-    </div>
-
-    <div class="xl:hidden flex items-center gap-3">
-      <div class="lang-switch">
-        <button type="button" class="lang-btn" data-lang="es">ES</button>
-        <button type="button" class="lang-btn" data-lang="en">EN</button>
-      </div>
-      <button id="menuBtn" aria-label="Abrir menú" aria-expanded="false" class="flex items-center justify-center w-10 h-10 rounded-lg border" style="border-color:var(--border-strong)">
-        <i data-lucide="menu" id="menuIcon" style="width:20px;height:20px"></i>
-      </button>
-    </div>
+<section id="servicios" class="alt"><div class="wrap">
+  <span class="hand" data-en="what I do">lo que hago</span><h2 class="rv" data-en="What I can make you">Qué puedo hacerte</h2>
+  <p class="sub rv" data-en="Four starting points. Then we shape it to your server.">Cuatro puntos de partida. Después lo moldeamos a tu servidor.</p>
+  <div class="svc">
+    <div class="box rv"><span class="ico"><i data-lucide="shield"></i></span><h3 data-en="Moderation">Moderación</h3><p data-en="Automod for spam and links, warns, mutes, bans and configurable logs.">Automod de spam y links, advertencias, mutes, baneos y logs configurables.</p></div>
+    <div class="box rv"><span class="ico"><i data-lucide="coins"></i></span><h3 data-en="Economy">Economía</h3><p data-en="Coins, jobs, daily rewards, shop, inventory, rankings and minigames.">Monedas, trabajos, recompensa diaria, tienda, inventario, rankings y minijuegos.</p></div>
+    <div class="box rv"><span class="ico"><i data-lucide="ticket"></i></span><h3 data-en="Tickets">Tickets</h3><p data-en="Button panels, categories, staff roles and automatic transcripts.">Paneles con botones, categorías, roles de staff y transcripciones automáticas.</p></div>
+    <div class="box rv"><span class="ico"><i data-lucide="swords"></i></span><h3 data-en="Custom">A medida</h3><p data-en="Roleplay systems, combat, stats, databases and admin panels. If you can describe it, we can talk about it.">Sistemas de rol, combate, estadísticas, bases de datos y paneles. Si lo podés describir, lo charlamos.</p></div>
   </div>
+</div></section>
 
-  <div id="mobileMenu" class="mobile-menu max-h-0 opacity-0 xl:hidden border-t" style="border-color:var(--border)">
-    <div class="px-6 py-6 flex flex-col gap-5 font-mono text-sm" style="background:rgba(7,7,12,0.97)">
-      <a href="#bots" class="navlink" data-i18n="nav.bots">Bots</a>
-      <a href="#proceso" class="navlink" data-i18n="nav.proceso">Cómo trabajo</a>
-      <a href="#precios" class="navlink" data-i18n="nav.precios">Precios</a>
-      <a href="#incluye" class="navlink" data-i18n="nav.incluye">Qué incluye</a>
-      <a href="#portfolio" class="navlink" data-i18n="nav.portfolio">Portfolio</a>
-      <a href="#comentarios" class="navlink" data-i18n="nav.comentarios">Comentarios</a>
-      <a href="#faq" class="navlink" data-i18n="nav.faq">FAQ</a>
-      <a href="#contacto" class="btn btn-primary px-5 py-3 text-sm mt-1" data-i18n="nav.cta">Solicitar presupuesto</a>
-    </div>
+<section id="proceso"><div class="wrap">
+  <span class="hand" data-en="no runaround">sin vueltas</span><h2 class="rv" data-en="How we work">Cómo trabajamos</h2>
+  <p class="sub rv" data-en="Four steps, clear talk from start to finish.">Cuatro pasos, con charla clara de principio a fin.</p>
+  <div class="steps">
+    <div class="box rv"><h3 data-en="Tell me your idea">Contame tu idea</h3><p data-en="What your server needs, features, references. The more context, the better the proposal.">Qué necesita tu servidor, funciones, referencias. Cuanto más contexto, mejor propuesta.</p></div>
+    <div class="box rv"><h3 data-en="We agree on a price">Acordamos el precio</h3><p data-en="Scope, timing and final price are settled before I write a single line.">Alcance, tiempos y precio final se cierran antes de escribir una sola línea.</p></div>
+    <div class="box rv"><h3 data-en="I build it">Lo desarrollo</h3><p data-en="Clean code, its own database, and updates along the way.">Código limpio, base de datos propia y avances durante el proceso.</p></div>
+    <div class="box rv"><h3 data-en="Delivery & support">Entrega y soporte</h3><p data-en="You get it installed and configured, with 3 months of support to fix any bug.">Lo recibís instalado y configurado, con 3 meses de soporte para corregir errores.</p></div>
   </div>
-</header>
+</div></section>
 
-<!-- ============ HERO ============ -->
-<section id="top" class="relative pt-40 pb-28 md:pt-52 md:pb-36 px-6 overflow-hidden">
-  <div class="absolute inset-0 grid-overlay"></div>
-  <div class="nova-glow blob" style="width:520px;height:520px; background:radial-gradient(circle, rgba(109,40,217,0.4), transparent 70%); top:-160px; left:-120px;"></div>
-  <div class="nova-glow blob-2" style="width:560px;height:560px; background:radial-gradient(circle, rgba(6,182,212,0.32), transparent 70%); top:-100px; right:-160px;"></div>
-  <div class="particles" id="heroParticles"></div>
-
-  <div class="relative max-w-7xl mx-auto grid lg:grid-cols-2 gap-16 items-center">
-    <div>
-      <div class="reveal in inline-flex items-center gap-2 chip px-4 py-1.5 mb-7">
-        <span class="relative flex h-2 w-2">
-          <span class="animate-ping absolute inline-flex h-full w-full rounded-full opacity-60" style="background:var(--violet)"></span>
-          <span class="relative inline-flex rounded-full h-2 w-2" style="background:var(--violet)"></span>
-        </span>
-        <span data-i18n="hero.badge">Bots a medida, listos para producción</span>
-      </div>
-
-      <h1 class="reveal in font-display font-bold text-4xl sm:text-5xl lg:text-[3.4rem] leading-[1.08] mb-6">
-        <span data-i18n="hero.title1">Bots de Discord diseñados para</span> <span class="text-grad" data-i18n="hero.title2">hacer crecer tu comunidad.</span>
-      </h1>
-
-      <p class="reveal in reveal-delay-1 text-lg leading-relaxed mb-9 max-w-xl" style="color:var(--muted)" data-i18n="hero.desc">
-        Desarrollo bots personalizados para Discord: moderación, economía, tickets y sistemas propios de RPG con IA con código prolijo, base de datos dedicada y soporte real después de la entrega.
-      </p>
-
-      <div class="reveal in reveal-delay-2 flex flex-wrap gap-4 mb-12">
-        <a href="#bots" class="btn btn-ghost px-6 py-3.5">
-          <i data-lucide="bot" style="width:17px;height:17px"></i>
-          <span data-i18n="hero.btnVer">Ver bots</span>
-        </a>
-        <a href="#contacto" class="btn btn-primary px-6 py-3.5">
-          <span data-i18n="nav.cta">Solicitar presupuesto</span>
-          <i data-lucide="arrow-right" style="width:17px;height:17px"></i>
-        </a>
-      </div>
-
-      <div class="reveal in reveal-delay-3 flex flex-wrap items-center gap-x-8 gap-y-3 font-mono text-xs" style="color:var(--muted-2)">
-        <span class="flex items-center gap-2"><i data-lucide="code-2" style="width:14px;height:14px"></i> discord.py &amp; discord.js</span>
-        <span class="flex items-center gap-2"><i data-lucide="database" style="width:14px;height:14px"></i> <span data-i18n="hero.tag2">SQLite dedicada</span></span>
-        <span class="flex items-center gap-2"><i data-lucide="brain-circuit" style="width:14px;height:14px"></i> <span data-i18n="hero.tag3">IA narrativa (Groq)</span></span>
-      </div>
-    </div>
-
-    <!-- Signature visual: mock discord embed showing a real bot response -->
-    <div class="reveal in reveal-delay-2 relative">
-      <div class="discord-mock p-5 sm:p-6 max-w-md mx-auto lg:ml-auto lg:mr-0 font-mono text-[13px]">
-        <div class="flex items-center gap-2 pb-4 mb-4 border-b" style="border-color:var(--border)">
-          <span class="dot" style="background:#ff5f56"></span>
-          <span class="dot" style="background:#ffbd2e"></span>
-          <span class="dot" style="background:#27c93f"></span>
-          <span class="ml-2" style="color:var(--muted-2)">#comandos-bot</span>
-        </div>
-
-        <div class="mb-4">
-          <span style="color:var(--muted-2)">Kaito</span>
-          <span style="color:var(--muted)" data-i18n="hero.mockUsed"> usó </span>
-          <span style="color:var(--blue)">/perfil</span>
-        </div>
-
-        <div class="rounded-xl p-4 mb-4" style="background:var(--surface-2); border-left:3px solid var(--violet)">
-          <div class="flex items-center justify-between mb-3">
-            <span class="font-semibold" style="color:var(--text)"><span data-i18n="hero.mockLevel">Kaito — Nivel 34</span></span>
-            <i data-lucide="shield-check" style="width:16px;height:16px; color:var(--blue)"></i>
-          </div>
-          <div class="flex justify-between mb-1.5" style="color:var(--muted)">
-            <span data-i18n="hero.mockCoins">❖ Monedas</span><span style="color:var(--text)">12,450</span>
-          </div>
-          <div class="flex justify-between mb-1.5" style="color:var(--muted)">
-            <span data-i18n="hero.mockClass">⚔ Clase</span><span style="color:var(--text)" data-i18n="hero.mockClassVal">Vanguardia</span>
-          </div>
-          <div class="flex justify-between mb-3" style="color:var(--muted)">
-            <span>♥ HP</span><span style="color:var(--text)">210 / 210</span>
-          </div>
-          <div class="h-1.5 rounded-full overflow-hidden" style="background:rgba(255,255,255,0.08)">
-            <div class="h-full rounded-full" style="width:72%; background:var(--grad)"></div>
-          </div>
-        </div>
-
-        <div class="flex items-center gap-2" style="color:var(--muted-2)">
-          <i data-lucide="terminal" style="width:14px;height:14px"></i>
-          <span data-i18n="hero.mockOnline">bot en línea · 99.9% uptime</span>
-          <span class="blink">▍</span>
-        </div>
-      </div>
-    </div>
+<section id="precios" class="alt"><div class="wrap">
+  <span class="hand" data-en="clear numbers">números claros</span><h2 class="rv" data-en="Prices">Precios</h2>
+  <p class="sub rv" data-en="Rough ranges by complexity. The final price is always agreed before starting.">Rangos orientativos según la complejidad. El precio final siempre se acuerda antes de empezar.</p>
+  <div class="svc">
+    <div class="box rv"><span class="tag" data-en="Help / questions">Ayuda / consultas</span><div class="price">$3 <small>USD</small></div><p data-en="Help with existing bots and one-off patches.">Ayuda con bots ya creados y parches puntuales.</p></div>
+    <div class="box rv"><span class="tag" data-en="Small bots">Bots chicos</span><div class="price">$5–7 <small>USD</small></div><p data-en="One system done well: economy, moderation or similar.">Un solo sistema bien resuelto: economía, moderación u otro.</p><ul><li data-en="Fast delivery">Entrega rápida</li></ul></div>
+    <div class="box rv"><span class="tag" data-en="Medium bots">Bots medianos</span><div class="price">$10–15 <small>USD</small></div><p data-en="Three systems connected to each other.">Tres sistemas conectados entre sí.</p><ul><li data-en="Own database">Base de datos propia</li><li data-en="3 months of support">Soporte de 3 meses</li></ul></div>
+    <div class="box rv"><span class="tag" data-en="Large bots">Bots grandes</span><div class="price">$20 <small>USD</small></div><p data-en="4+ systems: roleplay, combat, custom panels.">4 o más sistemas: rol, combate, paneles propios.</p><ul><li data-en="AI integration included">Integración de IA incluida</li></ul></div>
   </div>
-</section>
-
-<!-- ============ MIS BOTS ============ -->
-<section id="bots" class="relative py-28 md:py-36 px-6">
-  <div class="max-w-7xl mx-auto">
-    <div class="reveal text-center max-w-2xl mx-auto mb-16">
-      <p class="section-eyebrow mb-4" data-i18n="bots.eyebrow">Catálogo</p>
-      <h2 class="font-display font-bold text-3xl sm:text-4xl mb-5" data-i18n="bots.title">Mis bots</h2>
-      <p style="color:var(--muted)" class="text-lg" data-i18n="bots.subtitle">Cuatro puntos de partida sólidos. Cada uno se adapta al estilo, tema y reglas de tu servidor.</p>
-    </div>
-
-    <div class="grid sm:grid-cols-2 gap-6" id="botsGrid">
-      <!-- cards injected structure below, static for reliability -->
-
-      <article class="reveal card card-glow p-8" data-card>
-        <div class="flex items-start justify-between mb-6">
-          <span class="flex h-12 w-12 items-center justify-center rounded-2xl" style="background:var(--grad-soft); border:1px solid var(--border-strong)">
-            <i data-lucide="shield" style="width:22px;height:22px; color:var(--blue)"></i>
-          </span>
-          <span class="chip px-3 py-1" data-i18n="bots.c1.tag">Moderación</span>
-        </div>
-        <h3 class="font-display font-semibold text-xl mb-2.5" data-i18n="bots.c1.title">Bot de Moderación</h3>
-        <p style="color:var(--muted)" class="text-sm leading-relaxed mb-5" data-i18n="bots.c1.desc">Mantiene el orden en tu servidor con automoderación inteligente, sanciones y registros configurables.</p>
-        <ul class="space-y-2.5 mb-5 text-sm" style="color:var(--muted)">
-          <li class="flex gap-2"><i data-lucide="check" style="width:16px;height:16px;color:var(--violet)" class="shrink-0 mt-0.5"></i><span data-i18n="bots.c1.f1">Automoderación de spam, links e insultos</span></li>
-          <li class="flex gap-2"><i data-lucide="check" style="width:16px;height:16px;color:var(--violet)" class="shrink-0 mt-0.5"></i><span data-i18n="bots.c1.f2">Advertencias, mutes, kicks y baneos</span></li>
-          <li class="flex gap-2 more-feat hidden"><i data-lucide="check" style="width:16px;height:16px;color:var(--violet)" class="shrink-0 mt-0.5"></i><span data-i18n="bots.c1.f3">Logs de auditoría configurables por canal</span></li>
-          <li class="flex gap-2 more-feat hidden"><i data-lucide="check" style="width:16px;height:16px;color:var(--violet)" class="shrink-0 mt-0.5"></i><span data-i18n="bots.c1.f4">Filtros y palabras prohibidas personalizables</span></li>
-        </ul>
-        <button class="ver-mas flex items-center gap-1.5 text-sm font-semibold" style="color:var(--blue)">
-          <span data-i18n="bots.verMas">Ver más</span> <i data-lucide="chevron-down" class="chev" style="width:15px;height:15px"></i>
-        </button>
-      </article>
-
-      <article class="reveal reveal-delay-1 card card-glow p-8" data-card>
-        <div class="flex items-start justify-between mb-6">
-          <span class="flex h-12 w-12 items-center justify-center rounded-2xl" style="background:var(--grad-soft); border:1px solid var(--border-strong)">
-            <i data-lucide="coins" style="width:22px;height:22px; color:var(--violet)"></i>
-          </span>
-          <span class="chip px-3 py-1" data-i18n="bots.c2.tag">Economía</span>
-        </div>
-        <h3 class="font-display font-semibold text-xl mb-2.5" data-i18n="bots.c2.title">Bot de Economía</h3>
-        <p style="color:var(--muted)" class="text-sm leading-relaxed mb-5" data-i18n="bots.c2.desc">Un sistema económico completo con trabajos, tienda y rankings para mantener a la comunidad activa.</p>
-        <ul class="space-y-2.5 mb-5 text-sm" style="color:var(--muted)">
-          <li class="flex gap-2"><i data-lucide="check" style="width:16px;height:16px;color:var(--violet)" class="shrink-0 mt-0.5"></i><span data-i18n="bots.c2.f1">Monedas, trabajos y recompensa diaria</span></li>
-          <li class="flex gap-2"><i data-lucide="check" style="width:16px;height:16px;color:var(--violet)" class="shrink-0 mt-0.5"></i><span data-i18n="bots.c2.f2">Tienda, inventario y objetos</span></li>
-          <li class="flex gap-2 more-feat hidden"><i data-lucide="check" style="width:16px;height:16px;color:var(--violet)" class="shrink-0 mt-0.5"></i><span data-i18n="bots.c2.f3">Transferencias entre usuarios</span></li>
-          <li class="flex gap-2 more-feat hidden"><i data-lucide="check" style="width:16px;height:16px;color:var(--violet)" class="shrink-0 mt-0.5"></i><span data-i18n="bots.c2.f4">Rankings, apuestas y minijuegos</span></li>
-        </ul>
-        <button class="ver-mas flex items-center gap-1.5 text-sm font-semibold" style="color:var(--blue)">
-          <span data-i18n="bots.verMas">Ver más</span> <i data-lucide="chevron-down" class="chev" style="width:15px;height:15px"></i>
-        </button>
-      </article>
-
-      <article class="reveal reveal-delay-2 card card-glow p-8" data-card>
-        <div class="flex items-start justify-between mb-6">
-          <span class="flex h-12 w-12 items-center justify-center rounded-2xl" style="background:var(--grad-soft); border:1px solid var(--border-strong)">
-            <i data-lucide="ticket" style="width:22px;height:22px; color:var(--blue)"></i>
-          </span>
-          <span class="chip px-3 py-1" data-i18n="bots.c3.tag">Soporte</span>
-        </div>
-        <h3 class="font-display font-semibold text-xl mb-2.5" data-i18n="bots.c3.title">Bot de Tickets</h3>
-        <p style="color:var(--muted)" class="text-sm leading-relaxed mb-5" data-i18n="bots.c3.desc">Soporte organizado para tu servidor con paneles, categorías y transcripciones automáticas.</p>
-        <ul class="space-y-2.5 mb-5 text-sm" style="color:var(--muted)">
-          <li class="flex gap-2"><i data-lucide="check" style="width:16px;height:16px;color:var(--violet)" class="shrink-0 mt-0.5"></i><span data-i18n="bots.c3.f1">Panel de tickets con botones</span></li>
-          <li class="flex gap-2"><i data-lucide="check" style="width:16px;height:16px;color:var(--violet)" class="shrink-0 mt-0.5"></i><span data-i18n="bots.c3.f2">Categorías y roles de staff configurables</span></li>
-          <li class="flex gap-2 more-feat hidden"><i data-lucide="check" style="width:16px;height:16px;color:var(--violet)" class="shrink-0 mt-0.5"></i><span data-i18n="bots.c3.f3">Transcripciones automáticas al cerrar</span></li>
-          <li class="flex gap-2 more-feat hidden"><i data-lucide="check" style="width:16px;height:16px;color:var(--violet)" class="shrink-0 mt-0.5"></i><span data-i18n="bots.c3.f4">Notificaciones y logs de actividad</span></li>
-        </ul>
-        <button class="ver-mas flex items-center gap-1.5 text-sm font-semibold" style="color:var(--blue)">
-          <span data-i18n="bots.verMas">Ver más</span> <i data-lucide="chevron-down" class="chev" style="width:15px;height:15px"></i>
-        </button>
-      </article>
-
-      <article class="reveal reveal-delay-3 card card-glow p-8" data-card>
-        <div class="flex items-start justify-between mb-6">
-          <span class="flex h-12 w-12 items-center justify-center rounded-2xl" style="background:var(--grad-soft); border:1px solid var(--border-strong)">
-            <i data-lucide="wand-sparkles" style="width:22px;height:22px; color:var(--violet)"></i>
-          </span>
-          <span class="chip px-3 py-1" data-i18n="bots.c4.tag">A medida</span>
-        </div>
-        <h3 class="font-display font-semibold text-xl mb-2.5" data-i18n="bots.c4.title">Bot Personalizado</h3>
-        <p style="color:var(--muted)" class="text-sm leading-relaxed mb-5" data-i18n="bots.c4.desc">¿Tenés una idea distinta? Desarrollo sistemas propios de RPG, narrativa con IA y rol para comunidades de anime.</p>
-        <ul class="space-y-2.5 mb-5 text-sm" style="color:var(--muted)">
-          <li class="flex gap-2"><i data-lucide="check" style="width:16px;height:16px;color:var(--violet)" class="shrink-0 mt-0.5"></i><span data-i18n="bots.c4.f1">Sistemas de combate y estadísticas</span></li>
-          <li class="flex gap-2"><i data-lucide="check" style="width:16px;height:16px;color:var(--violet)" class="shrink-0 mt-0.5"></i><span data-i18n="bots.c4.f2">Narrativa asistida por IA</span></li>
-          <li class="flex gap-2 more-feat hidden"><i data-lucide="check" style="width:16px;height:16px;color:var(--violet)" class="shrink-0 mt-0.5"></i><span data-i18n="bots.c4.f3">Base de datos y paneles de administración propios</span></li>
-          <li class="flex gap-2 more-feat hidden"><i data-lucide="check" style="width:16px;height:16px;color:var(--violet)" class="shrink-0 mt-0.5"></i><span data-i18n="bots.c4.f4">Integraciones y funciones a medida</span></li>
-        </ul>
-        <button class="ver-mas flex items-center gap-1.5 text-sm font-semibold" style="color:var(--blue)">
-          <span data-i18n="bots.verMas">Ver más</span> <i data-lucide="chevron-down" class="chev" style="width:15px;height:15px"></i>
-        </button>
-      </article>
-    </div>
+  <div class="add">
+    <div class="box rv"><div><h3 data-en="Add AI to a bot">Sumar IA a un bot</h3><p data-en="For an existing or new bot.">Para un bot ya hecho o por hacer.</p></div><div class="price">+$4</div></div>
+    <div class="box rv"><div><h3 data-en="Web dashboard">Dashboard web</h3><p data-en="Manage your bot from the browser.">Gestioná tu bot desde el navegador.</p></div><div class="price">+$1</div></div>
   </div>
-</section>
+  <p class="note" data-en="Everything includes: clean code, database, setup for your roles and channels, installation, 3 months of support and bug fixes.">Todo incluye: código limpio, base de datos, configuración con tus roles y canales, instalación, 3 meses de soporte y corrección de errores.</p>
+</div></section>
 
-<!-- ============ CÓMO TRABAJO ============ -->
-<section id="proceso" class="relative py-28 md:py-36 px-6" style="background:var(--bg-soft)">
-  <div class="absolute inset-0 grid-overlay" style="opacity:0.5"></div>
-  <div class="relative max-w-5xl mx-auto">
-    <div class="reveal text-center max-w-2xl mx-auto mb-20">
-      <p class="section-eyebrow mb-4" data-i18n="proceso.eyebrow">Proceso</p>
-      <h2 class="font-display font-bold text-3xl sm:text-4xl mb-5" data-i18n="proceso.title">¿Cómo trabajo?</h2>
-      <p style="color:var(--muted)" class="text-lg" data-i18n="proceso.subtitle">Cuatro pasos, sin vueltas, con comunicación clara de principio a fin.</p>
-    </div>
-
-    <div class="relative pl-14 sm:pl-20">
-      <div class="timeline-line absolute left-[19px] sm:left-[27px] top-2 bottom-2 w-[2px] rounded-full opacity-40"></div>
-
-      <div class="relative space-y-14">
-        <div class="reveal relative">
-          <span class="step-dot absolute -left-14 sm:-left-20 top-0 w-10 h-10 rounded-full flex items-center justify-center font-display font-bold text-sm text-white">01</span>
-          <h3 class="font-display font-semibold text-lg mb-2" data-i18n="proceso.s1.title">Contame tu idea</h3>
-          <p style="color:var(--muted)" class="max-w-xl" data-i18n="proceso.s1.desc">Me explicás qué necesitás para tu servidor: tema, funciones, referencias. Cuanto más contexto, mejor propuesta.</p>
-        </div>
-        <div class="reveal reveal-delay-1 relative">
-          <span class="step-dot absolute -left-14 sm:-left-20 top-0 w-10 h-10 rounded-full flex items-center justify-center font-display font-bold text-sm text-white">02</span>
-          <h3 class="font-display font-semibold text-lg mb-2" data-i18n="proceso.s2.title">Acordamos el presupuesto</h3>
-          <p style="color:var(--muted)" class="max-w-xl" data-i18n="proceso.s2.desc">Con la idea clara, definimos alcance, tiempos y precio final antes de escribir una sola línea de código.</p>
-        </div>
-        <div class="reveal reveal-delay-2 relative">
-          <span class="step-dot absolute -left-14 sm:-left-20 top-0 w-10 h-10 rounded-full flex items-center justify-center font-display font-bold text-sm text-white">03</span>
-          <h3 class="font-display font-semibold text-lg mb-2" data-i18n="proceso.s3.title">Desarrollo el bot</h3>
-          <p style="color:var(--muted)" class="max-w-xl" data-i18n="proceso.s3.desc">Construyo tu bot con código limpio y base de datos propia, con avances y consultas durante el proceso.</p>
-        </div>
-        <div class="reveal reveal-delay-3 relative">
-          <span class="step-dot absolute -left-14 sm:-left-20 top-0 w-10 h-10 rounded-full flex items-center justify-center font-display font-bold text-sm text-white">04</span>
-          <h3 class="font-display font-semibold text-lg mb-2" data-i18n="proceso.s4.title">Entrega y soporte</h3>
-          <p style="color:var(--muted)" class="max-w-xl" data-i18n="proceso.s4.desc">Recibís el bot instalado y configurado, con 3 meses de soporte incluido para corregir cualquier error.</p>
-        </div>
-      </div>
-    </div>
+<section id="opiniones"><div class="wrap">
+  <span class="hand" data-en="real people">gente real</span><h2 class="rv" data-en="What people say">Lo que dicen</h2>
+  <p class="sub rv" data-en="Leave your recommendation. Everyone can see it.">Dejá tu recomendación. Todos pueden verla.</p>
+  <div class="cform rv">
+    <input id="cn" data-enph="Your name or Discord user" placeholder="Tu nombre o usuario de Discord">
+    <textarea id="cmsg" rows="3" data-enph="Tell us about your experience" placeholder="Contá tu experiencia"></textarea>
+    <p id="cerr" class="err hidden" data-en="Fill in your name and comment.">Completá tu nombre y comentario.</p>
+    <button id="csend" class="btn" data-en="Post comment">Publicar comentario</button>
   </div>
-</section>
+  <div id="cstat" style="color:var(--mut);margin-bottom:12px"></div><div id="clist"></div>
+</div></section>
 
-<!-- ============ PRECIOS ============ -->
-<section id="precios" class="relative py-28 md:py-36 px-6">
-  <div class="max-w-6xl mx-auto">
-    <div class="reveal text-center max-w-2xl mx-auto mb-16">
-      <p class="section-eyebrow mb-4" data-i18n="precios.eyebrow">Inversión</p>
-      <h2 class="font-display font-bold text-3xl sm:text-4xl mb-5" data-i18n="precios.title">Precios</h2>
-      <p style="color:var(--muted)" class="text-lg" data-i18n="precios.subtitle">Rangos orientativos según la complejidad. El valor final siempre se acuerda antes de empezar.</p>
-    </div>
-
-    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 items-stretch">
-      <div class="reveal price-card card p-7 flex flex-col">
-        <p class="chip inline-block px-3 py-1 mb-5 self-start" data-i18n="precios.p1.tag">Ayuda / consultas</p>
-        <p class="font-display font-bold text-3xl mb-1">$3<span class="text-base font-normal" style="color:var(--muted)"> USD</span></p>
-        <p class="text-sm mb-6" style="color:var(--muted)" data-i18n="precios.p1.desc">Ayuda o consultas sobre bots ya creados, además de parches puntuales.</p>
-        <ul class="space-y-2.5 text-sm mb-7" style="color:var(--muted)">
-          <li class="flex gap-2"><i data-lucide="check" style="width:15px;height:15px;color:var(--blue)" class="mt-0.5 shrink-0"></i><span data-i18n="precios.p1.f1">Diagnóstico y ayuda técnica</span></li>
-          <li class="flex gap-2"><i data-lucide="check" style="width:15px;height:15px;color:var(--blue)" class="mt-0.5 shrink-0"></i><span data-i18n="precios.p1.f2">Parches y correcciones puntuales</span></li>
-        </ul>
-        <a href="#contacto" class="btn btn-ghost mt-auto py-3 text-sm" data-i18n="precios.consultar">Consultar</a>
-      </div>
-
-      <div class="reveal reveal-delay-1 price-card card p-7 flex flex-col">
-        <p class="chip inline-block px-3 py-1 mb-5 self-start" data-i18n="precios.p2.tag">Bots chicos</p>
-        <p class="font-display font-bold text-3xl mb-1">$5 – $7<span class="text-base font-normal" style="color:var(--muted)"> USD</span></p>
-        <p class="text-sm mb-6" style="color:var(--muted)" data-i18n="precios.p2.desc">Un sistema único: economía, moderación u otro, bien resuelto.</p>
-        <ul class="space-y-2.5 text-sm mb-7" style="color:var(--muted)">
-          <li class="flex gap-2"><i data-lucide="check" style="width:15px;height:15px;color:var(--blue)" class="mt-0.5 shrink-0"></i><span data-i18n="precios.p2.f1">Un sistema principal</span></li>
-          <li class="flex gap-2"><i data-lucide="check" style="width:15px;height:15px;color:var(--blue)" class="mt-0.5 shrink-0"></i><span data-i18n="precios.p2.f2">Entrega rápida</span></li>
-        </ul>
-        <a href="#contacto" class="btn btn-ghost mt-auto py-3 text-sm" data-i18n="precios.consultar">Consultar</a>
-      </div>
-
-      <div class="reveal reveal-delay-2 price-card featured card p-7 flex flex-col">
-        <p class="chip inline-block px-3 py-1 mb-5 self-start" data-i18n="precios.p3.tag">Bots medianos</p>
-        <p class="font-display font-bold text-3xl mb-1">$10 – $15<span class="text-base font-normal" style="color:var(--muted)"> USD</span></p>
-        <p class="text-sm mb-6" style="color:var(--muted)" data-i18n="precios.p3.desc">Bot con 3 sistemas diferentes conectados entre sí.</p>
-        <ul class="space-y-2.5 text-sm mb-7" style="color:var(--muted)">
-          <li class="flex gap-2"><i data-lucide="check" style="width:15px;height:15px;color:var(--violet)" class="mt-0.5 shrink-0"></i><span data-i18n="precios.p3.f1">3 sistemas integrados</span></li>
-          <li class="flex gap-2"><i data-lucide="check" style="width:15px;height:15px;color:var(--violet)" class="mt-0.5 shrink-0"></i><span data-i18n="precios.p3.f2">Base de datos propia</span></li>
-          <li class="flex gap-2"><i data-lucide="check" style="width:15px;height:15px;color:var(--violet)" class="mt-0.5 shrink-0"></i><span data-i18n="precios.p3.f3">Soporte de 3 meses</span></li>
-        </ul>
-        <a href="#contacto" class="btn btn-primary mt-auto py-3 text-sm" data-i18n="precios.consultar">Consultar</a>
-      </div>
-
-      <div class="reveal reveal-delay-3 price-card card p-7 flex flex-col">
-        <p class="chip inline-block px-3 py-1 mb-5 self-start" data-i18n="precios.p4.tag">Bots grandes</p>
-        <p class="font-display font-bold text-3xl mb-1">$20<span class="text-base font-normal" style="color:var(--muted)"> USD</span></p>
-        <p class="text-sm mb-6" style="color:var(--muted)" data-i18n="precios.p4.desc">4 o más sistemas junto a IA: RPG, combate, narrativa, paneles propios.</p>
-        <ul class="space-y-2.5 text-sm mb-7" style="color:var(--muted)">
-          <li class="flex gap-2"><i data-lucide="check" style="width:15px;height:15px;color:var(--blue)" class="mt-0.5 shrink-0"></i><span data-i18n="precios.p4.f1">4+ sistemas integrados</span></li>
-          <li class="flex gap-2"><i data-lucide="check" style="width:15px;height:15px;color:var(--blue)" class="mt-0.5 shrink-0"></i><span data-i18n="precios.p4.f2">Incluye integración con IA</span></li>
-        </ul>
-        <a href="#contacto" class="btn btn-ghost mt-auto py-3 text-sm" data-i18n="precios.consultar">Consultar</a>
-      </div>
-    </div>
-
-    <div class="grid sm:grid-cols-2 gap-6 mt-6">
-      <div class="reveal reveal-delay-4 card p-6 sm:p-7 flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-6">
-        <span class="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl" style="background:var(--grad-soft)">
-          <i data-lucide="brain-circuit" style="width:20px;height:20px;color:var(--violet)"></i>
-        </span>
-        <div class="flex-1">
-          <h3 class="font-display font-semibold mb-1" data-i18n="precios.addonIA.title">Agregar IA a un bot</h3>
-          <p class="text-sm" style="color:var(--muted)" data-i18n="precios.addonIA.desc">Ya sea un bot creado o por crear: se suma <span style="color:var(--text)">+$4 USD</span> al precio final.</p>
-        </div>
-        <p class="font-display font-bold text-2xl shrink-0">+$4<span class="text-base font-normal" style="color:var(--muted)"> USD</span></p>
-      </div>
-
-      <div class="reveal reveal-delay-4 card p-6 sm:p-7 flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-6">
-        <span class="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl" style="background:var(--grad-soft)">
-          <i data-lucide="layout-dashboard" style="width:20px;height:20px;color:var(--blue)"></i>
-        </span>
-        <div class="flex-1">
-          <h3 class="font-display font-semibold mb-1" data-i18n="precios.addonDash.title">Dashboard web funcional</h3>
-          <p class="text-sm" style="color:var(--muted)" data-i18n="precios.addonDash.desc">Panel web para gestionar tu bot desde el navegador: se suma <span style="color:var(--text)">+$1 USD</span> al precio final.</p>
-        </div>
-        <p class="font-display font-bold text-2xl shrink-0">+$1<span class="text-base font-normal" style="color:var(--muted)"> USD</span></p>
-      </div>
-    </div>
-
-    <p class="reveal reveal-delay-4 flex items-center gap-2 justify-center text-sm mt-10" style="color:var(--muted-2)">
-      <i data-lucide="info" style="width:15px;height:15px"></i>
-      <span data-i18n="precios.nota">El precio final depende de la complejidad, cantidad de funciones y tiempo de desarrollo del bot.</span>
-    </p>
+<section id="faq" class="alt"><div class="wrap two">
+  <div><span class="hand" data-en="the fine print, in plain sight">la letra chica, pero a la vista</span><h2 class="rv" data-en="Ground rules">Reglas claras</h2>
+    <ul class="terms rv">
+      <li data-en="The price is agreed <b>before</b> development starts.">El presupuesto se acuerda <b>antes</b> de empezar.</li>
+      <li data-en="Development takes <b>a few days to several weeks</b>, depending on the project.">El desarrollo tarda <b>de unos días a varias semanas</b>, según el proyecto.</li>
+      <li data-en="If anything gets delayed, <b>you'll be told</b> ahead of time.">Si hay algún retraso, <b>te aviso</b> con anticipación.</li>
+      <li data-en="Includes <b>3 months of support</b> to fix bugs.">Incluye <b>3 meses de soporte</b> para corregir errores.</li>
+      <li data-en="<b>New features</b> after delivery may cost extra.">Las <b>funciones nuevas</b> pedidas después de la entrega pueden costar aparte.</li>
+      <li data-en="No refunds once <b>development has started</b>, unless we both agree.">No hay reembolsos una vez <b>iniciado el desarrollo</b>, salvo acuerdo entre ambos.</li>
+      <li data-en="<b>Hosting is the client's responsibility</b>; it's not included.">El <b>hosting corre por tu cuenta</b>: no está incluido ni lo administro.</li>
+    </ul></div>
+  <div><span class="hand" data-en="in case you wonder">por si te lo preguntás</span><h2 class="rv" data-en="Common questions">Dudas frecuentes</h2>
+    <details class="rv"><summary data-en="Does the bot run 24/7?">¿El bot anda 24/7?</summary><p data-en="Yes, as long as it's on an active host. I'll point you to options for your budget.">Sí, mientras esté en un hosting activo. Te oriento según tu presupuesto.</p></details>
+    <details class="rv"><summary data-en="Do I need to buy hosting?">¿Tengo que contratar hosting?</summary><p data-en="Yes, you pay for it yourself. I'll suggest cheap options and help with the setup.">Sí, lo contratás vos. Te sugiero opciones económicas y te ayudo con la instalación.</p></details>
+    <details class="rv"><summary data-en="Do you do fully custom bots?">¿Hacés bots totalmente a medida?</summary><p data-en="Yes, it's what I like most: roleplay, combat, economy and more, built from scratch.">Sí, es lo que más me gusta: rol, combate, economía y más, desde cero.</p></details>
+    <details class="rv"><summary data-en="What do you use?">¿Qué tecnologías usás?</summary><p data-en="Python (discord.py) and JavaScript (discord.js), with SQLite databases.">Python (discord.py) y JavaScript (discord.js), con bases de datos SQLite.</p></details>
+    <details class="rv"><summary data-en="How long does it take?">¿Cuánto tarda?</summary><p data-en="From a few days for simple bots to several weeks for advanced ones.">Desde unos días para bots simples hasta varias semanas para los más avanzados.</p></details>
   </div>
-</section>
+</div></section>
 
-<!-- ============ QUÉ INCLUYE ============ -->
-<section id="incluye" class="relative py-28 md:py-36 px-6" style="background:var(--bg-soft)">
-  <div class="max-w-6xl mx-auto">
-    <div class="reveal text-center max-w-2xl mx-auto mb-16">
-      <p class="section-eyebrow mb-4" data-i18n="incluye.eyebrow">Todo resuelto</p>
-      <h2 class="font-display font-bold text-3xl sm:text-4xl mb-5" data-i18n="incluye.title">¿Qué incluye?</h2>
-      <p style="color:var(--muted)" class="text-lg" data-i18n="incluye.subtitle">Cada proyecto se entrega listo para usar, no solo el código.</p>
-    </div>
+<section id="contacto" class="contact"><div class="wrap">
+  <h2 class="rv" data-en="Got a bot in mind?">¿Tenés un bot en la cabeza?</h2>
+  <p class="rv" data-en="Message me on Discord, I'll answer personally and we'll talk price, no strings attached.">Escribime por Discord, te respondo yo y vemos precio sin compromiso.</p>
+  <a class="btn rv" href="https://discord.com/users/1334723582592548884" target="_blank" rel="noopener"><i data-lucide="send"></i> @ranarisfr</a>
+</div></section>
+</main>
+<footer><div class="wrap"><span>© 2026 Ranaris Shop</span><span data-en="Handmade, no templates.">Hecho a mano, sin plantillas.</span></div></footer>
 
-    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-      <div class="reveal card p-7 flex items-start gap-4">
-        <span class="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl" style="background:var(--grad-soft)"><i data-lucide="file-code-2" style="width:20px;height:20px;color:var(--blue)"></i></span>
-        <div><h3 class="font-display font-semibold mb-1.5" data-i18n="incluye.i1.title">Código limpio</h3><p class="text-sm" style="color:var(--muted)" data-i18n="incluye.i1.desc">Organizado, comentado y fácil de mantener o ampliar más adelante.</p></div>
-      </div>
-      <div class="reveal reveal-delay-1 card p-7 flex items-start gap-4">
-        <span class="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl" style="background:var(--grad-soft)"><i data-lucide="database" style="width:20px;height:20px;color:var(--violet)"></i></span>
-        <div><h3 class="font-display font-semibold mb-1.5" data-i18n="incluye.i2.title">Base de datos</h3><p class="text-sm" style="color:var(--muted)" data-i18n="incluye.i2.desc">Persistencia propia para que ningún dato se pierda al reiniciar el bot.</p></div>
-      </div>
-      <div class="reveal reveal-delay-2 card p-7 flex items-start gap-4">
-        <span class="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl" style="background:var(--grad-soft)"><i data-lucide="sliders-horizontal" style="width:20px;height:20px;color:var(--blue)"></i></span>
-        <div><h3 class="font-display font-semibold mb-1.5" data-i18n="incluye.i3.title">Configuración</h3><p class="text-sm" style="color:var(--muted)" data-i18n="incluye.i3.desc">Ajustado a los roles, canales y reglas específicas de tu servidor.</p></div>
-      </div>
-      <div class="reveal card p-7 flex items-start gap-4">
-        <span class="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl" style="background:var(--grad-soft)"><i data-lucide="rocket" style="width:20px;height:20px;color:var(--violet)"></i></span>
-        <div><h3 class="font-display font-semibold mb-1.5" data-i18n="incluye.i4.title">Instalación</h3><p class="text-sm" style="color:var(--muted)" data-i18n="incluye.i4.desc">Me encargo de que el bot quede online y funcionando en tu servidor.</p></div>
-      </div>
-      <div class="reveal reveal-delay-1 card p-7 flex items-start gap-4">
-        <span class="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl" style="background:var(--grad-soft)"><i data-lucide="life-buoy" style="width:20px;height:20px;color:var(--blue)"></i></span>
-        <div><h3 class="font-display font-semibold mb-1.5" data-i18n="incluye.i5.title">Soporte 3 meses</h3><p class="text-sm" style="color:var(--muted)" data-i18n="incluye.i5.desc">Acompañamiento después de la entrega para dudas o ajustes.</p></div>
-      </div>
-      <div class="reveal reveal-delay-2 card p-7 flex items-start gap-4">
-        <span class="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl" style="background:var(--grad-soft)"><i data-lucide="bug" style="width:20px;height:20px;color:var(--violet)"></i></span>
-        <div><h3 class="font-display font-semibold mb-1.5" data-i18n="incluye.i6.title">Corrección de errores</h3><p class="text-sm" style="color:var(--muted)" data-i18n="incluye.i6.desc">Si algo falla, lo reviso y lo soluciono sin costo dentro del soporte.</p></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ============ PORTFOLIO ============ -->
-<section id="portfolio" class="relative py-28 md:py-36 px-6">
-  <div class="max-w-6xl mx-auto">
-    <div class="reveal text-center max-w-2xl mx-auto mb-12">
-      <p class="section-eyebrow mb-4" data-i18n="portfolio.eyebrow">Trabajos</p>
-      <h2 class="font-display font-bold text-3xl sm:text-4xl mb-5" data-i18n="portfolio.title">Portfolio</h2>
-      <p style="color:var(--muted)" class="text-lg" data-i18n="portfolio.subtitle">Capturas, clips y detalles de bots que ya entregué.</p>
-    </div>
-
-    <div class="reveal flex items-center justify-center gap-3 mb-10">
-      <button id="adminToggleBtn" class="btn btn-ghost px-4 py-2 text-xs">
-        <i data-lucide="lock" style="width:14px;height:14px"></i>
-        <span id="adminToggleLabel" data-i18n="portfolio.adminMode">Modo admin</span>
-      </button>
-      <button id="newPostBtn" class="btn btn-primary px-4 py-2 text-xs hidden">
-        <i data-lucide="plus" style="width:14px;height:14px"></i>
-        <span data-i18n="portfolio.newPost">Nueva publicación</span>
-      </button>
-    </div>
-
-    <div id="portfolioStatus" class="text-center text-sm mb-8" style="color:var(--muted-2)" data-i18n="portfolio.loading">Cargando publicaciones…</div>
-    <div id="portfolioGrid" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6"></div>
-    <div id="portfolioEmpty" class="hidden text-center py-16" style="color:var(--muted-2)">
-      <i data-lucide="images" style="width:32px;height:32px" class="mx-auto mb-3 opacity-60"></i>
-      <p data-i18n="portfolio.empty">Todavía no hay publicaciones en el portfolio.</p>
-    </div>
-  </div>
-</section>
-
-<!-- Admin login modal -->
-<div id="adminModal" class="hidden fixed inset-0 z-[70] items-center justify-center p-6" style="background:rgba(0,0,0,0.6)">
-  <div class="card p-7 w-full max-w-sm">
-    <h3 class="font-display font-semibold text-lg mb-1" data-i18n="adminModal.title">Acceso admin</h3>
-    <p class="text-sm mb-5" style="color:var(--muted)" data-i18n="adminModal.desc">Ingresá la contraseña para publicar en el portfolio.</p>
-    <input id="adminPasswordInput" type="password" data-i18n-placeholder="adminModal.placeholder" placeholder="Contraseña" class="w-full mb-2 px-4 py-3 rounded-xl text-sm" style="background:var(--surface-2); border:1px solid var(--border-strong); color:var(--text)">
-    <p id="adminError" class="hidden text-xs mb-3" style="color:#f87171" data-i18n="adminModal.error">Contraseña incorrecta.</p>
-    <div class="flex gap-3 mt-3">
-      <button id="adminCancelBtn" class="btn btn-ghost flex-1 py-2.5 text-sm" data-i18n="common.cancel">Cancelar</button>
-      <button id="adminSubmitBtn" class="btn btn-primary flex-1 py-2.5 text-sm" data-i18n="common.enter">Entrar</button>
-    </div>
-  </div>
-</div>
-
-<!-- New post modal -->
-<div id="postModal" class="hidden fixed inset-0 z-[70] items-center justify-center p-6" style="background:rgba(0,0,0,0.6)">
-  <div class="card p-7 w-full max-w-lg max-h-[85vh] overflow-y-auto">
-    <h3 class="font-display font-semibold text-lg mb-5" data-i18n="postModal.title">Nueva publicación</h3>
-    <label class="block text-xs mb-1.5" style="color:var(--muted)" data-i18n="postModal.labelTitle">Título</label>
-    <input id="postTitle" type="text" data-i18n-placeholder="postModal.phTitle" placeholder="Ej: Bot RPG para servidor de anime" class="w-full mb-4 px-4 py-3 rounded-xl text-sm" style="background:var(--surface-2); border:1px solid var(--border-strong); color:var(--text)">
-
-    <label class="block text-xs mb-1.5" style="color:var(--muted)" data-i18n="postModal.labelDesc">Descripción</label>
-    <textarea id="postDescription" rows="3" data-i18n-placeholder="postModal.phDesc" placeholder="Contá de qué se trata este proyecto" class="w-full mb-4 px-4 py-3 rounded-xl text-sm" style="background:var(--surface-2); border:1px solid var(--border-strong); color:var(--text)"></textarea>
-
-    <label class="block text-xs mb-1.5" style="color:var(--muted)" data-i18n="postModal.labelImg">Foto (opcional)</label>
-    <input id="postImageFile" type="file" accept="image/*" class="w-full mb-4 text-sm" style="color:var(--muted)">
-
-    <label class="block text-xs mb-1.5" style="color:var(--muted)" data-i18n="postModal.labelVid">Video (opcional, pegá un link de YouTube o un .mp4)</label>
-    <input id="postVideoUrl" type="text" data-i18n-placeholder="postModal.phVid" placeholder="https://..." class="w-full mb-5 px-4 py-3 rounded-xl text-sm" style="background:var(--surface-2); border:1px solid var(--border-strong); color:var(--text)">
-
-    <p id="postError" class="hidden text-xs mb-3" style="color:#f87171" data-i18n="postModal.error">Completá al menos el título.</p>
-    <div class="flex gap-3">
-      <button id="postCancelBtn" class="btn btn-ghost flex-1 py-2.5 text-sm" data-i18n="common.cancel">Cancelar</button>
-      <button id="postSubmitBtn" class="btn btn-primary flex-1 py-2.5 text-sm" data-i18n="common.publish">Publicar</button>
-    </div>
-  </div>
-</div>
-
-<!-- ============ COMENTARIOS ============ -->
-<section id="comentarios" class="relative py-28 md:py-36 px-6" style="background:var(--bg-soft)">
-  <div class="max-w-3xl mx-auto">
-    <div class="reveal text-center max-w-2xl mx-auto mb-12">
-      <p class="section-eyebrow mb-4" data-i18n="comentarios.eyebrow">Opiniones</p>
-      <h2 class="font-display font-bold text-3xl sm:text-4xl mb-5" data-i18n="comentarios.title">Comentarios y recomendaciones</h2>
-      <p style="color:var(--muted)" class="text-lg" data-i18n="comentarios.subtitle">Dejá tu recomendación. Todos pueden verla, siempre.</p>
-    </div>
-
-    <div class="reveal card p-6 sm:p-7 mb-10">
-      <div class="grid sm:grid-cols-[1fr_auto] gap-4 mb-4">
-        <input id="commentName" type="text" data-i18n-placeholder="comentarios.phName" placeholder="Tu nombre o usuario de Discord" class="w-full px-4 py-3 rounded-xl text-sm" style="background:var(--surface-2); border:1px solid var(--border-strong); color:var(--text)">
-      </div>
-      <textarea id="commentMessage" rows="3" data-i18n-placeholder="comentarios.phMsg" placeholder="Contá tu experiencia con el bot o el servicio" class="w-full mb-4 px-4 py-3 rounded-xl text-sm" style="background:var(--surface-2); border:1px solid var(--border-strong); color:var(--text)"></textarea>
-      <p id="commentError" class="hidden text-xs mb-3" style="color:#f87171" data-i18n="comentarios.error">Completá tu nombre y comentario.</p>
-      <button id="commentSubmitBtn" class="btn btn-primary px-6 py-3 text-sm">
-        <i data-lucide="send" style="width:15px;height:15px"></i>
-        <span data-i18n="comentarios.submit">Publicar comentario</span>
-      </button>
-    </div>
-
-    <div id="commentsStatus" class="text-center text-sm mb-6" style="color:var(--muted-2)" data-i18n="comentarios.loading">Cargando comentarios…</div>
-    <div id="commentsList" class="space-y-4"></div>
-    <div id="commentsEmpty" class="hidden text-center py-10" style="color:var(--muted-2)">
-      <i data-lucide="message-square" style="width:28px;height:28px" class="mx-auto mb-3 opacity-60"></i>
-      <p data-i18n="comentarios.empty">Sé el primero en dejar una recomendación.</p>
-    </div>
-  </div>
-</section>
-
-<!-- ============ TÉRMINOS ============ -->
-<section id="terminos" class="relative py-28 md:py-36 px-6">
-  <div class="max-w-4xl mx-auto">
-    <div class="reveal text-center max-w-2xl mx-auto mb-14">
-      <p class="section-eyebrow mb-4" data-i18n="terminos.eyebrow">Reglas claras</p>
-      <h2 class="font-display font-bold text-3xl sm:text-4xl mb-5" data-i18n="terminos.title">Términos y condiciones</h2>
-      <p style="color:var(--muted)" class="text-lg" data-i18n="terminos.subtitle">Para que ambas partes sepamos exactamente qué esperar.</p>
-    </div>
-
-    <div class="reveal card p-8 sm:p-12">
-      <ul class="space-y-6">
-        <li class="flex gap-4">
-          <i data-lucide="handshake" class="shrink-0 mt-0.5" style="width:20px;height:20px;color:var(--blue)"></i>
-          <p style="color:var(--muted)" data-i18n="terminos.t1">El presupuesto se acuerda <span style="color:var(--text)">antes de comenzar</span> el desarrollo.</p>
-        </li>
-        <li class="flex gap-4">
-          <i data-lucide="clock" class="shrink-0 mt-0.5" style="width:20px;height:20px;color:var(--violet)"></i>
-          <p style="color:var(--muted)" data-i18n="terminos.t2">El desarrollo puede tardar <span style="color:var(--text)">entre algunos días y varias semanas</span>, según la complejidad del proyecto.</p>
-        </li>
-        <li class="flex gap-4">
-          <i data-lucide="bell-ring" class="shrink-0 mt-0.5" style="width:20px;height:20px;color:var(--blue)"></i>
-          <p style="color:var(--muted)" data-i18n="terminos.t3">Si existe algún retraso, <span style="color:var(--text)">el cliente es informado</span> con anticipación.</p>
-        </li>
-        <li class="flex gap-4">
-          <i data-lucide="life-buoy" class="shrink-0 mt-0.5" style="width:20px;height:20px;color:var(--violet)"></i>
-          <p style="color:var(--muted)" data-i18n="terminos.t4">Incluye <span style="color:var(--text)">soporte durante 3 meses</span> para corregir errores del bot.</p>
-        </li>
-        <li class="flex gap-4">
-          <i data-lucide="plus-circle" class="shrink-0 mt-0.5" style="width:20px;height:20px;color:var(--blue)"></i>
-          <p style="color:var(--muted)" data-i18n="terminos.t5">Las <span style="color:var(--text)">funciones nuevas</span> pedidas después de la entrega pueden tener un costo adicional.</p>
-        </li>
-        <li class="flex gap-4">
-          <i data-lucide="ban" class="shrink-0 mt-0.5" style="width:20px;height:20px;color:var(--violet)"></i>
-          <p style="color:var(--muted)" data-i18n="terminos.t6">No hay reembolsos una vez <span style="color:var(--text)">iniciado el desarrollo</span>, salvo acuerdo entre ambas partes.</p>
-        </li>
-        <li class="flex gap-4">
-          <i data-lucide="server" class="shrink-0 mt-0.5" style="width:20px;height:20px;color:var(--blue)"></i>
-          <p style="color:var(--muted)" data-i18n="terminos.t7">El <span style="color:var(--text)">hosting del bot es responsabilidad del cliente</span>: lo contrata por su cuenta, no está incluido ni administrado por Ranaris.</p>
-        </li>
-      </ul>
-    </div>
-  </div>
-</section>
-
-<!-- ============ FAQ ============ -->
-<section id="faq" class="relative py-28 md:py-36 px-6" style="background:var(--bg-soft)">
-  <div class="max-w-3xl mx-auto">
-    <div class="reveal text-center mb-14">
-      <p class="section-eyebrow mb-4" data-i18n="faq.eyebrow">Dudas frecuentes</p>
-      <h2 class="font-display font-bold text-3xl sm:text-4xl mb-5" data-i18n="faq.title">Preguntas frecuentes</h2>
-    </div>
-
-    <div class="space-y-4">
-      <details class="faq-item reveal card px-7 py-5" open>
-        <summary class="flex items-center justify-between gap-4 font-display font-semibold">
-          <span data-i18n="faq.q1">¿El bot funciona 24/7?</span>
-          <i data-lucide="chevron-down" class="chevron shrink-0" style="width:18px;height:18px;color:var(--muted)"></i>
-        </summary>
-        <p class="faq-a mt-3 text-sm leading-relaxed" style="color:var(--muted)" data-i18n="faq.a1">Sí, siempre que esté alojado en un hosting activo. Te oriento sobre las opciones disponibles según tu presupuesto.</p>
-      </details>
-
-      <details class="faq-item reveal reveal-delay-1 card px-7 py-5">
-        <summary class="flex items-center justify-between gap-4 font-display font-semibold">
-          <span data-i18n="faq.q2">¿Necesito contratar hosting?</span>
-          <i data-lucide="chevron-down" class="chevron shrink-0" style="width:18px;height:18px;color:var(--muted)"></i>
-        </summary>
-        <p class="faq-a mt-3 text-sm leading-relaxed" style="color:var(--muted)" data-i18n="faq.a2">Sí, el bot necesita un servidor donde ejecutarse 24/7. El hosting lo contratás vos por tu cuenta; yo te oriento sobre opciones económicas y te ayudo con la instalación.</p>
-      </details>
-
-      <details class="faq-item reveal reveal-delay-2 card px-7 py-5">
-        <summary class="flex items-center justify-between gap-4 font-display font-semibold">
-          <span data-i18n="faq.q3">¿Hacés bots totalmente personalizados?</span>
-          <i data-lucide="chevron-down" class="chevron shrink-0" style="width:18px;height:18px;color:var(--muted)"></i>
-        </summary>
-        <p class="faq-a mt-3 text-sm leading-relaxed" style="color:var(--muted)" data-i18n="faq.a3">Sí, es una de mis especialidades: sistemas de RPG, combate, economía o narrativa con IA construidos desde cero para tu servidor.</p>
-      </details>
-
-      <details class="faq-item reveal reveal-delay-3 card px-7 py-5">
-        <summary class="flex items-center justify-between gap-4 font-display font-semibold">
-          <span data-i18n="faq.q4">¿Qué tecnologías usás?</span>
-          <i data-lucide="chevron-down" class="chevron shrink-0" style="width:18px;height:18px;color:var(--muted)"></i>
-        </summary>
-        <p class="faq-a mt-3 text-sm leading-relaxed" style="color:var(--muted)" data-i18n="faq.a4">Trabajo principalmente con Python (discord.py) y JavaScript (discord.js), bases de datos SQLite e integración de IA para sistemas narrativos.</p>
-      </details>
-
-      <details class="faq-item reveal reveal-delay-4 card px-7 py-5">
-        <summary class="flex items-center justify-between gap-4 font-display font-semibold">
-          <span data-i18n="faq.q5">¿Cuánto tarda el desarrollo?</span>
-          <i data-lucide="chevron-down" class="chevron shrink-0" style="width:18px;height:18px;color:var(--muted)"></i>
-        </summary>
-        <p class="faq-a mt-3 text-sm leading-relaxed" style="color:var(--muted)" data-i18n="faq.a5">Depende de la complejidad: desde unos pocos días para bots sencillos hasta varias semanas para sistemas avanzados a medida.</p>
-      </details>
-    </div>
-  </div>
-</section>
-
-<!-- ============ CONTACTO ============ -->
-<section id="contacto" class="relative py-28 md:py-40 px-6 overflow-hidden">
-  <div class="nova-glow blob" style="width:600px;height:600px; background:radial-gradient(circle, rgba(6,182,212,0.3), transparent 70%); bottom:-260px; left:50%; transform:translateX(-50%);"></div>
-  <div class="relative max-w-3xl mx-auto text-center">
-    <p class="reveal section-eyebrow mb-5" data-i18n="contacto.eyebrow">Empecemos</p>
-    <h2 class="reveal reveal-delay-1 font-display font-bold text-3xl sm:text-5xl mb-6 leading-tight" data-i18n="contacto.title">
-      ¿Listo para darle vida<br class="hidden sm:block"> a tu bot?
-    </h2>
-    <p class="reveal reveal-delay-2 text-lg mb-10" style="color:var(--muted)" data-i18n="contacto.subtitle">Contame tu idea y te paso un presupuesto claro, sin compromiso.</p>
-
-    <a href="https://discord.com/users/1334723582592548884" target="_blank" rel="noopener noreferrer" class="reveal reveal-delay-3 btn btn-primary px-10 py-5 text-base inline-flex">
-      <span data-i18n="nav.cta">Solicitar presupuesto</span>
-      <i data-lucide="send" style="width:18px;height:18px"></i>
-    </a>
-
-    <div class="reveal reveal-delay-4 flex flex-wrap items-center justify-center gap-4 mt-14">
-      <a href="https://discord.com/users/1334723582592548884" target="_blank" rel="noopener noreferrer" class="btn btn-ghost px-5 py-3 text-sm">
-        <i data-lucide="message-circle" style="width:16px;height:16px"></i> @ranarisfr
-      </a>
-    </div>
-  </div>
-</section>
-
-<!-- ============ FOOTER ============ -->
-<footer class="relative px-6 py-10 border-t" style="border-color:var(--border)">
-  <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 text-sm" style="color:var(--muted-2)">
-    <div class="flex items-center gap-2.5">
-      <span class="flex h-7 w-7 items-center justify-center rounded-lg overflow-hidden" style="background:var(--grad)"><img src="data:image/png;base64,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" alt="Ranaris Shop" style="width:16px;height:16px;object-fit:contain"></span>
-      <span class="font-display font-semibold">Ranaris Shop</span>
-    </div>
-    <p data-i18n="footer.text">© 2026 Ranaris Shop. Desarrollo de bots de Discord a medida.</p>
-  </div>
-</footer>
+<div id="cz"><div id="czp">
+  <h5 data-en="Mode">Modo</h5><div class="seg" id="sTheme"><button data-v="light" data-en="Light">Claro</button><button data-v="dark" data-en="Dark">Oscuro</button></div>
+  <h5 data-en="Accent color">Color de acento</h5><div class="sw" id="sAcc"></div>
+  <h5 data-en="Animations">Animaciones</h5><div class="seg" id="sAnim"><button data-v="on" data-en="On">Sí</button><button data-v="off" data-en="Off">No</button></div>
+</div><button id="czb" aria-label="Personalizar"><i data-lucide="palette"></i></button></div>
 
 <script>
-lucide.createIcons();
-
-/* ============================================================
-   I18N (ES / EN)
-============================================================ */
-const I18N = {
-  es: {
-    "nav.bots":"Bots","nav.proceso":"Cómo trabajo","nav.precios":"Precios","nav.incluye":"Qué incluye",
-    "nav.portfolio":"Portfolio","nav.comentarios":"Comentarios","nav.faq":"FAQ","nav.cta":"Solicitar presupuesto",
-    "hero.badge":"Bots a medida, listos para producción",
-    "hero.title1":"Bots de Discord diseñados para","hero.title2":"hacer crecer tu comunidad.",
-    "hero.desc":"Desarrollo bots personalizados para Discord: moderación, economía, tickets y sistemas propios de RPG con IA con código prolijo, base de datos dedicada y soporte real después de la entrega.",
-    "hero.btnVer":"Ver bots","hero.tag2":"SQLite dedicada","hero.tag3":"IA narrativa (Groq)",
-    "hero.mockUsed":" usó ","hero.mockLevel":"Kaito — Nivel 34","hero.mockCoins":"❖ Monedas","hero.mockClass":"⚔ Clase","hero.mockClassVal":"Vanguardia","hero.mockOnline":"bot en línea · 99.9% uptime",
-    "bots.eyebrow":"Catálogo","bots.title":"Mis bots","bots.subtitle":"Cuatro puntos de partida sólidos. Cada uno se adapta al estilo, tema y reglas de tu servidor.","bots.verMas":"Ver más",
-    "bots.c1.tag":"Moderación","bots.c1.title":"Bot de Moderación","bots.c1.desc":"Mantiene el orden en tu servidor con automoderación inteligente, sanciones y registros configurables.",
-    "bots.c1.f1":"Automoderación de spam, links e insultos","bots.c1.f2":"Advertencias, mutes, kicks y baneos","bots.c1.f3":"Logs de auditoría configurables por canal","bots.c1.f4":"Filtros y palabras prohibidas personalizables",
-    "bots.c2.tag":"Economía","bots.c2.title":"Bot de Economía","bots.c2.desc":"Un sistema económico completo con trabajos, tienda y rankings para mantener a la comunidad activa.",
-    "bots.c2.f1":"Monedas, trabajos y recompensa diaria","bots.c2.f2":"Tienda, inventario y objetos","bots.c2.f3":"Transferencias entre usuarios","bots.c2.f4":"Rankings, apuestas y minijuegos",
-    "bots.c3.tag":"Soporte","bots.c3.title":"Bot de Tickets","bots.c3.desc":"Soporte organizado para tu servidor con paneles, categorías y transcripciones automáticas.",
-    "bots.c3.f1":"Panel de tickets con botones","bots.c3.f2":"Categorías y roles de staff configurables","bots.c3.f3":"Transcripciones automáticas al cerrar","bots.c3.f4":"Notificaciones y logs de actividad",
-    "bots.c4.tag":"A medida","bots.c4.title":"Bot Personalizado","bots.c4.desc":"¿Tenés una idea distinta? Desarrollo sistemas propios de RPG, narrativa con IA y rol para comunidades de anime.",
-    "bots.c4.f1":"Sistemas de combate y estadísticas","bots.c4.f2":"Narrativa asistida por IA","bots.c4.f3":"Base de datos y paneles de administración propios","bots.c4.f4":"Integraciones y funciones a medida",
-    "proceso.eyebrow":"Proceso","proceso.title":"¿Cómo trabajo?","proceso.subtitle":"Cuatro pasos, sin vueltas, con comunicación clara de principio a fin.",
-    "proceso.s1.title":"Contame tu idea","proceso.s1.desc":"Me explicás qué necesitás para tu servidor: tema, funciones, referencias. Cuanto más contexto, mejor propuesta.",
-    "proceso.s2.title":"Acordamos el presupuesto","proceso.s2.desc":"Con la idea clara, definimos alcance, tiempos y precio final antes de escribir una sola línea de código.",
-    "proceso.s3.title":"Desarrollo el bot","proceso.s3.desc":"Construyo tu bot con código limpio y base de datos propia, con avances y consultas durante el proceso.",
-    "proceso.s4.title":"Entrega y soporte","proceso.s4.desc":"Recibís el bot instalado y configurado, con 3 meses de soporte incluido para corregir cualquier error.",
-    "precios.eyebrow":"Inversión","precios.title":"Precios","precios.subtitle":"Rangos orientativos según la complejidad. El valor final siempre se acuerda antes de empezar.","precios.consultar":"Consultar",
-    "precios.p1.tag":"Ayuda / consultas","precios.p1.desc":"Ayuda o consultas sobre bots ya creados, además de parches puntuales.","precios.p1.f1":"Diagnóstico y ayuda técnica","precios.p1.f2":"Parches y correcciones puntuales",
-    "precios.p2.tag":"Bots chicos","precios.p2.desc":"Un sistema único: economía, moderación u otro, bien resuelto.","precios.p2.f1":"Un sistema principal","precios.p2.f2":"Entrega rápida",
-    "precios.p3.tag":"Bots medianos","precios.p3.desc":"Bot con 3 sistemas diferentes conectados entre sí.","precios.p3.f1":"3 sistemas integrados","precios.p3.f2":"Base de datos propia","precios.p3.f3":"Soporte de 3 meses",
-    "precios.p4.tag":"Bots grandes","precios.p4.desc":"4 o más sistemas junto a IA: RPG, combate, narrativa, paneles propios.","precios.p4.f1":"4+ sistemas integrados","precios.p4.f2":"Incluye integración con IA",
-    "precios.addonIA.title":"Agregar IA a un bot","precios.addonIA.desc":"Ya sea un bot creado o por crear: se suma <span style=\"color:var(--text)\">+$4 USD</span> al precio final.",
-    "precios.addonDash.title":"Dashboard web funcional","precios.addonDash.desc":"Panel web para gestionar tu bot desde el navegador: se suma <span style=\"color:var(--text)\">+$1 USD</span> al precio final.",
-    "precios.nota":"El precio final depende de la complejidad, cantidad de funciones y tiempo de desarrollo del bot.",
-    "incluye.eyebrow":"Todo resuelto","incluye.title":"¿Qué incluye?","incluye.subtitle":"Cada proyecto se entrega listo para usar, no solo el código.",
-    "incluye.i1.title":"Código limpio","incluye.i1.desc":"Organizado, comentado y fácil de mantener o ampliar más adelante.",
-    "incluye.i2.title":"Base de datos","incluye.i2.desc":"Persistencia propia para que ningún dato se pierda al reiniciar el bot.",
-    "incluye.i3.title":"Configuración","incluye.i3.desc":"Ajustado a los roles, canales y reglas específicas de tu servidor.",
-    "incluye.i4.title":"Instalación","incluye.i4.desc":"Me encargo de que el bot quede online y funcionando en tu servidor.",
-    "incluye.i5.title":"Soporte 3 meses","incluye.i5.desc":"Acompañamiento después de la entrega para dudas o ajustes.",
-    "incluye.i6.title":"Corrección de errores","incluye.i6.desc":"Si algo falla, lo reviso y lo soluciono sin costo dentro del soporte.",
-    "portfolio.eyebrow":"Trabajos","portfolio.title":"Portfolio","portfolio.subtitle":"Capturas, clips y detalles de bots que ya entregué.",
-    "portfolio.adminMode":"Modo admin","portfolio.newPost":"Nueva publicación","portfolio.loading":"Cargando publicaciones…","portfolio.empty":"Todavía no hay publicaciones en el portfolio.",
-    "adminModal.title":"Acceso admin","adminModal.desc":"Ingresá la contraseña para publicar en el portfolio.","adminModal.placeholder":"Contraseña","adminModal.error":"Contraseña incorrecta.",
-    "postModal.title":"Nueva publicación","postModal.labelTitle":"Título","postModal.phTitle":"Ej: Bot RPG para servidor de anime",
-    "postModal.labelDesc":"Descripción","postModal.phDesc":"Contá de qué se trata este proyecto",
-    "postModal.labelImg":"Foto (opcional)","postModal.labelVid":"Video (opcional, pegá un link de YouTube o un .mp4)","postModal.phVid":"https://...","postModal.error":"Completá al menos el título.",
-    "common.cancel":"Cancelar","common.enter":"Entrar","common.publish":"Publicar",
-    "comentarios.eyebrow":"Opiniones","comentarios.title":"Comentarios y recomendaciones","comentarios.subtitle":"Dejá tu recomendación. Todos pueden verla, siempre.",
-    "comentarios.phName":"Tu nombre o usuario de Discord","comentarios.phMsg":"Contá tu experiencia con el bot o el servicio","comentarios.error":"Completá tu nombre y comentario.","comentarios.submit":"Publicar comentario",
-    "comentarios.loading":"Cargando comentarios…","comentarios.empty":"Sé el primero en dejar una recomendación.",
-    "terminos.eyebrow":"Reglas claras","terminos.title":"Términos y condiciones","terminos.subtitle":"Para que ambas partes sepamos exactamente qué esperar.",
-    "terminos.t1":"El presupuesto se acuerda <span style=\"color:var(--text)\">antes de comenzar</span> el desarrollo.",
-    "terminos.t2":"El desarrollo puede tardar <span style=\"color:var(--text)\">entre algunos días y varias semanas</span>, según la complejidad del proyecto.",
-    "terminos.t3":"Si existe algún retraso, <span style=\"color:var(--text)\">el cliente es informado</span> con anticipación.",
-    "terminos.t4":"Incluye <span style=\"color:var(--text)\">soporte durante 3 meses</span> para corregir errores del bot.",
-    "terminos.t5":"Las <span style=\"color:var(--text)\">funciones nuevas</span> pedidas después de la entrega pueden tener un costo adicional.",
-    "terminos.t6":"No hay reembolsos una vez <span style=\"color:var(--text)\">iniciado el desarrollo</span>, salvo acuerdo entre ambas partes.",
-    "terminos.t7":"El <span style=\"color:var(--text)\">hosting del bot es responsabilidad del cliente</span>: lo contrata por su cuenta, no está incluido ni administrado por Ranaris.",
-    "faq.eyebrow":"Dudas frecuentes","faq.title":"Preguntas frecuentes",
-    "faq.q1":"¿El bot funciona 24/7?","faq.a1":"Sí, siempre que esté alojado en un hosting activo. Te oriento sobre las opciones disponibles según tu presupuesto.",
-    "faq.q2":"¿Necesito contratar hosting?","faq.a2":"Sí, el bot necesita un servidor donde ejecutarse 24/7. El hosting lo contratás vos por tu cuenta; yo te oriento sobre opciones económicas y te ayudo con la instalación.",
-    "faq.q3":"¿Hacés bots totalmente personalizados?","faq.a3":"Sí, es una de mis especialidades: sistemas de RPG, combate, economía o narrativa con IA construidos desde cero para tu servidor.",
-    "faq.q4":"¿Qué tecnologías usás?","faq.a4":"Trabajo principalmente con Python (discord.py) y JavaScript (discord.js), bases de datos SQLite e integración de IA para sistemas narrativos.",
-    "faq.q5":"¿Cuánto tarda el desarrollo?","faq.a5":"Depende de la complejidad: desde unos pocos días para bots sencillos hasta varias semanas para sistemas avanzados a medida.",
-    "contacto.eyebrow":"Empecemos","contacto.title":"¿Listo para darle vida<br class=\"hidden sm:block\"> a tu bot?","contacto.subtitle":"Contame tu idea y te paso un presupuesto claro, sin compromiso.",
-    "footer.text":"© 2026 Ranaris Shop. Desarrollo de bots de Discord a medida."
-  },
-  en: {
-    "nav.bots":"Bots","nav.proceso":"How I work","nav.precios":"Pricing","nav.incluye":"What's included",
-    "nav.portfolio":"Portfolio","nav.comentarios":"Reviews","nav.faq":"FAQ","nav.cta":"Request a quote",
-    "hero.badge":"Custom bots, production-ready",
-    "hero.title1":"Discord bots designed to","hero.title2":"grow your community.",
-    "hero.desc":"I build custom Discord bots: moderation, economy, tickets, and AI-powered RPG systems, with clean code, a dedicated database, and real support after delivery.",
-    "hero.btnVer":"View bots","hero.tag2":"Dedicated SQLite","hero.tag3":"AI storytelling (Groq)",
-    "hero.mockUsed":" used ","hero.mockLevel":"Kaito — Level 34","hero.mockCoins":"❖ Coins","hero.mockClass":"⚔ Class","hero.mockClassVal":"Vanguard","hero.mockOnline":"bot online · 99.9% uptime",
-    "bots.eyebrow":"Catalog","bots.title":"My bots","bots.subtitle":"Four solid starting points. Each one adapts to your server's style, theme, and rules.","bots.verMas":"See more",
-    "bots.c1.tag":"Moderation","bots.c1.title":"Moderation Bot","bots.c1.desc":"Keeps your server in order with smart automod, sanctions, and configurable logs.",
-    "bots.c1.f1":"Automod for spam, links, and insults","bots.c1.f2":"Warnings, mutes, kicks, and bans","bots.c1.f3":"Configurable audit logs per channel","bots.c1.f4":"Custom filters and banned words",
-    "bots.c2.tag":"Economy","bots.c2.title":"Economy Bot","bots.c2.desc":"A full economy system with jobs, shop, and leaderboards to keep the community active.",
-    "bots.c2.f1":"Coins, jobs, and daily rewards","bots.c2.f2":"Shop, inventory, and items","bots.c2.f3":"Transfers between users","bots.c2.f4":"Leaderboards, betting, and minigames",
-    "bots.c3.tag":"Support","bots.c3.title":"Ticket Bot","bots.c3.desc":"Organized support for your server with panels, categories, and automatic transcripts.",
-    "bots.c3.f1":"Ticket panel with buttons","bots.c3.f2":"Configurable categories and staff roles","bots.c3.f3":"Automatic transcripts on close","bots.c3.f4":"Notifications and activity logs",
-    "bots.c4.tag":"Custom","bots.c4.title":"Custom Bot","bots.c4.desc":"Got a different idea? I build custom RPG systems, AI-driven storytelling, and roleplay for anime communities.",
-    "bots.c4.f1":"Combat and stats systems","bots.c4.f2":"AI-assisted storytelling","bots.c4.f3":"Own database and admin panels","bots.c4.f4":"Custom integrations and features",
-    "proceso.eyebrow":"Process","proceso.title":"How I work","proceso.subtitle":"Four steps, no detours, with clear communication from start to finish.",
-    "proceso.s1.title":"Tell me your idea","proceso.s1.desc":"You explain what your server needs: theme, features, references. The more context, the better the proposal.",
-    "proceso.s2.title":"We agree on the budget","proceso.s2.desc":"Once the idea is clear, we define scope, timeline, and final price before writing a single line of code.",
-    "proceso.s3.title":"I build the bot","proceso.s3.desc":"I build your bot with clean code and its own database, with updates and check-ins during the process.",
-    "proceso.s4.title":"Delivery and support","proceso.s4.desc":"You get the bot installed and configured, with 3 months of support included to fix any bugs.",
-    "precios.eyebrow":"Investment","precios.title":"Pricing","precios.subtitle":"Ballpark ranges based on complexity. The final price is always agreed before starting.","precios.consultar":"Ask",
-    "precios.p1.tag":"Help / questions","precios.p1.desc":"Help or questions about existing bots, plus one-off patches.","precios.p1.f1":"Diagnosis and technical help","precios.p1.f2":"Patches and one-off fixes",
-    "precios.p2.tag":"Small bots","precios.p2.desc":"A single system: economy, moderation, or other, well built.","precios.p2.f1":"One main system","precios.p2.f2":"Fast delivery",
-    "precios.p3.tag":"Medium bots","precios.p3.desc":"Bot with 3 different systems connected together.","precios.p3.f1":"3 integrated systems","precios.p3.f2":"Own database","precios.p3.f3":"3 months of support",
-    "precios.p4.tag":"Large bots","precios.p4.desc":"4+ systems plus AI: RPG, combat, storytelling, custom panels.","precios.p4.f1":"4+ integrated systems","precios.p4.f2":"Includes AI integration",
-    "precios.addonIA.title":"Add AI to a bot","precios.addonIA.desc":"Whether it's an existing bot or a new one: adds <span style=\"color:var(--text)\">+$4 USD</span> to the final price.",
-    "precios.addonDash.title":"Functional web dashboard","precios.addonDash.desc":"A web panel to manage your bot from the browser: adds <span style=\"color:var(--text)\">+$1 USD</span> to the final price.",
-    "precios.nota":"The final price depends on complexity, number of features, and development time.",
-    "incluye.eyebrow":"All handled","incluye.title":"What's included?","incluye.subtitle":"Every project is delivered ready to use, not just the code.",
-    "incluye.i1.title":"Clean code","incluye.i1.desc":"Organized, commented, and easy to maintain or extend later on.",
-    "incluye.i2.title":"Database","incluye.i2.desc":"Its own persistence so no data is lost when the bot restarts.",
-    "incluye.i3.title":"Configuration","incluye.i3.desc":"Adjusted to your server's specific roles, channels, and rules.",
-    "incluye.i4.title":"Installation","incluye.i4.desc":"I make sure the bot goes online and works on your server.",
-    "incluye.i5.title":"3 months of support","incluye.i5.desc":"Follow-up after delivery for questions or adjustments.",
-    "incluye.i6.title":"Bug fixes","incluye.i6.desc":"If something breaks, I review and fix it at no cost within support.",
-    "portfolio.eyebrow":"Work","portfolio.title":"Portfolio","portfolio.subtitle":"Screenshots, clips, and details from bots I've already delivered.",
-    "portfolio.adminMode":"Admin mode","portfolio.newPost":"New post","portfolio.loading":"Loading posts…","portfolio.empty":"No portfolio posts yet.",
-    "adminModal.title":"Admin access","adminModal.desc":"Enter the password to post to the portfolio.","adminModal.placeholder":"Password","adminModal.error":"Incorrect password.",
-    "postModal.title":"New post","postModal.labelTitle":"Title","postModal.phTitle":"E.g.: RPG bot for an anime server",
-    "postModal.labelDesc":"Description","postModal.phDesc":"Tell us what this project is about",
-    "postModal.labelImg":"Photo (optional)","postModal.labelVid":"Video (optional, paste a YouTube link or a .mp4)","postModal.phVid":"https://...","postModal.error":"Fill in at least the title.",
-    "common.cancel":"Cancel","common.enter":"Enter","common.publish":"Publish",
-    "comentarios.eyebrow":"Reviews","comentarios.title":"Comments and recommendations","comentarios.subtitle":"Leave your recommendation. Everyone can always see it.",
-    "comentarios.phName":"Your name or Discord username","comentarios.phMsg":"Tell us about your experience with the bot or the service","comentarios.error":"Fill in your name and comment.","comentarios.submit":"Post comment",
-    "comentarios.loading":"Loading comments…","comentarios.empty":"Be the first to leave a recommendation.",
-    "terminos.eyebrow":"Clear rules","terminos.title":"Terms and conditions","terminos.subtitle":"So both sides know exactly what to expect.",
-    "terminos.t1":"The budget is agreed <span style=\"color:var(--text)\">before</span> development starts.",
-    "terminos.t2":"Development can take <span style=\"color:var(--text)\">anywhere from a few days to several weeks</span>, depending on the project's complexity.",
-    "terminos.t3":"If there's any delay, <span style=\"color:var(--text)\">the client is notified</span> in advance.",
-    "terminos.t4":"Includes <span style=\"color:var(--text)\">3 months of support</span> to fix bot errors.",
-    "terminos.t5":"New features requested after delivery may have an <span style=\"color:var(--text)\">additional cost</span>.",
-    "terminos.t6":"No refunds once <span style=\"color:var(--text)\">development has started</span>, unless agreed by both parties.",
-    "terminos.t7":"<span style=\"color:var(--text)\">Bot hosting is the client's responsibility</span>: it's hired independently, not included or managed by Ranaris.",
-    "faq.eyebrow":"Common questions","faq.title":"Frequently asked questions",
-    "faq.q1":"Does the bot run 24/7?","faq.a1":"Yes, as long as it's hosted on active hosting. I'll guide you through the options based on your budget.",
-    "faq.q2":"Do I need to get hosting?","faq.a2":"Yes, the bot needs a server to run 24/7. You hire the hosting yourself; I guide you toward affordable options and help with installation.",
-    "faq.q3":"Do you build fully custom bots?","faq.a3":"Yes, it's one of my specialties: RPG, combat, economy, or AI-driven storytelling systems built from scratch for your server.",
-    "faq.q4":"What technologies do you use?","faq.a4":"I mainly work with Python (discord.py) and JavaScript (discord.js), SQLite databases, and AI integration for narrative systems.",
-    "faq.q5":"How long does development take?","faq.a5":"It depends on complexity: from a few days for simple bots to several weeks for advanced custom systems.",
-    "contacto.eyebrow":"Let's start","contacto.title":"Ready to bring<br class=\"hidden sm:block\"> your bot to life?","contacto.subtitle":"Tell me your idea and I'll give you a clear, no-obligation quote.",
-    "footer.text":"© 2026 Ranaris Shop. Custom Discord bot development."
-  }
+const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
+const store={get(k){try{return localStorage.getItem(k)}catch(e){return null}},set(k,v){try{localStorage.setItem(k,v)}catch(e){}}};
+/* idioma */
+$$('[data-en]').forEach(e=>e.dataset.es=e.innerHTML);$$('[data-enph]').forEach(e=>e.dataset.esph=e.placeholder);
+let lang=store.get('rl')||((navigator.language||'es').startsWith('es')?'es':'en');
+function setLang(l){lang=l;document.documentElement.lang=l;$$('[data-en]').forEach(e=>e.innerHTML=l==='en'?e.dataset.en:e.dataset.es);$$('[data-enph]').forEach(e=>e.placeholder=l==='en'?e.dataset.enph:e.dataset.esph);$$('.lang button').forEach(b=>b.classList.toggle('on',b.dataset.l===l));store.set('rl',l);loadC()}
+$$('.lang button').forEach(b=>b.onclick=()=>setLang(b.dataset.l));
+/* menú */
+$('#burger').onclick=()=>$('#links').classList.toggle('open');$$('#links a').forEach(a=>a.onclick=()=>$('#links').classList.remove('open'));
+/* marquee */
+$('#mq').innerHTML=('<span>MILIL</span><span>✦</span><span>LuvieBot</span><span>✦</span><span>ALL-IN</span><span>✦</span><span>NINI BOT</span><span>✦</span><span>Tableware</span><span>✦</span><span>SATOM</span><span>✦</span><span>LUNA</span><span>✦</span>').repeat(4);
+/* reveal + contadores */
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.12});
+$$('.rv').forEach((e,i)=>{e.style.transitionDelay=(i%4)*70+'ms';io.observe(e)});
+$$('[data-n]').forEach(el=>{const n=+el.dataset.n;let c=0;const t=setInterval(()=>{el.textContent=++c;if(c>=n)clearInterval(t)},180)});
+/* personalizar */
+const ACC=['#3b7bff','#0ea5e9','#14b8a6','#6366f1','#2563eb'];
+function acc(c){document.documentElement.style.setProperty('--acc',c);store.set('ra',c);$$('#sAcc button').forEach(b=>b.classList.toggle('on',b.dataset.c===c))}
+$('#sAcc').innerHTML=ACC.map(c=>`<button data-c="${c}" style="background:${c}" aria-label="${c}"></button>`).join('');
+$$('#sAcc button').forEach(b=>b.onclick=()=>acc(b.dataset.c));
+function theme(t){document.documentElement.dataset.theme=t;store.set('rt',t);$$('#sTheme button').forEach(b=>b.classList.toggle('on',b.dataset.v===t))}
+$$('#sTheme button').forEach(b=>b.onclick=()=>theme(b.dataset.v));
+function anim(v){document.body.classList.toggle('noanim',v==='off');store.set('rn',v);$$('#sAnim button').forEach(b=>b.classList.toggle('on',b.dataset.v===v))}
+$$('#sAnim button').forEach(b=>b.onclick=()=>anim(b.dataset.v));
+$('#czb').onclick=()=>$('#czp').classList.toggle('open');
+theme(store.get('rt')||'dark');acc(ACC.includes(store.get('ra'))?store.get('ra'):ACC[0]);anim(store.get('rn')||'on');
+/* comentarios (usa window.storage si existe, si no localStorage) */
+const S={async get(k){if(window.storage){try{const r=await window.storage.get(k,true);return r&&r.value}catch(e){return null}}return store.get('c_'+k)},async set(k,v){if(window.storage)return window.storage.set(k,v,true);store.set('c_'+k,v)}};
+const esc=s=>{const d=document.createElement('div');d.textContent=s;return d.innerHTML};
+function ago(iso){const m=Math.max(0,Math.floor((Date.now()-new Date(iso))/6e4)),en=lang==='en';if(m<1)return en?'just now':'recién';if(m<60)return en?m+' min ago':'hace '+m+' min';const h=Math.floor(m/60);if(h<24)return en?h+' h ago':'hace '+h+' h';const d=Math.floor(h/24);return en?d+' d ago':'hace '+d+' d'}
+async function loadC(){
+  const ids=JSON.parse(await S.get('comments:index')||'[]'),out=[];
+  for(const id of ids){const v=await S.get('comments:item:'+id);if(v)out.push(JSON.parse(v))}
+  out.sort((a,b)=>new Date(b.createdAt)-new Date(a.createdAt));
+  $('#cstat').textContent=out.length?'':(lang==='en'?'Be the first to leave a recommendation.':'Sé el primero en dejar una recomendación.');
+  $('#clist').innerHTML=out.map(c=>`<div class="cm"><b>${esc(c.name)}</b><small>${ago(c.createdAt)}</small><p>${esc(c.message)}</p></div>`).join('');
+}
+$('#csend').onclick=async()=>{
+  const name=$('#cn').value.trim(),message=$('#cmsg').value.trim();
+  if(!name||!message){$('#cerr').classList.remove('hidden');return}$('#cerr').classList.add('hidden');
+  const c={id:'c_'+Date.now()+Math.random().toString(36).slice(2,6),name,message,createdAt:new Date().toISOString()};
+  try{await S.set('comments:item:'+c.id,JSON.stringify(c));const ids=JSON.parse(await S.get('comments:index')||'[]');ids.push(c.id);await S.set('comments:index',JSON.stringify(ids));$('#cn').value=$('#cmsg').value='';loadC()}
+  catch(e){alert(lang==='en'?'Could not post the comment.':'No se pudo publicar el comentario.')}
 };
-
-function detectLang(){
-  const saved = localStorage.getItem('ranaris_lang');
-  if (saved === 'es' || saved === 'en') return saved;
-  const nav = (navigator.language || navigator.userLanguage || 'es').toLowerCase();
-  return nav.startsWith('es') ? 'es' : 'en';
-}
-
-let currentLang = detectLang();
-
-function applyLang(lang){
-  currentLang = lang;
-  document.documentElement.setAttribute('lang', lang);
-  const dict = I18N[lang];
-  document.querySelectorAll('[data-i18n]').forEach(el => {
-    const key = el.getAttribute('data-i18n');
-    if (dict[key] !== undefined) el.innerHTML = dict[key];
-  });
-  document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
-    const key = el.getAttribute('data-i18n-placeholder');
-    if (dict[key] !== undefined) el.setAttribute('placeholder', dict[key]);
-  });
-  document.querySelectorAll('.lang-btn').forEach(btn => {
-    btn.classList.toggle('active', btn.getAttribute('data-lang') === lang);
-  });
-  localStorage.setItem('ranaris_lang', lang);
-}
-
-document.querySelectorAll('.lang-btn').forEach(btn => {
-  btn.addEventListener('click', () => applyLang(btn.getAttribute('data-lang')));
-});
-
-applyLang(currentLang);
-
-// nav scroll state
-const nav = document.getElementById('nav');
-window.addEventListener('scroll', () => {
-  nav.classList.toggle('scrolled', window.scrollY > 20);
-}, { passive:true });
-
-// mobile menu
-const menuBtn = document.getElementById('menuBtn');
-const menuIcon = document.getElementById('menuIcon');
-const mobileMenu = document.getElementById('mobileMenu');
-let menuOpen = false;
-menuBtn.addEventListener('click', () => {
-  menuOpen = !menuOpen;
-  menuBtn.setAttribute('aria-expanded', menuOpen);
-  if (menuOpen) {
-    mobileMenu.style.maxHeight = mobileMenu.scrollHeight + 'px';
-    mobileMenu.style.opacity = '1';
-    menuIcon.setAttribute('data-lucide', 'x');
-  } else {
-    mobileMenu.style.maxHeight = '0px';
-    mobileMenu.style.opacity = '0';
-    menuIcon.setAttribute('data-lucide', 'menu');
-  }
-  lucide.createIcons();
-});
-mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
-  menuOpen = false;
-  mobileMenu.style.maxHeight = '0px';
-  mobileMenu.style.opacity = '0';
-  menuIcon.setAttribute('data-lucide', 'menu');
-  lucide.createIcons();
-}));
-
-// scroll reveal
-const revealEls = document.querySelectorAll('.reveal');
-const io = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add('in');
-      io.unobserve(entry.target);
-    }
-  });
-}, { threshold:0.12, rootMargin:'0px 0px -60px 0px' });
-revealEls.forEach(el => io.observe(el));
-
-// "ver más" toggles on bot cards
-document.querySelectorAll('.ver-mas').forEach(btn => {
-  btn.addEventListener('click', () => {
-    const card = btn.closest('[data-card]');
-    const hiddenItems = card.querySelectorAll('.more-feat');
-    const expanded = btn.getAttribute('data-expanded') === 'true';
-    hiddenItems.forEach(li => li.classList.toggle('hidden', expanded));
-    btn.setAttribute('data-expanded', String(!expanded));
-    btn.querySelector('.chev').style.transform = expanded ? 'rotate(0deg)' : 'rotate(180deg)';
-    const label = btn.querySelector('span');
-    const dict = I18N[currentLang];
-    label.textContent = expanded ? dict['bots.verMas'] : (currentLang === 'es' ? 'Ver menos' : 'See less');
-  });
-});
-
-// hero particles
-const particlesContainer = document.getElementById('heroParticles');
-const particleCount = window.innerWidth < 640 ? 14 : 28;
-for (let i = 0; i < particleCount; i++) {
-  const p = document.createElement('span');
-  p.className = 'particle';
-  p.style.left = Math.random() * 100 + '%';
-  p.style.top = Math.random() * 100 + '%';
-  p.style.animationDelay = (Math.random() * 6) + 's';
-  p.style.animationDuration = (4 + Math.random() * 5) + 's';
-  p.style.background = Math.random() > 0.5 ? '#6D28D9' : '#06B6D4';
-  particlesContainer.appendChild(p);
-}
-
-// close other open faq items (accordion behavior)
-document.querySelectorAll('.faq-item').forEach(item => {
-  item.addEventListener('toggle', () => {
-    if (item.open) {
-      document.querySelectorAll('.faq-item').forEach(other => {
-        if (other !== item) other.open = false;
-      });
-    }
-  });
-});
-
-/* ============================================================
-   PORTFOLIO (admin-gated posts) + COMENTARIOS (público)
-   Usa window.storage (persistente entre sesiones).
-   Nota: la contraseña de admin es una protección básica del lado
-   del cliente, pensada para uso informal (no es seguridad real).
-============================================================ */
-const ADMIN_PASSWORD = 'ranaris2026'; // <-- cambiá esto por tu propia contraseña
-let isAdmin = false;
-
-function escapeHTML(str){
-  const div = document.createElement('div');
-  div.textContent = str == null ? '' : String(str);
-  return div.innerHTML;
-}
-function timeAgoEs(iso){
-  const d = new Date(iso);
-  const diff = Math.max(0, Date.now() - d.getTime());
-  const mins = Math.floor(diff/60000);
-  if (currentLang === 'en'){
-    if (mins < 1) return 'just now';
-    if (mins < 60) return `${mins} min ago`;
-    const hrs = Math.floor(mins/60);
-    if (hrs < 24) return `${hrs} h ago`;
-    const days = Math.floor(hrs/24);
-    if (days < 30) return `${days} d ago`;
-    return d.toLocaleDateString('en-US', { day:'numeric', month:'short', year:'numeric' });
-  }
-  if (mins < 1) return 'recién';
-  if (mins < 60) return `hace ${mins} min`;
-  const hrs = Math.floor(mins/60);
-  if (hrs < 24) return `hace ${hrs} h`;
-  const days = Math.floor(hrs/24);
-  if (days < 30) return `hace ${days} d`;
-  return d.toLocaleDateString('es-AR', { day:'numeric', month:'short', year:'numeric' });
-}
-
-/* ---------- Portfolio ---------- */
-const portfolioGrid = document.getElementById('portfolioGrid');
-const portfolioStatus = document.getElementById('portfolioStatus');
-const portfolioEmpty = document.getElementById('portfolioEmpty');
-const adminToggleBtn = document.getElementById('adminToggleBtn');
-const adminToggleLabel = document.getElementById('adminToggleLabel');
-const newPostBtn = document.getElementById('newPostBtn');
-const adminModal = document.getElementById('adminModal');
-const adminPasswordInput = document.getElementById('adminPasswordInput');
-const adminError = document.getElementById('adminError');
-const adminCancelBtn = document.getElementById('adminCancelBtn');
-const adminSubmitBtn = document.getElementById('adminSubmitBtn');
-const postModal = document.getElementById('postModal');
-const postTitle = document.getElementById('postTitle');
-const postDescription = document.getElementById('postDescription');
-const postImageFile = document.getElementById('postImageFile');
-const postVideoUrl = document.getElementById('postVideoUrl');
-const postError = document.getElementById('postError');
-const postCancelBtn = document.getElementById('postCancelBtn');
-const postSubmitBtn = document.getElementById('postSubmitBtn');
-
-function openModal(el){ el.classList.remove('hidden'); el.classList.add('flex'); }
-function closeModal(el){ el.classList.add('hidden'); el.classList.remove('flex'); }
-
-function toYouTubeEmbed(url){
-  try{
-    const u = new URL(url);
-    let id = null;
-    if (u.hostname.includes('youtu.be')) id = u.pathname.slice(1);
-    else if (u.hostname.includes('youtube.com')) id = u.searchParams.get('v');
-    if (id) return `https://www.youtube.com/embed/${id}`;
-  }catch(e){}
-  return null;
-}
-
-function renderPostMedia(post){
-  if (post.imageData){
-    return `<img src="${post.imageData}" alt="${escapeHTML(post.title)}" class="w-full h-48 object-cover" loading="lazy">`;
-  }
-  if (post.videoUrl){
-    const yt = toYouTubeEmbed(post.videoUrl);
-    if (yt){
-      return `<iframe class="w-full h-48" src="${yt}" title="${escapeHTML(post.title)}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>`;
-    }
-    return `<video class="w-full h-48 object-cover" src="${post.videoUrl}" controls preload="metadata"></video>`;
-  }
-  return `<div class="w-full h-48 flex items-center justify-center" style="background:var(--grad-soft)"><i data-lucide="bot" style="width:32px;height:32px;color:var(--violet)"></i></div>`;
-}
-
-async function loadPortfolio(){
-  portfolioStatus.textContent = I18N[currentLang]['portfolio.loading'];
-  portfolioStatus.classList.remove('hidden');
-  portfolioGrid.innerHTML = '';
-  portfolioEmpty.classList.add('hidden');
-  try{
-    let idx;
-    try{ idx = await window.storage.get('portfolio:index', true); }catch(e){ idx = null; }
-    const ids = idx && idx.value ? JSON.parse(idx.value) : [];
-    if (!ids.length){
-      portfolioStatus.classList.add('hidden');
-      portfolioEmpty.classList.remove('hidden');
-      return;
-    }
-    const posts = [];
-    for (const id of ids){
-      try{
-        const r = await window.storage.get('portfolio:post:' + id, true);
-        if (r && r.value) posts.push(JSON.parse(r.value));
-      }catch(e){ /* post might've been deleted */ }
-    }
-    posts.sort((a,b) => new Date(b.createdAt) - new Date(a.createdAt));
-    portfolioStatus.classList.add('hidden');
-    if (!posts.length){
-      portfolioEmpty.classList.remove('hidden');
-      return;
-    }
-    const deleteLabel = currentLang === 'en' ? 'Delete' : 'Eliminar';
-    portfolioGrid.innerHTML = posts.map(post => `
-      <article class="card overflow-hidden" data-post-id="${escapeHTML(post.id)}">
-        <div class="overflow-hidden">${renderPostMedia(post)}</div>
-        <div class="p-6">
-          <h3 class="font-display font-semibold text-lg mb-2">${escapeHTML(post.title)}</h3>
-          ${post.description ? `<p class="text-sm leading-relaxed mb-3" style="color:var(--muted)">${escapeHTML(post.description)}</p>` : ''}
-          <div class="flex items-center justify-between">
-            <span class="text-xs font-mono" style="color:var(--muted-2)">${timeAgoEs(post.createdAt)}</span>
-            ${isAdmin ? `<button class="delete-post-btn text-xs font-semibold flex items-center gap-1" style="color:#f87171" data-id="${escapeHTML(post.id)}"><i data-lucide="trash-2" style="width:13px;height:13px"></i>${deleteLabel}</button>` : ''}
-          </div>
-        </div>
-      </article>
-    `).join('');
-    lucide.createIcons();
-    portfolioGrid.querySelectorAll('.delete-post-btn').forEach(btn => {
-      btn.addEventListener('click', () => deletePost(btn.getAttribute('data-id')));
-    });
-  }catch(e){
-    portfolioStatus.textContent = currentLang === 'en' ? 'Could not load posts.' : 'No se pudieron cargar las publicaciones.';
-    portfolioStatus.classList.remove('hidden');
-  }
-}
-
-async function deletePost(id){
-  if (!isAdmin) return;
-  const confirmMsg = currentLang === 'en' ? 'Delete this post?' : '¿Eliminar esta publicación?';
-  if (!confirm(confirmMsg)) return;
-  try{
-    let idx;
-    try{ idx = await window.storage.get('portfolio:index', true); }catch(e){ idx = null; }
-    let ids = idx && idx.value ? JSON.parse(idx.value) : [];
-    ids = ids.filter(x => x !== id);
-    await window.storage.set('portfolio:index', JSON.stringify(ids), true);
-    await window.storage.delete('portfolio:post:' + id, true);
-    loadPortfolio();
-  }catch(e){
-    alert(currentLang === 'en' ? 'An error occurred while deleting the post.' : 'Ocurrió un error al eliminar la publicación.');
-  }
-}
-
-function updateAdminUI(){
-  adminToggleLabel.textContent = isAdmin ? (currentLang === 'en' ? 'Exit admin' : 'Salir de admin') : I18N[currentLang]['portfolio.adminMode'];
-  adminToggleBtn.querySelector('i')?.setAttribute('data-lucide', isAdmin ? 'lock-open' : 'lock');
-  newPostBtn.classList.toggle('hidden', !isAdmin);
-  lucide.createIcons();
-}
-
-adminToggleBtn.addEventListener('click', () => {
-  if (isAdmin){
-    isAdmin = false;
-    updateAdminUI();
-    loadPortfolio();
-  } else {
-    adminPasswordInput.value = '';
-    adminError.classList.add('hidden');
-    openModal(adminModal);
-    adminPasswordInput.focus();
-  }
-});
-adminCancelBtn.addEventListener('click', () => closeModal(adminModal));
-adminSubmitBtn.addEventListener('click', () => {
-  if (adminPasswordInput.value === ADMIN_PASSWORD){
-    isAdmin = true;
-    closeModal(adminModal);
-    updateAdminUI();
-    loadPortfolio();
-  } else {
-    adminError.classList.remove('hidden');
-  }
-});
-adminPasswordInput.addEventListener('keydown', (e) => { if (e.key === 'Enter') adminSubmitBtn.click(); });
-
-newPostBtn.addEventListener('click', () => {
-  postTitle.value = ''; postDescription.value = ''; postImageFile.value = ''; postVideoUrl.value = '';
-  postError.classList.add('hidden');
-  openModal(postModal);
-});
-postCancelBtn.addEventListener('click', () => closeModal(postModal));
-
-function readFileAsDataURL(file){
-  return new Promise((resolve, reject) => {
-    const r = new FileReader();
-    r.onload = () => resolve(r.result);
-    r.onerror = reject;
-    r.readAsDataURL(file);
-  });
-}
-
-postSubmitBtn.addEventListener('click', async () => {
-  const title = postTitle.value.trim();
-  if (!title){ postError.classList.remove('hidden'); return; }
-  postError.classList.add('hidden');
-  postSubmitBtn.disabled = true;
-  postSubmitBtn.textContent = currentLang === 'en' ? 'Publishing…' : 'Publicando…';
-  try{
-    let imageData = null;
-    const file = postImageFile.files[0];
-    if (file) imageData = await readFileAsDataURL(file);
-    const post = {
-      id: 'p_' + Date.now() + '_' + Math.random().toString(36).slice(2,8),
-      title,
-      description: postDescription.value.trim(),
-      imageData: imageData || null,
-      videoUrl: postVideoUrl.value.trim() || null,
-      createdAt: new Date().toISOString()
-    };
-    await window.storage.set('portfolio:post:' + post.id, JSON.stringify(post), true);
-    let idx;
-    try{ idx = await window.storage.get('portfolio:index', true); }catch(e){ idx = null; }
-    const ids = idx && idx.value ? JSON.parse(idx.value) : [];
-    ids.push(post.id);
-    await window.storage.set('portfolio:index', JSON.stringify(ids), true);
-    closeModal(postModal);
-    loadPortfolio();
-  }catch(e){
-    alert(currentLang === 'en' ? 'An error occurred while publishing. Try a lighter image.' : 'Ocurrió un error al publicar. Probá con una imagen más liviana.');
-  }finally{
-    postSubmitBtn.disabled = false;
-    postSubmitBtn.textContent = I18N[currentLang]['common.publish'];
-  }
-});
-
-/* ---------- Comentarios (público, todos pueden ver y publicar) ---------- */
-const commentsList = document.getElementById('commentsList');
-const commentsStatus = document.getElementById('commentsStatus');
-const commentsEmpty = document.getElementById('commentsEmpty');
-const commentName = document.getElementById('commentName');
-const commentMessage = document.getElementById('commentMessage');
-const commentError = document.getElementById('commentError');
-const commentSubmitBtn = document.getElementById('commentSubmitBtn');
-
-async function loadComments(){
-  commentsStatus.textContent = I18N[currentLang]['comentarios.loading'];
-  commentsStatus.classList.remove('hidden');
-  commentsList.innerHTML = '';
-  commentsEmpty.classList.add('hidden');
-  try{
-    let idx;
-    try{ idx = await window.storage.get('comments:index', true); }catch(e){ idx = null; }
-    const ids = idx && idx.value ? JSON.parse(idx.value) : [];
-    if (!ids.length){
-      commentsStatus.classList.add('hidden');
-      commentsEmpty.classList.remove('hidden');
-      return;
-    }
-    const comments = [];
-    for (const id of ids){
-      try{
-        const r = await window.storage.get('comments:item:' + id, true);
-        if (r && r.value) comments.push(JSON.parse(r.value));
-      }catch(e){}
-    }
-    comments.sort((a,b) => new Date(b.createdAt) - new Date(a.createdAt));
-    commentsStatus.classList.add('hidden');
-    if (!comments.length){
-      commentsEmpty.classList.remove('hidden');
-      return;
-    }
-    commentsList.innerHTML = comments.map(c => `
-      <div class="card p-5">
-        <div class="flex items-center justify-between mb-2">
-          <span class="font-display font-semibold text-sm">${escapeHTML(c.name)}</span>
-          <span class="text-xs font-mono" style="color:var(--muted-2)">${timeAgoEs(c.createdAt)}</span>
-        </div>
-        <p class="text-sm leading-relaxed" style="color:var(--muted)">${escapeHTML(c.message)}</p>
-      </div>
-    `).join('');
-  }catch(e){
-    commentsStatus.textContent = currentLang === 'en' ? 'Could not load comments.' : 'No se pudieron cargar los comentarios.';
-    commentsStatus.classList.remove('hidden');
-  }
-}
-
-commentSubmitBtn.addEventListener('click', async () => {
-  const name = commentName.value.trim();
-  const message = commentMessage.value.trim();
-  if (!name || !message){ commentError.classList.remove('hidden'); return; }
-  commentError.classList.add('hidden');
-  commentSubmitBtn.disabled = true;
-  const original = commentSubmitBtn.innerHTML;
-  commentSubmitBtn.innerHTML = currentLang === 'en' ? 'Publishing…' : 'Publicando…';
-  try{
-    const comment = {
-      id: 'c_' + Date.now() + '_' + Math.random().toString(36).slice(2,8),
-      name, message,
-      createdAt: new Date().toISOString()
-    };
-    await window.storage.set('comments:item:' + comment.id, JSON.stringify(comment), true);
-    let idx;
-    try{ idx = await window.storage.get('comments:index', true); }catch(e){ idx = null; }
-    const ids = idx && idx.value ? JSON.parse(idx.value) : [];
-    ids.push(comment.id);
-    await window.storage.set('comments:index', JSON.stringify(ids), true);
-    commentName.value = ''; commentMessage.value = '';
-    loadComments();
-  }catch(e){
-    alert(currentLang === 'en' ? 'An error occurred while posting the comment.' : 'Ocurrió un error al publicar el comentario.');
-  }finally{
-    commentSubmitBtn.disabled = false;
-    commentSubmitBtn.innerHTML = original;
-    lucide.createIcons();
-  }
-});
-
-loadPortfolio();
-loadComments();
+setLang(lang);lucide.createIcons();
 </script>
-
-</body>
-</html>
+</body></html>
